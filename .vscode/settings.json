@@ -1,0 +1,16 @@
+{
+  "code-runner.executorMap": {
+    "typescript": "cls ; npx ts-node --files --transpile-only",
+  },
+  "liveServer.settings.port": 5501,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+"eslint.validate": [
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact"
+],
+"prettier.requireConfig": true
+}
