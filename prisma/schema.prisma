@@ -1,0 +1,504 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./node_modules/@prisma/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum PaymentMethodType {
+  CREDIT_CARD
+  PIX
+  BOLETO
+  BANK_TRANSFER
+}
+
+enum OrderStatusType {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURNED
+}
+
+enum ReturnExchangeStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  COMPLETED
+}
+
+model Admin {
+  id     Int  @id @default(autoincrement())
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  name       String @db.VarChar(255)
+  cpf        String   @unique @db.VarChar(14)
+  email      String   @unique @db.VarChar(255)
+  password   String
+  bornDate   DateTime
+
+  avatarId Int?    @unique
+  avatar   Images? @relation("UserAvatar", fields: [avatarId], references: [id], onDelete: SetNull)
+
+  tokenLogin        LoginToken?        @relation("LoginToken")
+  confirmationToken ConfirmationToken? @relation("ConfirmationToken")
+
+  admin Admin?
+
+  principalAddress   Addresses?  @relation("PrincipalAddress", fields: [principalAddressId], references: [id], onDelete: SetNull)
+  principalAddressId Int?        @unique
+  addresses          Addresses[] @relation("UserAddresses")
+
+
+  store Stores?
+
+  productAvaliations ProductAvaliations[]
+  storeAvaliations   StoreAvaliations[]
+
+  cartId Int  @unique
+  cart   Cart @relation("CartUser", fields: [cartId], references: [id], onDelete: Cascade)
+
+  orders Orders[]
+
+  usedCoupons UserUsedCoupons[]
+
+  chat Chat[]
+
+  sentMessages     chatMessages[] @relation("SentMessages")
+  receivedMessages chatMessages[] @relation("ReceivedMessages")
+
+  logs          Log[]
+  TwoFactorAuth TwoFactorAuth[]
+  Wishlist      Wishlist[]
+  AbandonedCart AbandonedCart[]
+}
+
+model Addresses {
+  id     Int @id @default(autoincrement())
+  userId Int
+
+  user        User  @relation("UserAddresses", fields: [userId], references: [id], onDelete: Cascade)
+  principalOf User? @relation("PrincipalAddress")
+
+  cep          String  @db.VarChar(10)
+  road         String  @db.VarChar(255)
+  number       String  @db.VarChar(10)
+  complement   String? @db.VarChar(255)
+  neighborhood String  @db.VarChar(100)
+  city         String  @db.VarChar(100)
+  state        String  @db.VarChar(2)
+  country      String  @db.VarChar(50) @default("Brasil")
+  type         String? @db.VarChar(20)
+  reference    String? @db.VarChar(255)
+
+
+  order Orders[]
+}
+
+model UserUsedCoupons {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  couponId Int
+  coupon   Coupons @relation(fields: [couponId], references: [id], onDelete: Cascade)
+
+  usedAt  DateTime @default(now())
+  orderId Int?     @unique
+  order   Orders?  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model Stores {
+  id Int @id @default(autoincrement())
+
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  name       String   @db.VarChar(255)
+  avatar     String
+  cnpj       String?  @unique @db.VarChar(18)
+
+  product Products[] @relation("StoreProduct")
+
+  avaliations StoreAvaliations[]
+
+  coupons Coupons[]
+
+  chat             Chat[]
+  sentMessages     chatMessages[] @relation("StoreSentMessages")
+  receivedMessages chatMessages[] @relation("StoreReceivedMessages")
+
+  orderItems OrderItems[]
+
+  promotions Promotion[]
+}
+
+model StoreAvaliations {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  storeId Int
+  store   Stores @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  note           Int
+  avaliationDate DateTime @default(now())
+  comment        String?  @db.VarChar(500)
+
+  images Images[]
+}
+
+model Coupons {
+  id                 Int      @id @default(autoincrement())
+  code               String   @db.VarChar(50)
+  expirationDate     DateTime
+  percentageDiscount Int
+  discountValue      Decimal  @db.Decimal(10,2)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  storeId Int
+  store   Stores @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  usedCoupons UserUsedCoupons[]
+}
+
+model Products {
+  id Int @id @default(autoincrement())
+
+  storeId Int
+  store   Stores @relation("StoreProduct", fields: [storeId], references: [id], onDelete: Cascade)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  name       String   @db.VarChar(255)
+  price      Decimal  @db.Decimal(10,2)
+
+  inventory Inventory?
+
+  images Images[]
+
+  category Category[]
+
+  avaliations ProductAvaliations[]
+
+  promotions Promotion[] @relation("PromotionProducts")
+
+  cartItem CartItems[]
+
+  orderItems OrderItems[]
+
+  wishlists   Wishlist[]  @relation("WishlistProducts")
+
+  @@index([name])
+}
+
+model Wishlist {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  products Products[] @relation("WishlistProducts")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Inventory {
+  id        Int      @id @default(autoincrement())
+  productId Int      @unique
+  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Promotion {
+  id            Int      @id @default(autoincrement())
+  code          String   @unique @db.VarChar(50)
+  description   String   @db.VarChar(500)
+  discountType  String   @db.VarChar(20)
+  discountValue Decimal  @db.Decimal(10,2)
+  startDate     DateTime
+  endDate       DateTime
+
+  storeId Int
+  store   Stores @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  products Products[] @relation("PromotionProducts")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Images {
+  id  Int    @id @default(autoincrement())
+  url String @db.VarChar(500)
+
+  userAvatar User? @relation("UserAvatar")
+
+  productId Int?
+  product   Products? @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  storeAvaliationId Int?
+  storeAvaliation   StoreAvaliations? @relation(fields: [storeAvaliationId], references: [id], onDelete: Cascade)
+
+  productAvaliationId Int?
+  productAvaliation   ProductAvaliations? @relation(fields: [productAvaliationId], references: [id], onDelete: Cascade)
+
+  messageImage chatMessages? @relation("MessageImage")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(100)
+
+  product Products[]
+
+  @@index([name])
+}
+
+model ProductAvaliations {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  productId Int
+  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  note           Int
+  avaliationDate DateTime @default(now())
+  comment        String?  @db.VarChar(500)
+
+  images Images[]
+}
+
+model Cart {
+  id       Int   @id @default(autoincrement())
+  userCart User? @relation("CartUser")
+
+  cartItems CartItems[]
+}
+
+model CartItems {
+  id Int @id @default(autoincrement())
+
+  cartId Int
+  cart   Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
+
+  productId Int
+  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  quantidade      Int
+  abandonedCartId Int?
+  AbandonedCart   AbandonedCart? @relation(fields: [abandonedCartId], references: [id], onDelete: Cascade)
+}
+
+model PaymentMethod {
+  id     Int    @id @default(autoincrement())
+  method PaymentMethodType
+
+  payments Payment[]
+}
+
+model Payment {
+  id          Int      @id @default(autoincrement())
+  valor       Decimal  @db.Decimal(10,2)
+  paymentDate DateTime @default(now())
+
+  paymentMethodId Int
+  paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [id], onDelete: Cascade)
+}
+
+model OrderStatus {
+  id     Int    @id @default(autoincrement())
+  Status OrderStatusType
+
+  orders Orders[] @relation("StatusOrder")
+}
+
+model Orders {
+  id           Int     @id @default(autoincrement())
+  totalValue   Decimal @db.Decimal(10,2)
+  trackingCode String  @db.VarChar(50)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sendDate     DateTime
+  deliveryDate DateTime
+
+  minimumDeliveryForeast DateTime
+  maximumDeliveryForeast DateTime
+
+  usedCoupon Boolean @default(false)
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  orderStatusId Int
+  orderStatus   OrderStatus @relation("StatusOrder", fields: [orderStatusId], references: [id], onDelete: Cascade)
+
+  deliveryAddressId Int
+  deliveryAddress   Addresses @relation(fields: [deliveryAddressId], references: [id], onDelete: Cascade)
+
+  usedCoupons UserUsedCoupons[]
+
+  orderItems OrderItems[]
+
+  orderHistory OrderHistory[]
+
+  shipping       Shipping?
+  ReturnExchange ReturnExchange[]
+}
+
+model OrderHistory {
+  id        Int      @id @default(autoincrement())
+  orderId   Int
+  order     Orders   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  action    String   @db.VarChar(100)
+  updatedAt DateTime @default(now())
+}
+
+model OrderItems {
+  id Int @id @default(autoincrement())
+
+  orderId Int
+  order   Orders @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId Int
+  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  storeId Int
+  store   Stores @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  quantity Int
+  price    Decimal @db.Decimal(10,2)
+}
+
+model Shipping {
+  id                Int      @id @default(autoincrement())
+  orderId           Int      @unique
+  order             Orders   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  shippingMethod    String   @db.VarChar(50)
+  shippingCost      Decimal  @db.Decimal(10,2)
+  estimatedDelivery DateTime
+  trackingCode      String?  @db.VarChar(50)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Chat {
+  id       Int            @id @default(autoincrement())
+  userId   Int
+  user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  storeId  Int
+  store    Stores         @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  messages chatMessages[]
+}
+
+model chatMessages {
+  id      Int    @id @default(autoincrement())
+  content String @db.VarChar(2000)
+
+  chatId  Int
+  chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+
+  senderUserId Int?
+  senderUser   User? @relation("SentMessages", fields: [senderUserId], references: [id], onDelete: Cascade)
+
+  senderStoreId Int?
+  senderStore   Stores? @relation("StoreSentMessages", fields: [senderStoreId], references: [id], onDelete: Cascade)
+
+  receiverUserId Int?
+  receiverUser   User? @relation("ReceivedMessages", fields: [receiverUserId], references: [id], onDelete: Cascade)
+
+  receiverStoreId Int?
+  receiverStore   Stores? @relation("StoreReceivedMessages", fields: [receiverStoreId], references: [id], onDelete: Cascade)
+
+  imageId Int?    @unique
+  image   Images? @relation("MessageImage", fields: [imageId], references: [id], onDelete: SetNull)
+
+  sentAt      DateTime  @default(now())
+  receivedAt  DateTime?
+  wasReceived Boolean   @default(false)
+  readAt      DateTime?
+  wasRead     Boolean   @default(false)
+}
+
+
+model LoginToken {
+  id Int @id @default(autoincrement())
+
+  userId Int  @unique
+  user   User @relation("LoginToken", fields: [userId], references: [id], onDelete: Cascade)
+
+  token String @db.VarChar(255)
+}
+
+model ConfirmationToken {
+  id Int @id @default(autoincrement())
+
+  userId Int  @unique
+  user   User @relation("ConfirmationToken", fields: [userId], references: [id], onDelete: Cascade)
+
+  token String @db.VarChar(255)
+}
+
+model Log {
+  id        Int      @id @default(autoincrement())
+  action    String   @db.VarChar(100)
+  tableName String   @db.VarChar(50)
+  recordId  Int?
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  timestamp DateTime @default(now())
+  details   String?  @db.VarChar(500)
+}
+
+model TwoFactorAuth {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  secret    String  @db.VarChar(255)
+  isEnabled Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AbandonedCart {
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cartItems CartItems[]
+
+  abandonedAt DateTime @default(now())
+}
+
+model ReturnExchange {
+  id          Int                @id @default(autoincrement())
+  orderId     Int
+  order       Orders             @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  reason      String             @db.VarChar(500)
+  status      ReturnExchangeStatus
+  requestedAt DateTime           @default(now())
+  completedAt DateTime?
+}
