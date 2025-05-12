@@ -18,9 +18,10 @@ export async function createUser(req: Request, res: Response) {
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
       if (error.code === 'P2002') {
-        return res.status(409).json({
+        res.status(409).json({
           error: `Email ou cpf já cadastrados!`,
         });
+        return;
       }
     }
     res.status(500).json({ error: 'Erro ao criar usuário' });
