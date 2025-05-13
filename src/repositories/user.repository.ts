@@ -30,3 +30,8 @@ export async function getUser(id: number) {
   const user = await prisma.user.findUnique({ where: { id } });
   return user;
 }
+
+export async function deleteUser(id: number) {
+  const user = await prisma.user.delete({ where: { id } });
+  return;
+}

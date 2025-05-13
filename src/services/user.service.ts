@@ -8,3 +8,7 @@ export async function createUser(data: CreateUserDTO) {
 export async function getUser(id: number) {
   return userRepository.getUser(id);
 }
+
+export async function deleteUser(id: number) {
+  return userRepository.deleteUser(id);
+}

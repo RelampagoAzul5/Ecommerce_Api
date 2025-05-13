@@ -45,3 +45,19 @@ export async function getUser(req: Request, res: Response) {
     res.json(user);
   } catch (err) {}
 }
+
+export async function deleteUser(req: Request, res: Response) {
+  try {
+    await userService.deleteUser(Number(req.params.id));
+    res.json({
+      message: `Usuário foi deletado com sucesso!`,
+    });
+    return;
+  } catch (err) {
+    if (err instanceof PrismaClientKnownRequestError && err.code === 'P2025') {
+      res.status(404).json({ error: 'Usuário não encontrado' });
+      return;
+    }
+    res.status(500).json({ error: 'Não foi possível deletar usuário' });
+  }
+}
