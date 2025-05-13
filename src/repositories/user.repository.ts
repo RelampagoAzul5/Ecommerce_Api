@@ -1,5 +1,5 @@
 import { prisma } from '../lib/prisma';
-import { CreateUserDTO } from '../interfaces/user.interface';
+import { CreateUserDTO, UserUpdateDTO } from '../interfaces/user.interface';
 
 export async function createUser(data: CreateUserDTO) {
   const cart = await prisma.cart.create({
@@ -34,4 +34,14 @@ export async function getUser(id: number) {
 export async function deleteUser(id: number) {
   const user = await prisma.user.delete({ where: { id } });
   return;
+}
+
+export async function updateUser(data: UserUpdateDTO, id: number) {
+  const user = await prisma.user.update({
+    where: { id },
+    data: {
+      ...data,
+    },
+  });
+  return user;
 }

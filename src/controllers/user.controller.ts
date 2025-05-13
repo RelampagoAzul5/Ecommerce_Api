@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import * as userService from '../services/user.service';
 import userValidation from '../utils/userValidation';
 import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
+import updateUserValidation from '../utils/userValidation/updateUserValidation';
+import { UserUpdateDTO } from '@/interfaces/user.interface';
 
 export async function createUser(req: Request, res: Response) {
   req.body.bornDate = new Date(req.body.bornDate);
@@ -59,5 +61,35 @@ export async function deleteUser(req: Request, res: Response) {
       return;
     }
     res.status(500).json({ error: 'Não foi possível deletar usuário' });
+  }
+}
+
+export async function updateUser(req: Request, res: Response) {
+  const updatedUser: UserUpdateDTO = req.body;
+  const errors = updateUserValidation(updatedUser);
+  const id = Number(req.params.id);
+
+  if (errors.length > 0) {
+    res.status(400).json({ errors });
+    return;
+  }
+
+  if (isNaN(id)) {
+    res.status(400).json({ error: 'ID inválido' });
+    return;
+  }
+
+  try {
+    const user = await userService.updateUser(
+      updatedUser,
+      Number(req.params.id),
+    );
+    res.status(200).json(user);
+  } catch (err) {
+    if (err instanceof PrismaClientKnownRequestError && err.code === 'P2025') {
+      res.status(404).json({ error: 'Usuário não encontrado' });
+      return;
+    }
+    res.status(500).json({ error: 'Não foi possível atualizar usuário' });
   }
 }
