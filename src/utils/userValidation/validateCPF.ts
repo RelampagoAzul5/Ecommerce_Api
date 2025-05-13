@@ -23,7 +23,5 @@ export default function validateCPF(cpf: string) {
   const firstDigit = calculateDigit(cpfWithoutDigits);
   const secondDigit = calculateDigit(`${cpfWithoutDigits}${firstDigit}`);
 
-  return cleanedCPF === `${cpfWithoutDigits}${firstDigit}${secondDigit}`
-    ? true
-    : false;
+  return cleanedCPF === `${cpfWithoutDigits}${firstDigit}${secondDigit}`;
 }
