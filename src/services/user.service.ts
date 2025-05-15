@@ -1,18 +1,22 @@
-import * as userRepository from '../repositories/user.repository';
+import userRepository from '../repositories/user.repository';
 import { CreateUserDTO, UserUpdateDTO } from '../interfaces/user.interface';
 
-export async function createUser(data: CreateUserDTO) {
-  return await userRepository.createUser(data);
+class UserService {
+  async createUser(data: CreateUserDTO) {
+    return await userRepository.createUser(data);
+  }
+
+  async getUser(id: number) {
+    return userRepository.getUser(id);
+  }
+
+  async deleteUser(id: number) {
+    return userRepository.deleteUser(id);
+  }
+
+  async updateUser(data: UserUpdateDTO, id: number) {
+    return userRepository.updateUser(data, id);
+  }
 }
 
-export async function getUser(id: number) {
-  return userRepository.getUser(id);
-}
-
-export async function deleteUser(id: number) {
-  return userRepository.deleteUser(id);
-}
-
-export async function updateUser(data: UserUpdateDTO, id: number) {
-  return userRepository.updateUser(data, id);
-}
+export default new UserService();
