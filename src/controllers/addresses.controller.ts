@@ -1,16 +1,24 @@
 import { Request, Response } from 'express';
 import addressService from '../services/address.service';
 import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
-import { AddressUpdateDTO } from '@/interfaces/address.interface';
+import { AddressUpdateDTO } from '../interfaces/address.interface';
+import addressValitation from '../utils/addressValidation';
 
 class AddressControler {
   async createAddress(req: Request, res: Response) {
+    const errors = addressValitation.addressCreateValitation(req.body);
     const userId = Number(req.params.userId);
 
     if (isNaN(userId)) {
       res.status(400).json({ error: 'ID inválido' });
       return;
     }
+
+    if (errors.length > 0) {
+      res.status(400).json({ errors });
+      return;
+    }
+
     try {
       const address = await addressService.createAddress(req.body, userId);
       res.status(201).json(address);
@@ -72,9 +80,15 @@ class AddressControler {
     const updatedAddressData: AddressUpdateDTO = req.body;
     const addressId = Number(req.params.addressId);
     const userId = Number(req.params.userId);
+    const errors =
+      addressValitation.addressUpdateValitation(updatedAddressData);
 
     if (isNaN(addressId)) {
       res.status(400).json({ error: 'ID inválido' });
+      return;
+    }
+    if (errors.length > 0) {
+      res.status(400).json({ errors });
       return;
     }
 
