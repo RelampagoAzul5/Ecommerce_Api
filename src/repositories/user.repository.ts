@@ -6,11 +6,6 @@ class UserRepository {
     const cart = await prisma.cart.create({
       data: {},
     });
-    const avatar = await prisma.images.create({
-      data: {
-        url: 'a',
-      },
-    });
 
     const user = await prisma.user.create({
       data: {
@@ -19,7 +14,6 @@ class UserRepository {
         email: data.email,
         password: data.password,
         bornDate: data.bornDate,
-        avatarId: avatar.id,
         cartId: cart.id,
       },
     });

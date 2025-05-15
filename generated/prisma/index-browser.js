@@ -139,6 +139,11 @@ exports.Prisma.UserScalarFieldEnum = {
   cartId: 'cartId'
 };
 
+exports.Prisma.AvatarUserScalarFieldEnum = {
+  id: 'id',
+  url: 'url'
+};
+
 exports.Prisma.AddressesScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -168,8 +173,13 @@ exports.Prisma.StoresScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   name: 'name',
-  avatar: 'avatar',
-  cnpj: 'cnpj'
+  cnpj: 'cnpj',
+  avatarId: 'avatarId'
+};
+
+exports.Prisma.AvatarStoreScalarFieldEnum = {
+  id: 'id',
+  url: 'url'
 };
 
 exports.Prisma.StoreAvaliationsScalarFieldEnum = {
@@ -179,6 +189,12 @@ exports.Prisma.StoreAvaliationsScalarFieldEnum = {
   note: 'note',
   avaliationDate: 'avaliationDate',
   comment: 'comment'
+};
+
+exports.Prisma.StoreAvaliationImagesScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  storeAvaliationId: 'storeAvaliationId'
 };
 
 exports.Prisma.CouponsScalarFieldEnum = {
@@ -199,6 +215,12 @@ exports.Prisma.ProductsScalarFieldEnum = {
   updated_at: 'updated_at',
   name: 'name',
   price: 'price'
+};
+
+exports.Prisma.ProductImagesScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  productId: 'productId'
 };
 
 exports.Prisma.WishlistScalarFieldEnum = {
@@ -229,14 +251,6 @@ exports.Prisma.PromotionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ImagesScalarFieldEnum = {
-  id: 'id',
-  url: 'url',
-  productId: 'productId',
-  storeAvaliationId: 'storeAvaliationId',
-  productAvaliationId: 'productAvaliationId'
-};
-
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name'
@@ -249,6 +263,12 @@ exports.Prisma.ProductAvaliationsScalarFieldEnum = {
   note: 'note',
   avaliationDate: 'avaliationDate',
   comment: 'comment'
+};
+
+exports.Prisma.ProductAvaliationImagesScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  productAvaliationId: 'productAvaliationId'
 };
 
 exports.Prisma.CartScalarFieldEnum = {
@@ -345,6 +365,11 @@ exports.Prisma.ChatMessagesScalarFieldEnum = {
   wasRead: 'wasRead'
 };
 
+exports.Prisma.MessageImagesScalarFieldEnum = {
+  id: 'id',
+  url: 'url'
+};
+
 exports.Prisma.LoginTokenScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -408,6 +433,10 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.AvatarUserOrderByRelevanceFieldEnum = {
+  url: 'url'
+};
+
 exports.Prisma.AddressesOrderByRelevanceFieldEnum = {
   cep: 'cep',
   road: 'road',
@@ -423,12 +452,19 @@ exports.Prisma.AddressesOrderByRelevanceFieldEnum = {
 
 exports.Prisma.StoresOrderByRelevanceFieldEnum = {
   name: 'name',
-  avatar: 'avatar',
   cnpj: 'cnpj'
+};
+
+exports.Prisma.AvatarStoreOrderByRelevanceFieldEnum = {
+  url: 'url'
 };
 
 exports.Prisma.StoreAvaliationsOrderByRelevanceFieldEnum = {
   comment: 'comment'
+};
+
+exports.Prisma.StoreAvaliationImagesOrderByRelevanceFieldEnum = {
+  url: 'url'
 };
 
 exports.Prisma.CouponsOrderByRelevanceFieldEnum = {
@@ -439,14 +475,14 @@ exports.Prisma.ProductsOrderByRelevanceFieldEnum = {
   name: 'name'
 };
 
+exports.Prisma.ProductImagesOrderByRelevanceFieldEnum = {
+  url: 'url'
+};
+
 exports.Prisma.PromotionOrderByRelevanceFieldEnum = {
   code: 'code',
   description: 'description',
   discountType: 'discountType'
-};
-
-exports.Prisma.ImagesOrderByRelevanceFieldEnum = {
-  url: 'url'
 };
 
 exports.Prisma.CategoryOrderByRelevanceFieldEnum = {
@@ -455,6 +491,10 @@ exports.Prisma.CategoryOrderByRelevanceFieldEnum = {
 
 exports.Prisma.ProductAvaliationsOrderByRelevanceFieldEnum = {
   comment: 'comment'
+};
+
+exports.Prisma.ProductAvaliationImagesOrderByRelevanceFieldEnum = {
+  url: 'url'
 };
 
 exports.Prisma.OrdersOrderByRelevanceFieldEnum = {
@@ -472,6 +512,10 @@ exports.Prisma.ShippingOrderByRelevanceFieldEnum = {
 
 exports.Prisma.chatMessagesOrderByRelevanceFieldEnum = {
   content: 'content'
+};
+
+exports.Prisma.MessageImagesOrderByRelevanceFieldEnum = {
+  url: 'url'
 };
 
 exports.Prisma.LoginTokenOrderByRelevanceFieldEnum = {
@@ -521,18 +565,22 @@ exports.ReturnExchangeStatus = exports.$Enums.ReturnExchangeStatus = {
 exports.Prisma.ModelName = {
   Admin: 'Admin',
   User: 'User',
+  AvatarUser: 'AvatarUser',
   Addresses: 'Addresses',
   UserUsedCoupons: 'UserUsedCoupons',
   Stores: 'Stores',
+  AvatarStore: 'AvatarStore',
   StoreAvaliations: 'StoreAvaliations',
+  StoreAvaliationImages: 'StoreAvaliationImages',
   Coupons: 'Coupons',
   Products: 'Products',
+  ProductImages: 'ProductImages',
   Wishlist: 'Wishlist',
   Inventory: 'Inventory',
   Promotion: 'Promotion',
-  Images: 'Images',
   Category: 'Category',
   ProductAvaliations: 'ProductAvaliations',
+  ProductAvaliationImages: 'ProductAvaliationImages',
   Cart: 'Cart',
   CartItems: 'CartItems',
   PaymentMethod: 'PaymentMethod',
@@ -544,6 +592,7 @@ exports.Prisma.ModelName = {
   Shipping: 'Shipping',
   Chat: 'Chat',
   chatMessages: 'chatMessages',
+  MessageImages: 'MessageImages',
   LoginToken: 'LoginToken',
   ConfirmationToken: 'ConfirmationToken',
   Log: 'Log',

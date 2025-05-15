@@ -47,8 +47,8 @@ model User {
   password   String
   bornDate   DateTime
 
-  avatarId Int?    @unique
-  avatar   Images? @relation("UserAvatar", fields: [avatarId], references: [id], onDelete: SetNull)
+  avatarId Int?        @unique
+  avatar   AvatarUser? @relation("UserAvatar", fields: [avatarId], references: [id], onDelete: SetNull)
 
   tokenLogin        LoginToken?        @relation("LoginToken")
   confirmationToken ConfirmationToken? @relation("ConfirmationToken")
@@ -80,6 +80,13 @@ model User {
   TwoFactorAuth TwoFactorAuth[]
   Wishlist      Wishlist[]
   AbandonedCart AbandonedCart[]
+}
+
+model AvatarUser {
+  id  Int    @id @default(autoincrement())
+  url String @db.VarChar(500)
+
+  userAvatar User? @relation("UserAvatar")
 }
 
 model Addresses {
@@ -126,8 +133,10 @@ model Stores {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   name       String   @db.VarChar(255)
-  avatar     String
   cnpj       String?  @unique @db.VarChar(18)
+
+  avatarId Int?         @unique
+  avatar   AvatarStore? @relation("StoreAvatar", fields: [avatarId], references: [id], onDelete: SetNull)
 
   product Products[] @relation("StoreProduct")
 
@@ -144,6 +153,13 @@ model Stores {
   promotions Promotion[]
 }
 
+model AvatarStore {
+  id  Int    @id @default(autoincrement())
+  url String @db.VarChar(500)
+
+  storeAvatar Stores? @relation("StoreAvatar")
+}
+
 model StoreAvaliations {
   id     Int  @id @default(autoincrement())
   userId Int
@@ -156,7 +172,15 @@ model StoreAvaliations {
   avaliationDate DateTime @default(now())
   comment        String?  @db.VarChar(500)
 
-  images Images[]
+  images StoreAvaliationImages[]
+}
+
+model StoreAvaliationImages {
+  id  Int    @id @default(autoincrement())
+  url String @db.VarChar(500)
+
+  storeAvaliationId Int?
+  storeAvaliation   StoreAvaliations? @relation(fields: [storeAvaliationId], references: [id], onDelete: Cascade)
 }
 
 model Coupons {
@@ -187,7 +211,7 @@ model Products {
 
   inventory Inventory?
 
-  images Images[]
+  images ProductImages[]
 
   category Category[]
 
@@ -202,6 +226,14 @@ model Products {
   wishlists Wishlist[] @relation("WishlistProducts")
 
   @@index([name])
+}
+
+model ProductImages {
+  id  Int    @id @default(autoincrement())
+  url String @db.VarChar(500)
+
+  productId Int?
+  product   Products? @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Wishlist {
@@ -243,24 +275,6 @@ model Promotion {
   updatedAt DateTime @updatedAt
 }
 
-model Images {
-  id  Int    @id @default(autoincrement())
-  url String @db.VarChar(500)
-
-  userAvatar User? @relation("UserAvatar")
-
-  productId Int?
-  product   Products? @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  storeAvaliationId Int?
-  storeAvaliation   StoreAvaliations? @relation(fields: [storeAvaliationId], references: [id], onDelete: Cascade)
-
-  productAvaliationId Int?
-  productAvaliation   ProductAvaliations? @relation(fields: [productAvaliationId], references: [id], onDelete: Cascade)
-
-  messageImage chatMessages? @relation("MessageImage")
-}
-
 model Category {
   id   Int    @id @default(autoincrement())
   name String @db.VarChar(100)
@@ -282,7 +296,15 @@ model ProductAvaliations {
   avaliationDate DateTime @default(now())
   comment        String?  @db.VarChar(500)
 
-  images Images[]
+  images ProductAvaliationImages[]
+}
+
+model ProductAvaliationImages {
+  id  Int    @id @default(autoincrement())
+  url String @db.VarChar(500)
+
+  productAvaliationId Int?
+  productAvaliation   ProductAvaliations? @relation(fields: [productAvaliationId], references: [id], onDelete: Cascade)
 }
 
 model Cart {
@@ -430,14 +452,21 @@ model chatMessages {
   receiverStoreId Int?
   receiverStore   Stores? @relation("StoreReceivedMessages", fields: [receiverStoreId], references: [id], onDelete: Cascade)
 
-  imageId Int?    @unique
-  image   Images? @relation("MessageImage", fields: [imageId], references: [id], onDelete: SetNull)
+  imageId Int?           @unique
+  image   MessageImages? @relation("MessageImage", fields: [imageId], references: [id], onDelete: SetNull)
 
   sentAt      DateTime  @default(now())
   receivedAt  DateTime?
   wasReceived Boolean   @default(false)
   readAt      DateTime?
   wasRead     Boolean   @default(false)
+}
+
+model MessageImages {
+  id  Int    @id @default(autoincrement())
+  url String @db.VarChar(500)
+
+  messageImage chatMessages? @relation("MessageImage")
 }
 
 model LoginToken {
