@@ -2,13 +2,12 @@ import { Request, Response } from 'express';
 import * as userService from '../services/user.service';
 import userValidation from '../utils/userValidation';
 import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
-import updateUserValidation from '../utils/userValidation/updateUserValidation';
 import { UserUpdateDTO } from '@/interfaces/user.interface';
 
 export async function createUser(req: Request, res: Response) {
   req.body.bornDate = new Date(req.body.bornDate);
 
-  const errors = userValidation(req.body);
+  const errors = userValidation.userCreateValidation(req.body);
 
   if (errors.length > 0) {
     res.status(400).json({ errors });
@@ -66,7 +65,7 @@ export async function deleteUser(req: Request, res: Response) {
 
 export async function updateUser(req: Request, res: Response) {
   const updatedUser: UserUpdateDTO = req.body;
-  const errors = updateUserValidation(updatedUser);
+  const errors = userValidation.userUpdateValidation(updatedUser);
   const id = Number(req.params.id);
 
   if (errors.length > 0) {
