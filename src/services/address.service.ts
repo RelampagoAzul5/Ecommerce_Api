@@ -3,10 +3,20 @@ import {
   CreateAddressDTO,
 } from '@/interfaces/address.interface';
 import addressRepository from '../repositories/address.repository';
+import userRepository from '../repositories/user.repository';
 
 class AddressService {
   async createAddress(data: CreateAddressDTO, userId: number) {
-    return await addressRepository.createAddress(data, userId);
+    const userAdressesCount = await addressRepository.countAdresses(userId);
+    const isDefault = userAdressesCount === 0;
+    const address = await addressRepository.createAddress(data, userId);
+    if (isDefault) {
+      await userRepository.updateUser(
+        { principalAddressId: address.id },
+        userId,
+      );
+    }
+    return address;
   }
 
   async getAddress(id: number) {

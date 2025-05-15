@@ -10,7 +10,7 @@ export interface UserUpdateDTO {
   name?: string;
   email?: string;
   password?: string;
-  principalAdressID?: number;
+  principalAddressId?: number;
   avatarId?: number;
   bornDate?: Date;
 }

@@ -39,6 +39,10 @@ class AddressRepository {
     });
     return address;
   }
+  async countAdresses(userId: number) {
+    const numberOfAdresses = prisma.addresses.count({ where: { userId } });
+    return numberOfAdresses;
+  }
 }
 
 export default new AddressRepository();
