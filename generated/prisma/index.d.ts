@@ -7027,16 +7027,19 @@ export namespace Prisma {
   export type AvatarUserMinAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
   }
 
   export type AvatarUserMaxAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
   }
 
   export type AvatarUserCountAggregateOutputType = {
     id: number
     url: number
+    publicId: number
     _all: number
   }
 
@@ -7052,16 +7055,19 @@ export namespace Prisma {
   export type AvatarUserMinAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
   }
 
   export type AvatarUserMaxAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
   }
 
   export type AvatarUserCountAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     _all?: true
   }
 
@@ -7154,6 +7160,7 @@ export namespace Prisma {
   export type AvatarUserGroupByOutputType = {
     id: number
     url: string
+    publicId: string
     _count: AvatarUserCountAggregateOutputType | null
     _avg: AvatarUserAvgAggregateOutputType | null
     _sum: AvatarUserSumAggregateOutputType | null
@@ -7178,6 +7185,7 @@ export namespace Prisma {
   export type AvatarUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
+    publicId?: boolean
     userAvatar?: boolean | AvatarUser$userAvatarArgs<ExtArgs>
   }, ExtArgs["result"]["avatarUser"]>
 
@@ -7186,9 +7194,10 @@ export namespace Prisma {
   export type AvatarUserSelectScalar = {
     id?: boolean
     url?: boolean
+    publicId?: boolean
   }
 
-  export type AvatarUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url", ExtArgs["result"]["avatarUser"]>
+  export type AvatarUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "publicId", ExtArgs["result"]["avatarUser"]>
   export type AvatarUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userAvatar?: boolean | AvatarUser$userAvatarArgs<ExtArgs>
   }
@@ -7201,6 +7210,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       url: string
+      publicId: string
     }, ExtArgs["result"]["avatarUser"]>
     composites: {}
   }
@@ -7573,6 +7583,7 @@ export namespace Prisma {
   interface AvatarUserFieldRefs {
     readonly id: FieldRef<"AvatarUser", 'Int'>
     readonly url: FieldRef<"AvatarUser", 'String'>
+    readonly publicId: FieldRef<"AvatarUser", 'String'>
   }
     
 
@@ -11317,16 +11328,19 @@ export namespace Prisma {
   export type AvatarStoreMinAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
   }
 
   export type AvatarStoreMaxAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
   }
 
   export type AvatarStoreCountAggregateOutputType = {
     id: number
     url: number
+    publicId: number
     _all: number
   }
 
@@ -11342,16 +11356,19 @@ export namespace Prisma {
   export type AvatarStoreMinAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
   }
 
   export type AvatarStoreMaxAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
   }
 
   export type AvatarStoreCountAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     _all?: true
   }
 
@@ -11444,6 +11461,7 @@ export namespace Prisma {
   export type AvatarStoreGroupByOutputType = {
     id: number
     url: string
+    publicId: string
     _count: AvatarStoreCountAggregateOutputType | null
     _avg: AvatarStoreAvgAggregateOutputType | null
     _sum: AvatarStoreSumAggregateOutputType | null
@@ -11468,6 +11486,7 @@ export namespace Prisma {
   export type AvatarStoreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
+    publicId?: boolean
     storeAvatar?: boolean | AvatarStore$storeAvatarArgs<ExtArgs>
   }, ExtArgs["result"]["avatarStore"]>
 
@@ -11476,9 +11495,10 @@ export namespace Prisma {
   export type AvatarStoreSelectScalar = {
     id?: boolean
     url?: boolean
+    publicId?: boolean
   }
 
-  export type AvatarStoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url", ExtArgs["result"]["avatarStore"]>
+  export type AvatarStoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "publicId", ExtArgs["result"]["avatarStore"]>
   export type AvatarStoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     storeAvatar?: boolean | AvatarStore$storeAvatarArgs<ExtArgs>
   }
@@ -11491,6 +11511,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       url: string
+      publicId: string
     }, ExtArgs["result"]["avatarStore"]>
     composites: {}
   }
@@ -11863,6 +11884,7 @@ export namespace Prisma {
   interface AvatarStoreFieldRefs {
     readonly id: FieldRef<"AvatarStore", 'Int'>
     readonly url: FieldRef<"AvatarStore", 'String'>
+    readonly publicId: FieldRef<"AvatarStore", 'String'>
   }
     
 
@@ -13288,18 +13310,21 @@ export namespace Prisma {
   export type StoreAvaliationImagesMinAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
     storeAvaliationId: number | null
   }
 
   export type StoreAvaliationImagesMaxAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
     storeAvaliationId: number | null
   }
 
   export type StoreAvaliationImagesCountAggregateOutputType = {
     id: number
     url: number
+    publicId: number
     storeAvaliationId: number
     _all: number
   }
@@ -13318,18 +13343,21 @@ export namespace Prisma {
   export type StoreAvaliationImagesMinAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     storeAvaliationId?: true
   }
 
   export type StoreAvaliationImagesMaxAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     storeAvaliationId?: true
   }
 
   export type StoreAvaliationImagesCountAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     storeAvaliationId?: true
     _all?: true
   }
@@ -13423,6 +13451,7 @@ export namespace Prisma {
   export type StoreAvaliationImagesGroupByOutputType = {
     id: number
     url: string
+    publicId: string
     storeAvaliationId: number | null
     _count: StoreAvaliationImagesCountAggregateOutputType | null
     _avg: StoreAvaliationImagesAvgAggregateOutputType | null
@@ -13448,6 +13477,7 @@ export namespace Prisma {
   export type StoreAvaliationImagesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
+    publicId?: boolean
     storeAvaliationId?: boolean
     storeAvaliation?: boolean | StoreAvaliationImages$storeAvaliationArgs<ExtArgs>
   }, ExtArgs["result"]["storeAvaliationImages"]>
@@ -13457,10 +13487,11 @@ export namespace Prisma {
   export type StoreAvaliationImagesSelectScalar = {
     id?: boolean
     url?: boolean
+    publicId?: boolean
     storeAvaliationId?: boolean
   }
 
-  export type StoreAvaliationImagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "storeAvaliationId", ExtArgs["result"]["storeAvaliationImages"]>
+  export type StoreAvaliationImagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "publicId" | "storeAvaliationId", ExtArgs["result"]["storeAvaliationImages"]>
   export type StoreAvaliationImagesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     storeAvaliation?: boolean | StoreAvaliationImages$storeAvaliationArgs<ExtArgs>
   }
@@ -13473,6 +13504,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       url: string
+      publicId: string
       storeAvaliationId: number | null
     }, ExtArgs["result"]["storeAvaliationImages"]>
     composites: {}
@@ -13846,6 +13878,7 @@ export namespace Prisma {
   interface StoreAvaliationImagesFieldRefs {
     readonly id: FieldRef<"StoreAvaliationImages", 'Int'>
     readonly url: FieldRef<"StoreAvaliationImages", 'String'>
+    readonly publicId: FieldRef<"StoreAvaliationImages", 'String'>
     readonly storeAvaliationId: FieldRef<"StoreAvaliationImages", 'Int'>
   }
     
@@ -16493,18 +16526,21 @@ export namespace Prisma {
   export type ProductImagesMinAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
     productId: number | null
   }
 
   export type ProductImagesMaxAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
     productId: number | null
   }
 
   export type ProductImagesCountAggregateOutputType = {
     id: number
     url: number
+    publicId: number
     productId: number
     _all: number
   }
@@ -16523,18 +16559,21 @@ export namespace Prisma {
   export type ProductImagesMinAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     productId?: true
   }
 
   export type ProductImagesMaxAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     productId?: true
   }
 
   export type ProductImagesCountAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     productId?: true
     _all?: true
   }
@@ -16628,6 +16667,7 @@ export namespace Prisma {
   export type ProductImagesGroupByOutputType = {
     id: number
     url: string
+    publicId: string
     productId: number | null
     _count: ProductImagesCountAggregateOutputType | null
     _avg: ProductImagesAvgAggregateOutputType | null
@@ -16653,6 +16693,7 @@ export namespace Prisma {
   export type ProductImagesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
+    publicId?: boolean
     productId?: boolean
     product?: boolean | ProductImages$productArgs<ExtArgs>
   }, ExtArgs["result"]["productImages"]>
@@ -16662,10 +16703,11 @@ export namespace Prisma {
   export type ProductImagesSelectScalar = {
     id?: boolean
     url?: boolean
+    publicId?: boolean
     productId?: boolean
   }
 
-  export type ProductImagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "productId", ExtArgs["result"]["productImages"]>
+  export type ProductImagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "publicId" | "productId", ExtArgs["result"]["productImages"]>
   export type ProductImagesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | ProductImages$productArgs<ExtArgs>
   }
@@ -16678,6 +16720,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       url: string
+      publicId: string
       productId: number | null
     }, ExtArgs["result"]["productImages"]>
     composites: {}
@@ -17051,6 +17094,7 @@ export namespace Prisma {
   interface ProductImagesFieldRefs {
     readonly id: FieldRef<"ProductImages", 'Int'>
     readonly url: FieldRef<"ProductImages", 'String'>
+    readonly publicId: FieldRef<"ProductImages", 'String'>
     readonly productId: FieldRef<"ProductImages", 'Int'>
   }
     
@@ -22446,18 +22490,21 @@ export namespace Prisma {
   export type ProductAvaliationImagesMinAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
     productAvaliationId: number | null
   }
 
   export type ProductAvaliationImagesMaxAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
     productAvaliationId: number | null
   }
 
   export type ProductAvaliationImagesCountAggregateOutputType = {
     id: number
     url: number
+    publicId: number
     productAvaliationId: number
     _all: number
   }
@@ -22476,18 +22523,21 @@ export namespace Prisma {
   export type ProductAvaliationImagesMinAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     productAvaliationId?: true
   }
 
   export type ProductAvaliationImagesMaxAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     productAvaliationId?: true
   }
 
   export type ProductAvaliationImagesCountAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     productAvaliationId?: true
     _all?: true
   }
@@ -22581,6 +22631,7 @@ export namespace Prisma {
   export type ProductAvaliationImagesGroupByOutputType = {
     id: number
     url: string
+    publicId: string
     productAvaliationId: number | null
     _count: ProductAvaliationImagesCountAggregateOutputType | null
     _avg: ProductAvaliationImagesAvgAggregateOutputType | null
@@ -22606,6 +22657,7 @@ export namespace Prisma {
   export type ProductAvaliationImagesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
+    publicId?: boolean
     productAvaliationId?: boolean
     productAvaliation?: boolean | ProductAvaliationImages$productAvaliationArgs<ExtArgs>
   }, ExtArgs["result"]["productAvaliationImages"]>
@@ -22615,10 +22667,11 @@ export namespace Prisma {
   export type ProductAvaliationImagesSelectScalar = {
     id?: boolean
     url?: boolean
+    publicId?: boolean
     productAvaliationId?: boolean
   }
 
-  export type ProductAvaliationImagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "productAvaliationId", ExtArgs["result"]["productAvaliationImages"]>
+  export type ProductAvaliationImagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "publicId" | "productAvaliationId", ExtArgs["result"]["productAvaliationImages"]>
   export type ProductAvaliationImagesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     productAvaliation?: boolean | ProductAvaliationImages$productAvaliationArgs<ExtArgs>
   }
@@ -22631,6 +22684,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       url: string
+      publicId: string
       productAvaliationId: number | null
     }, ExtArgs["result"]["productAvaliationImages"]>
     composites: {}
@@ -23004,6 +23058,7 @@ export namespace Prisma {
   interface ProductAvaliationImagesFieldRefs {
     readonly id: FieldRef<"ProductAvaliationImages", 'Int'>
     readonly url: FieldRef<"ProductAvaliationImages", 'String'>
+    readonly publicId: FieldRef<"ProductAvaliationImages", 'String'>
     readonly productAvaliationId: FieldRef<"ProductAvaliationImages", 'Int'>
   }
     
@@ -34601,16 +34656,19 @@ export namespace Prisma {
   export type MessageImagesMinAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
   }
 
   export type MessageImagesMaxAggregateOutputType = {
     id: number | null
     url: string | null
+    publicId: string | null
   }
 
   export type MessageImagesCountAggregateOutputType = {
     id: number
     url: number
+    publicId: number
     _all: number
   }
 
@@ -34626,16 +34684,19 @@ export namespace Prisma {
   export type MessageImagesMinAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
   }
 
   export type MessageImagesMaxAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
   }
 
   export type MessageImagesCountAggregateInputType = {
     id?: true
     url?: true
+    publicId?: true
     _all?: true
   }
 
@@ -34728,6 +34789,7 @@ export namespace Prisma {
   export type MessageImagesGroupByOutputType = {
     id: number
     url: string
+    publicId: string
     _count: MessageImagesCountAggregateOutputType | null
     _avg: MessageImagesAvgAggregateOutputType | null
     _sum: MessageImagesSumAggregateOutputType | null
@@ -34752,6 +34814,7 @@ export namespace Prisma {
   export type MessageImagesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
+    publicId?: boolean
     messageImage?: boolean | MessageImages$messageImageArgs<ExtArgs>
   }, ExtArgs["result"]["messageImages"]>
 
@@ -34760,9 +34823,10 @@ export namespace Prisma {
   export type MessageImagesSelectScalar = {
     id?: boolean
     url?: boolean
+    publicId?: boolean
   }
 
-  export type MessageImagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url", ExtArgs["result"]["messageImages"]>
+  export type MessageImagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "publicId", ExtArgs["result"]["messageImages"]>
   export type MessageImagesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     messageImage?: boolean | MessageImages$messageImageArgs<ExtArgs>
   }
@@ -34775,6 +34839,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       url: string
+      publicId: string
     }, ExtArgs["result"]["messageImages"]>
     composites: {}
   }
@@ -35147,6 +35212,7 @@ export namespace Prisma {
   interface MessageImagesFieldRefs {
     readonly id: FieldRef<"MessageImages", 'Int'>
     readonly url: FieldRef<"MessageImages", 'String'>
+    readonly publicId: FieldRef<"MessageImages", 'String'>
   }
     
 
@@ -41401,7 +41467,8 @@ export namespace Prisma {
 
   export const AvatarUserScalarFieldEnum: {
     id: 'id',
-    url: 'url'
+    url: 'url',
+    publicId: 'publicId'
   };
 
   export type AvatarUserScalarFieldEnum = (typeof AvatarUserScalarFieldEnum)[keyof typeof AvatarUserScalarFieldEnum]
@@ -41451,7 +41518,8 @@ export namespace Prisma {
 
   export const AvatarStoreScalarFieldEnum: {
     id: 'id',
-    url: 'url'
+    url: 'url',
+    publicId: 'publicId'
   };
 
   export type AvatarStoreScalarFieldEnum = (typeof AvatarStoreScalarFieldEnum)[keyof typeof AvatarStoreScalarFieldEnum]
@@ -41472,6 +41540,7 @@ export namespace Prisma {
   export const StoreAvaliationImagesScalarFieldEnum: {
     id: 'id',
     url: 'url',
+    publicId: 'publicId',
     storeAvaliationId: 'storeAvaliationId'
   };
 
@@ -41507,6 +41576,7 @@ export namespace Prisma {
   export const ProductImagesScalarFieldEnum: {
     id: 'id',
     url: 'url',
+    publicId: 'publicId',
     productId: 'productId'
   };
 
@@ -41573,6 +41643,7 @@ export namespace Prisma {
   export const ProductAvaliationImagesScalarFieldEnum: {
     id: 'id',
     url: 'url',
+    publicId: 'publicId',
     productAvaliationId: 'productAvaliationId'
   };
 
@@ -41708,7 +41779,8 @@ export namespace Prisma {
 
   export const MessageImagesScalarFieldEnum: {
     id: 'id',
-    url: 'url'
+    url: 'url',
+    publicId: 'publicId'
   };
 
   export type MessageImagesScalarFieldEnum = (typeof MessageImagesScalarFieldEnum)[keyof typeof MessageImagesScalarFieldEnum]
@@ -41805,7 +41877,8 @@ export namespace Prisma {
 
 
   export const AvatarUserOrderByRelevanceFieldEnum: {
-    url: 'url'
+    url: 'url',
+    publicId: 'publicId'
   };
 
   export type AvatarUserOrderByRelevanceFieldEnum = (typeof AvatarUserOrderByRelevanceFieldEnum)[keyof typeof AvatarUserOrderByRelevanceFieldEnum]
@@ -41836,7 +41909,8 @@ export namespace Prisma {
 
 
   export const AvatarStoreOrderByRelevanceFieldEnum: {
-    url: 'url'
+    url: 'url',
+    publicId: 'publicId'
   };
 
   export type AvatarStoreOrderByRelevanceFieldEnum = (typeof AvatarStoreOrderByRelevanceFieldEnum)[keyof typeof AvatarStoreOrderByRelevanceFieldEnum]
@@ -41850,7 +41924,8 @@ export namespace Prisma {
 
 
   export const StoreAvaliationImagesOrderByRelevanceFieldEnum: {
-    url: 'url'
+    url: 'url',
+    publicId: 'publicId'
   };
 
   export type StoreAvaliationImagesOrderByRelevanceFieldEnum = (typeof StoreAvaliationImagesOrderByRelevanceFieldEnum)[keyof typeof StoreAvaliationImagesOrderByRelevanceFieldEnum]
@@ -41871,7 +41946,8 @@ export namespace Prisma {
 
 
   export const ProductImagesOrderByRelevanceFieldEnum: {
-    url: 'url'
+    url: 'url',
+    publicId: 'publicId'
   };
 
   export type ProductImagesOrderByRelevanceFieldEnum = (typeof ProductImagesOrderByRelevanceFieldEnum)[keyof typeof ProductImagesOrderByRelevanceFieldEnum]
@@ -41901,7 +41977,8 @@ export namespace Prisma {
 
 
   export const ProductAvaliationImagesOrderByRelevanceFieldEnum: {
-    url: 'url'
+    url: 'url',
+    publicId: 'publicId'
   };
 
   export type ProductAvaliationImagesOrderByRelevanceFieldEnum = (typeof ProductAvaliationImagesOrderByRelevanceFieldEnum)[keyof typeof ProductAvaliationImagesOrderByRelevanceFieldEnum]
@@ -41937,7 +42014,8 @@ export namespace Prisma {
 
 
   export const MessageImagesOrderByRelevanceFieldEnum: {
-    url: 'url'
+    url: 'url',
+    publicId: 'publicId'
   };
 
   export type MessageImagesOrderByRelevanceFieldEnum = (typeof MessageImagesOrderByRelevanceFieldEnum)[keyof typeof MessageImagesOrderByRelevanceFieldEnum]
@@ -42241,12 +42319,14 @@ export namespace Prisma {
     NOT?: AvatarUserWhereInput | AvatarUserWhereInput[]
     id?: IntFilter<"AvatarUser"> | number
     url?: StringFilter<"AvatarUser"> | string
+    publicId?: StringFilter<"AvatarUser"> | string
     userAvatar?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type AvatarUserOrderByWithRelationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     userAvatar?: UserOrderByWithRelationInput
     _relevance?: AvatarUserOrderByRelevanceInput
   }
@@ -42257,12 +42337,14 @@ export namespace Prisma {
     OR?: AvatarUserWhereInput[]
     NOT?: AvatarUserWhereInput | AvatarUserWhereInput[]
     url?: StringFilter<"AvatarUser"> | string
+    publicId?: StringFilter<"AvatarUser"> | string
     userAvatar?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type AvatarUserOrderByWithAggregationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     _count?: AvatarUserCountOrderByAggregateInput
     _avg?: AvatarUserAvgOrderByAggregateInput
     _max?: AvatarUserMaxOrderByAggregateInput
@@ -42276,6 +42358,7 @@ export namespace Prisma {
     NOT?: AvatarUserScalarWhereWithAggregatesInput | AvatarUserScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"AvatarUser"> | number
     url?: StringWithAggregatesFilter<"AvatarUser"> | string
+    publicId?: StringWithAggregatesFilter<"AvatarUser"> | string
   }
 
   export type AddressesWhereInput = {
@@ -42541,12 +42624,14 @@ export namespace Prisma {
     NOT?: AvatarStoreWhereInput | AvatarStoreWhereInput[]
     id?: IntFilter<"AvatarStore"> | number
     url?: StringFilter<"AvatarStore"> | string
+    publicId?: StringFilter<"AvatarStore"> | string
     storeAvatar?: XOR<StoresNullableScalarRelationFilter, StoresWhereInput> | null
   }
 
   export type AvatarStoreOrderByWithRelationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     storeAvatar?: StoresOrderByWithRelationInput
     _relevance?: AvatarStoreOrderByRelevanceInput
   }
@@ -42557,12 +42642,14 @@ export namespace Prisma {
     OR?: AvatarStoreWhereInput[]
     NOT?: AvatarStoreWhereInput | AvatarStoreWhereInput[]
     url?: StringFilter<"AvatarStore"> | string
+    publicId?: StringFilter<"AvatarStore"> | string
     storeAvatar?: XOR<StoresNullableScalarRelationFilter, StoresWhereInput> | null
   }, "id">
 
   export type AvatarStoreOrderByWithAggregationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     _count?: AvatarStoreCountOrderByAggregateInput
     _avg?: AvatarStoreAvgOrderByAggregateInput
     _max?: AvatarStoreMaxOrderByAggregateInput
@@ -42576,6 +42663,7 @@ export namespace Prisma {
     NOT?: AvatarStoreScalarWhereWithAggregatesInput | AvatarStoreScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"AvatarStore"> | number
     url?: StringWithAggregatesFilter<"AvatarStore"> | string
+    publicId?: StringWithAggregatesFilter<"AvatarStore"> | string
   }
 
   export type StoreAvaliationsWhereInput = {
@@ -42653,6 +42741,7 @@ export namespace Prisma {
     NOT?: StoreAvaliationImagesWhereInput | StoreAvaliationImagesWhereInput[]
     id?: IntFilter<"StoreAvaliationImages"> | number
     url?: StringFilter<"StoreAvaliationImages"> | string
+    publicId?: StringFilter<"StoreAvaliationImages"> | string
     storeAvaliationId?: IntNullableFilter<"StoreAvaliationImages"> | number | null
     storeAvaliation?: XOR<StoreAvaliationsNullableScalarRelationFilter, StoreAvaliationsWhereInput> | null
   }
@@ -42660,6 +42749,7 @@ export namespace Prisma {
   export type StoreAvaliationImagesOrderByWithRelationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     storeAvaliationId?: SortOrderInput | SortOrder
     storeAvaliation?: StoreAvaliationsOrderByWithRelationInput
     _relevance?: StoreAvaliationImagesOrderByRelevanceInput
@@ -42671,6 +42761,7 @@ export namespace Prisma {
     OR?: StoreAvaliationImagesWhereInput[]
     NOT?: StoreAvaliationImagesWhereInput | StoreAvaliationImagesWhereInput[]
     url?: StringFilter<"StoreAvaliationImages"> | string
+    publicId?: StringFilter<"StoreAvaliationImages"> | string
     storeAvaliationId?: IntNullableFilter<"StoreAvaliationImages"> | number | null
     storeAvaliation?: XOR<StoreAvaliationsNullableScalarRelationFilter, StoreAvaliationsWhereInput> | null
   }, "id">
@@ -42678,6 +42769,7 @@ export namespace Prisma {
   export type StoreAvaliationImagesOrderByWithAggregationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     storeAvaliationId?: SortOrderInput | SortOrder
     _count?: StoreAvaliationImagesCountOrderByAggregateInput
     _avg?: StoreAvaliationImagesAvgOrderByAggregateInput
@@ -42692,6 +42784,7 @@ export namespace Prisma {
     NOT?: StoreAvaliationImagesScalarWhereWithAggregatesInput | StoreAvaliationImagesScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"StoreAvaliationImages"> | number
     url?: StringWithAggregatesFilter<"StoreAvaliationImages"> | string
+    publicId?: StringWithAggregatesFilter<"StoreAvaliationImages"> | string
     storeAvaliationId?: IntNullableWithAggregatesFilter<"StoreAvaliationImages"> | number | null
   }
 
@@ -42864,6 +42957,7 @@ export namespace Prisma {
     NOT?: ProductImagesWhereInput | ProductImagesWhereInput[]
     id?: IntFilter<"ProductImages"> | number
     url?: StringFilter<"ProductImages"> | string
+    publicId?: StringFilter<"ProductImages"> | string
     productId?: IntNullableFilter<"ProductImages"> | number | null
     product?: XOR<ProductsNullableScalarRelationFilter, ProductsWhereInput> | null
   }
@@ -42871,6 +42965,7 @@ export namespace Prisma {
   export type ProductImagesOrderByWithRelationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     productId?: SortOrderInput | SortOrder
     product?: ProductsOrderByWithRelationInput
     _relevance?: ProductImagesOrderByRelevanceInput
@@ -42882,6 +42977,7 @@ export namespace Prisma {
     OR?: ProductImagesWhereInput[]
     NOT?: ProductImagesWhereInput | ProductImagesWhereInput[]
     url?: StringFilter<"ProductImages"> | string
+    publicId?: StringFilter<"ProductImages"> | string
     productId?: IntNullableFilter<"ProductImages"> | number | null
     product?: XOR<ProductsNullableScalarRelationFilter, ProductsWhereInput> | null
   }, "id">
@@ -42889,6 +42985,7 @@ export namespace Prisma {
   export type ProductImagesOrderByWithAggregationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     productId?: SortOrderInput | SortOrder
     _count?: ProductImagesCountOrderByAggregateInput
     _avg?: ProductImagesAvgOrderByAggregateInput
@@ -42903,6 +43000,7 @@ export namespace Prisma {
     NOT?: ProductImagesScalarWhereWithAggregatesInput | ProductImagesScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"ProductImages"> | number
     url?: StringWithAggregatesFilter<"ProductImages"> | string
+    publicId?: StringWithAggregatesFilter<"ProductImages"> | string
     productId?: IntNullableWithAggregatesFilter<"ProductImages"> | number | null
   }
 
@@ -43222,6 +43320,7 @@ export namespace Prisma {
     NOT?: ProductAvaliationImagesWhereInput | ProductAvaliationImagesWhereInput[]
     id?: IntFilter<"ProductAvaliationImages"> | number
     url?: StringFilter<"ProductAvaliationImages"> | string
+    publicId?: StringFilter<"ProductAvaliationImages"> | string
     productAvaliationId?: IntNullableFilter<"ProductAvaliationImages"> | number | null
     productAvaliation?: XOR<ProductAvaliationsNullableScalarRelationFilter, ProductAvaliationsWhereInput> | null
   }
@@ -43229,6 +43328,7 @@ export namespace Prisma {
   export type ProductAvaliationImagesOrderByWithRelationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     productAvaliationId?: SortOrderInput | SortOrder
     productAvaliation?: ProductAvaliationsOrderByWithRelationInput
     _relevance?: ProductAvaliationImagesOrderByRelevanceInput
@@ -43240,6 +43340,7 @@ export namespace Prisma {
     OR?: ProductAvaliationImagesWhereInput[]
     NOT?: ProductAvaliationImagesWhereInput | ProductAvaliationImagesWhereInput[]
     url?: StringFilter<"ProductAvaliationImages"> | string
+    publicId?: StringFilter<"ProductAvaliationImages"> | string
     productAvaliationId?: IntNullableFilter<"ProductAvaliationImages"> | number | null
     productAvaliation?: XOR<ProductAvaliationsNullableScalarRelationFilter, ProductAvaliationsWhereInput> | null
   }, "id">
@@ -43247,6 +43348,7 @@ export namespace Prisma {
   export type ProductAvaliationImagesOrderByWithAggregationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     productAvaliationId?: SortOrderInput | SortOrder
     _count?: ProductAvaliationImagesCountOrderByAggregateInput
     _avg?: ProductAvaliationImagesAvgOrderByAggregateInput
@@ -43261,6 +43363,7 @@ export namespace Prisma {
     NOT?: ProductAvaliationImagesScalarWhereWithAggregatesInput | ProductAvaliationImagesScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"ProductAvaliationImages"> | number
     url?: StringWithAggregatesFilter<"ProductAvaliationImages"> | string
+    publicId?: StringWithAggregatesFilter<"ProductAvaliationImages"> | string
     productAvaliationId?: IntNullableWithAggregatesFilter<"ProductAvaliationImages"> | number | null
   }
 
@@ -43988,12 +44091,14 @@ export namespace Prisma {
     NOT?: MessageImagesWhereInput | MessageImagesWhereInput[]
     id?: IntFilter<"MessageImages"> | number
     url?: StringFilter<"MessageImages"> | string
+    publicId?: StringFilter<"MessageImages"> | string
     messageImage?: XOR<ChatMessagesNullableScalarRelationFilter, chatMessagesWhereInput> | null
   }
 
   export type MessageImagesOrderByWithRelationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     messageImage?: chatMessagesOrderByWithRelationInput
     _relevance?: MessageImagesOrderByRelevanceInput
   }
@@ -44004,12 +44109,14 @@ export namespace Prisma {
     OR?: MessageImagesWhereInput[]
     NOT?: MessageImagesWhereInput | MessageImagesWhereInput[]
     url?: StringFilter<"MessageImages"> | string
+    publicId?: StringFilter<"MessageImages"> | string
     messageImage?: XOR<ChatMessagesNullableScalarRelationFilter, chatMessagesWhereInput> | null
   }, "id">
 
   export type MessageImagesOrderByWithAggregationInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     _count?: MessageImagesCountOrderByAggregateInput
     _avg?: MessageImagesAvgOrderByAggregateInput
     _max?: MessageImagesMaxOrderByAggregateInput
@@ -44023,6 +44130,7 @@ export namespace Prisma {
     NOT?: MessageImagesScalarWhereWithAggregatesInput | MessageImagesScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"MessageImages"> | number
     url?: StringWithAggregatesFilter<"MessageImages"> | string
+    publicId?: StringWithAggregatesFilter<"MessageImages"> | string
   }
 
   export type LoginTokenWhereInput = {
@@ -44555,38 +44663,45 @@ export namespace Prisma {
 
   export type AvatarUserCreateInput = {
     url: string
+    publicId: string
     userAvatar?: UserCreateNestedOneWithoutAvatarInput
   }
 
   export type AvatarUserUncheckedCreateInput = {
     id?: number
     url: string
+    publicId: string
     userAvatar?: UserUncheckedCreateNestedOneWithoutAvatarInput
   }
 
   export type AvatarUserUpdateInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     userAvatar?: UserUpdateOneWithoutAvatarNestedInput
   }
 
   export type AvatarUserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     userAvatar?: UserUncheckedUpdateOneWithoutAvatarNestedInput
   }
 
   export type AvatarUserCreateManyInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type AvatarUserUpdateManyMutationInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AvatarUserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AddressesCreateInput = {
@@ -44847,38 +44962,45 @@ export namespace Prisma {
 
   export type AvatarStoreCreateInput = {
     url: string
+    publicId: string
     storeAvatar?: StoresCreateNestedOneWithoutAvatarInput
   }
 
   export type AvatarStoreUncheckedCreateInput = {
     id?: number
     url: string
+    publicId: string
     storeAvatar?: StoresUncheckedCreateNestedOneWithoutAvatarInput
   }
 
   export type AvatarStoreUpdateInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     storeAvatar?: StoresUpdateOneWithoutAvatarNestedInput
   }
 
   export type AvatarStoreUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     storeAvatar?: StoresUncheckedUpdateOneWithoutAvatarNestedInput
   }
 
   export type AvatarStoreCreateManyInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type AvatarStoreUpdateManyMutationInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AvatarStoreUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StoreAvaliationsCreateInput = {
@@ -44945,39 +45067,46 @@ export namespace Prisma {
 
   export type StoreAvaliationImagesCreateInput = {
     url: string
+    publicId: string
     storeAvaliation?: StoreAvaliationsCreateNestedOneWithoutImagesInput
   }
 
   export type StoreAvaliationImagesUncheckedCreateInput = {
     id?: number
     url: string
+    publicId: string
     storeAvaliationId?: number | null
   }
 
   export type StoreAvaliationImagesUpdateInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     storeAvaliation?: StoreAvaliationsUpdateOneWithoutImagesNestedInput
   }
 
   export type StoreAvaliationImagesUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     storeAvaliationId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StoreAvaliationImagesCreateManyInput = {
     id?: number
     url: string
+    publicId: string
     storeAvaliationId?: number | null
   }
 
   export type StoreAvaliationImagesUpdateManyMutationInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StoreAvaliationImagesUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     storeAvaliationId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -45151,39 +45280,46 @@ export namespace Prisma {
 
   export type ProductImagesCreateInput = {
     url: string
+    publicId: string
     product?: ProductsCreateNestedOneWithoutImagesInput
   }
 
   export type ProductImagesUncheckedCreateInput = {
     id?: number
     url: string
+    publicId: string
     productId?: number | null
   }
 
   export type ProductImagesUpdateInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     product?: ProductsUpdateOneWithoutImagesNestedInput
   }
 
   export type ProductImagesUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     productId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ProductImagesCreateManyInput = {
     id?: number
     url: string
+    publicId: string
     productId?: number | null
   }
 
   export type ProductImagesUpdateManyMutationInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProductImagesUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     productId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -45479,39 +45615,46 @@ export namespace Prisma {
 
   export type ProductAvaliationImagesCreateInput = {
     url: string
+    publicId: string
     productAvaliation?: ProductAvaliationsCreateNestedOneWithoutImagesInput
   }
 
   export type ProductAvaliationImagesUncheckedCreateInput = {
     id?: number
     url: string
+    publicId: string
     productAvaliationId?: number | null
   }
 
   export type ProductAvaliationImagesUpdateInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     productAvaliation?: ProductAvaliationsUpdateOneWithoutImagesNestedInput
   }
 
   export type ProductAvaliationImagesUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     productAvaliationId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ProductAvaliationImagesCreateManyInput = {
     id?: number
     url: string
+    publicId: string
     productAvaliationId?: number | null
   }
 
   export type ProductAvaliationImagesUpdateManyMutationInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProductAvaliationImagesUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     productAvaliationId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -46164,38 +46307,45 @@ export namespace Prisma {
 
   export type MessageImagesCreateInput = {
     url: string
+    publicId: string
     messageImage?: chatMessagesCreateNestedOneWithoutImageInput
   }
 
   export type MessageImagesUncheckedCreateInput = {
     id?: number
     url: string
+    publicId: string
     messageImage?: chatMessagesUncheckedCreateNestedOneWithoutImageInput
   }
 
   export type MessageImagesUpdateInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     messageImage?: chatMessagesUpdateOneWithoutImageNestedInput
   }
 
   export type MessageImagesUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
     messageImage?: chatMessagesUncheckedUpdateOneWithoutImageNestedInput
   }
 
   export type MessageImagesCreateManyInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type MessageImagesUpdateManyMutationInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageImagesUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type LoginTokenCreateInput = {
@@ -46868,6 +47018,7 @@ export namespace Prisma {
   export type AvatarUserCountOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
   }
 
   export type AvatarUserAvgOrderByAggregateInput = {
@@ -46877,11 +47028,13 @@ export namespace Prisma {
   export type AvatarUserMaxOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
   }
 
   export type AvatarUserMinOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
   }
 
   export type AvatarUserSumOrderByAggregateInput = {
@@ -47132,6 +47285,7 @@ export namespace Prisma {
   export type AvatarStoreCountOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
   }
 
   export type AvatarStoreAvgOrderByAggregateInput = {
@@ -47141,11 +47295,13 @@ export namespace Prisma {
   export type AvatarStoreMaxOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
   }
 
   export type AvatarStoreMinOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
   }
 
   export type AvatarStoreSumOrderByAggregateInput = {
@@ -47228,6 +47384,7 @@ export namespace Prisma {
   export type StoreAvaliationImagesCountOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     storeAvaliationId?: SortOrder
   }
 
@@ -47239,12 +47396,14 @@ export namespace Prisma {
   export type StoreAvaliationImagesMaxOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     storeAvaliationId?: SortOrder
   }
 
   export type StoreAvaliationImagesMinOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     storeAvaliationId?: SortOrder
   }
 
@@ -47427,6 +47586,7 @@ export namespace Prisma {
   export type ProductImagesCountOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     productId?: SortOrder
   }
 
@@ -47438,12 +47598,14 @@ export namespace Prisma {
   export type ProductImagesMaxOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     productId?: SortOrder
   }
 
   export type ProductImagesMinOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     productId?: SortOrder
   }
 
@@ -47681,6 +47843,7 @@ export namespace Prisma {
   export type ProductAvaliationImagesCountOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     productAvaliationId?: SortOrder
   }
 
@@ -47692,12 +47855,14 @@ export namespace Prisma {
   export type ProductAvaliationImagesMaxOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     productAvaliationId?: SortOrder
   }
 
   export type ProductAvaliationImagesMinOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
     productAvaliationId?: SortOrder
   }
 
@@ -48308,6 +48473,7 @@ export namespace Prisma {
   export type MessageImagesCountOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
   }
 
   export type MessageImagesAvgOrderByAggregateInput = {
@@ -48317,11 +48483,13 @@ export namespace Prisma {
   export type MessageImagesMaxOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
   }
 
   export type MessageImagesMinOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
+    publicId?: SortOrder
   }
 
   export type MessageImagesSumOrderByAggregateInput = {
@@ -51880,11 +52048,13 @@ export namespace Prisma {
 
   export type AvatarUserCreateWithoutUserAvatarInput = {
     url: string
+    publicId: string
   }
 
   export type AvatarUserUncheckedCreateWithoutUserAvatarInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type AvatarUserCreateOrConnectWithoutUserAvatarInput = {
@@ -52396,11 +52566,13 @@ export namespace Prisma {
 
   export type AvatarUserUpdateWithoutUserAvatarInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AvatarUserUncheckedUpdateWithoutUserAvatarInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type LoginTokenUpsertWithoutUserInput = {
@@ -53705,11 +53877,13 @@ export namespace Prisma {
 
   export type AvatarStoreCreateWithoutStoreAvatarInput = {
     url: string
+    publicId: string
   }
 
   export type AvatarStoreUncheckedCreateWithoutStoreAvatarInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type AvatarStoreCreateOrConnectWithoutStoreAvatarInput = {
@@ -54056,11 +54230,13 @@ export namespace Prisma {
 
   export type AvatarStoreUpdateWithoutStoreAvatarInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AvatarStoreUncheckedUpdateWithoutStoreAvatarInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProductsUpsertWithWhereUniqueWithoutStoreInput = {
@@ -54429,11 +54605,13 @@ export namespace Prisma {
 
   export type StoreAvaliationImagesCreateWithoutStoreAvaliationInput = {
     url: string
+    publicId: string
   }
 
   export type StoreAvaliationImagesUncheckedCreateWithoutStoreAvaliationInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type StoreAvaliationImagesCreateOrConnectWithoutStoreAvaliationInput = {
@@ -54580,6 +54758,7 @@ export namespace Prisma {
     NOT?: StoreAvaliationImagesScalarWhereInput | StoreAvaliationImagesScalarWhereInput[]
     id?: IntFilter<"StoreAvaliationImages"> | number
     url?: StringFilter<"StoreAvaliationImages"> | string
+    publicId?: StringFilter<"StoreAvaliationImages"> | string
     storeAvaliationId?: IntNullableFilter<"StoreAvaliationImages"> | number | null
   }
 
@@ -54812,11 +54991,13 @@ export namespace Prisma {
 
   export type ProductImagesCreateWithoutProductInput = {
     url: string
+    publicId: string
   }
 
   export type ProductImagesUncheckedCreateWithoutProductInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type ProductImagesCreateOrConnectWithoutProductInput = {
@@ -55056,6 +55237,7 @@ export namespace Prisma {
     NOT?: ProductImagesScalarWhereInput | ProductImagesScalarWhereInput[]
     id?: IntFilter<"ProductImages"> | number
     url?: StringFilter<"ProductImages"> | string
+    publicId?: StringFilter<"ProductImages"> | string
     productId?: IntNullableFilter<"ProductImages"> | number | null
   }
 
@@ -55798,11 +55980,13 @@ export namespace Prisma {
 
   export type ProductAvaliationImagesCreateWithoutProductAvaliationInput = {
     url: string
+    publicId: string
   }
 
   export type ProductAvaliationImagesUncheckedCreateWithoutProductAvaliationInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type ProductAvaliationImagesCreateOrConnectWithoutProductAvaliationInput = {
@@ -55947,6 +56131,7 @@ export namespace Prisma {
     NOT?: ProductAvaliationImagesScalarWhereInput | ProductAvaliationImagesScalarWhereInput[]
     id?: IntFilter<"ProductAvaliationImages"> | number
     url?: StringFilter<"ProductAvaliationImages"> | string
+    publicId?: StringFilter<"ProductAvaliationImages"> | string
     productAvaliationId?: IntNullableFilter<"ProductAvaliationImages"> | number | null
   }
 
@@ -57868,11 +58053,13 @@ export namespace Prisma {
 
   export type MessageImagesCreateWithoutMessageImageInput = {
     url: string
+    publicId: string
   }
 
   export type MessageImagesUncheckedCreateWithoutMessageImageInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type MessageImagesCreateOrConnectWithoutMessageImageInput = {
@@ -58139,11 +58326,13 @@ export namespace Prisma {
 
   export type MessageImagesUpdateWithoutMessageImageInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageImagesUncheckedUpdateWithoutMessageImageInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type chatMessagesCreateWithoutImageInput = {
@@ -59887,20 +60076,24 @@ export namespace Prisma {
   export type StoreAvaliationImagesCreateManyStoreAvaliationInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type StoreAvaliationImagesUpdateWithoutStoreAvaliationInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StoreAvaliationImagesUncheckedUpdateWithoutStoreAvaliationInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StoreAvaliationImagesUncheckedUpdateManyWithoutStoreAvaliationInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUsedCouponsCreateManyCouponInput = {
@@ -59933,6 +60126,7 @@ export namespace Prisma {
   export type ProductImagesCreateManyProductInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type ProductAvaliationsCreateManyProductInput = {
@@ -59960,16 +60154,19 @@ export namespace Prisma {
 
   export type ProductImagesUpdateWithoutProductInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProductImagesUncheckedUpdateWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProductImagesUncheckedUpdateManyWithoutProductInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CategoryUpdateWithoutProductInput = {
@@ -60235,20 +60432,24 @@ export namespace Prisma {
   export type ProductAvaliationImagesCreateManyProductAvaliationInput = {
     id?: number
     url: string
+    publicId: string
   }
 
   export type ProductAvaliationImagesUpdateWithoutProductAvaliationInput = {
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProductAvaliationImagesUncheckedUpdateWithoutProductAvaliationInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ProductAvaliationImagesUncheckedUpdateManyWithoutProductAvaliationInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    publicId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CartItemsCreateManyCartInput = {

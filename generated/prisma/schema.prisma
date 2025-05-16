@@ -83,8 +83,9 @@ model User {
 }
 
 model AvatarUser {
-  id  Int    @id @default(autoincrement())
-  url String @db.VarChar(500)
+  id       Int    @id @default(autoincrement())
+  url      String @db.VarChar(500)
+  publicId String @db.VarChar(255)
 
   userAvatar User? @relation("UserAvatar")
 }
@@ -154,8 +155,9 @@ model Stores {
 }
 
 model AvatarStore {
-  id  Int    @id @default(autoincrement())
-  url String @db.VarChar(500)
+  id       Int    @id @default(autoincrement())
+  url      String @db.VarChar(500)
+  publicId String @db.VarChar(255)
 
   storeAvatar Stores? @relation("StoreAvatar")
 }
@@ -176,8 +178,9 @@ model StoreAvaliations {
 }
 
 model StoreAvaliationImages {
-  id  Int    @id @default(autoincrement())
-  url String @db.VarChar(500)
+  id       Int    @id @default(autoincrement())
+  url      String @db.VarChar(500)
+  publicId String @db.VarChar(255)
 
   storeAvaliationId Int?
   storeAvaliation   StoreAvaliations? @relation(fields: [storeAvaliationId], references: [id], onDelete: Cascade)
@@ -229,8 +232,9 @@ model Products {
 }
 
 model ProductImages {
-  id  Int    @id @default(autoincrement())
-  url String @db.VarChar(500)
+  id       Int    @id @default(autoincrement())
+  url      String @db.VarChar(500)
+  publicId String @db.VarChar(255)
 
   productId Int?
   product   Products? @relation(fields: [productId], references: [id], onDelete: Cascade)
@@ -300,8 +304,9 @@ model ProductAvaliations {
 }
 
 model ProductAvaliationImages {
-  id  Int    @id @default(autoincrement())
-  url String @db.VarChar(500)
+  id       Int    @id @default(autoincrement())
+  url      String @db.VarChar(500)
+  publicId String @db.VarChar(255)
 
   productAvaliationId Int?
   productAvaliation   ProductAvaliations? @relation(fields: [productAvaliationId], references: [id], onDelete: Cascade)
@@ -463,8 +468,9 @@ model chatMessages {
 }
 
 model MessageImages {
-  id  Int    @id @default(autoincrement())
-  url String @db.VarChar(500)
+  id       Int    @id @default(autoincrement())
+  url      String @db.VarChar(500)
+  publicId String @db.VarChar(255)
 
   messageImage chatMessages? @relation("MessageImage")
 }

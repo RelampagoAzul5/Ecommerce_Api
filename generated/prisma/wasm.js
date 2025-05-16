@@ -141,7 +141,8 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.AvatarUserScalarFieldEnum = {
   id: 'id',
-  url: 'url'
+  url: 'url',
+  publicId: 'publicId'
 };
 
 exports.Prisma.AddressesScalarFieldEnum = {
@@ -179,7 +180,8 @@ exports.Prisma.StoresScalarFieldEnum = {
 
 exports.Prisma.AvatarStoreScalarFieldEnum = {
   id: 'id',
-  url: 'url'
+  url: 'url',
+  publicId: 'publicId'
 };
 
 exports.Prisma.StoreAvaliationsScalarFieldEnum = {
@@ -194,6 +196,7 @@ exports.Prisma.StoreAvaliationsScalarFieldEnum = {
 exports.Prisma.StoreAvaliationImagesScalarFieldEnum = {
   id: 'id',
   url: 'url',
+  publicId: 'publicId',
   storeAvaliationId: 'storeAvaliationId'
 };
 
@@ -220,6 +223,7 @@ exports.Prisma.ProductsScalarFieldEnum = {
 exports.Prisma.ProductImagesScalarFieldEnum = {
   id: 'id',
   url: 'url',
+  publicId: 'publicId',
   productId: 'productId'
 };
 
@@ -268,6 +272,7 @@ exports.Prisma.ProductAvaliationsScalarFieldEnum = {
 exports.Prisma.ProductAvaliationImagesScalarFieldEnum = {
   id: 'id',
   url: 'url',
+  publicId: 'publicId',
   productAvaliationId: 'productAvaliationId'
 };
 
@@ -367,7 +372,8 @@ exports.Prisma.ChatMessagesScalarFieldEnum = {
 
 exports.Prisma.MessageImagesScalarFieldEnum = {
   id: 'id',
-  url: 'url'
+  url: 'url',
+  publicId: 'publicId'
 };
 
 exports.Prisma.LoginTokenScalarFieldEnum = {
@@ -434,7 +440,8 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.AvatarUserOrderByRelevanceFieldEnum = {
-  url: 'url'
+  url: 'url',
+  publicId: 'publicId'
 };
 
 exports.Prisma.AddressesOrderByRelevanceFieldEnum = {
@@ -456,7 +463,8 @@ exports.Prisma.StoresOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.AvatarStoreOrderByRelevanceFieldEnum = {
-  url: 'url'
+  url: 'url',
+  publicId: 'publicId'
 };
 
 exports.Prisma.StoreAvaliationsOrderByRelevanceFieldEnum = {
@@ -464,7 +472,8 @@ exports.Prisma.StoreAvaliationsOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.StoreAvaliationImagesOrderByRelevanceFieldEnum = {
-  url: 'url'
+  url: 'url',
+  publicId: 'publicId'
 };
 
 exports.Prisma.CouponsOrderByRelevanceFieldEnum = {
@@ -476,7 +485,8 @@ exports.Prisma.ProductsOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.ProductImagesOrderByRelevanceFieldEnum = {
-  url: 'url'
+  url: 'url',
+  publicId: 'publicId'
 };
 
 exports.Prisma.PromotionOrderByRelevanceFieldEnum = {
@@ -494,7 +504,8 @@ exports.Prisma.ProductAvaliationsOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.ProductAvaliationImagesOrderByRelevanceFieldEnum = {
-  url: 'url'
+  url: 'url',
+  publicId: 'publicId'
 };
 
 exports.Prisma.OrdersOrderByRelevanceFieldEnum = {
@@ -515,7 +526,8 @@ exports.Prisma.chatMessagesOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.MessageImagesOrderByRelevanceFieldEnum = {
-  url: 'url'
+  url: 'url',
+  publicId: 'publicId'
 };
 
 exports.Prisma.LoginTokenOrderByRelevanceFieldEnum = {
