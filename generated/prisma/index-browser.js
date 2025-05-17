@@ -142,7 +142,8 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.AvatarUserScalarFieldEnum = {
   id: 'id',
   url: 'url',
-  publicId: 'publicId'
+  publicId: 'publicId',
+  userId: 'userId'
 };
 
 exports.Prisma.AddressesScalarFieldEnum = {

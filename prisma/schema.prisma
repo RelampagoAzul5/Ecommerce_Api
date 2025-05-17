@@ -48,7 +48,7 @@ model User {
   bornDate   DateTime
 
   avatarId Int?    @unique
-  avatar   AvatarUser? @relation("UserAvatar", fields: [avatarId], references: [id], onDelete: SetNull)
+  avatar   AvatarUser?
 
   tokenLogin        LoginToken?        @relation("LoginToken")
   confirmationToken ConfirmationToken? @relation("ConfirmationToken")
@@ -87,7 +87,8 @@ model AvatarUser {
   url String @db.VarChar(500)
   publicId String @db.VarChar(255)
 
-  userAvatar User? @relation("UserAvatar")
+  userId   Int    @unique
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   }
 
 model Addresses {
@@ -138,7 +139,7 @@ model Stores {
   cnpj       String?  @unique @db.VarChar(18)
 
   avatarId Int?    @unique
-  avatar   AvatarStore? @relation("StoreAvatar", fields: [avatarId], references: [id], onDelete: SetNull)
+  avatar   AvatarStore?
 
   product Products[] @relation("StoreProduct")
 
@@ -160,7 +161,9 @@ model AvatarStore {
   url String @db.VarChar(500)
   publicId String @db.VarChar(255)
 
-  storeAvatar Stores? @relation("StoreAvatar")
+  storeId   Int    @unique @map("userId")
+  store     Stores   @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
   }
 
 model StoreAvaliations {

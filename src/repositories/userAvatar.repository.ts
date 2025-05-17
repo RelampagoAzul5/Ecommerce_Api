@@ -18,6 +18,7 @@ class UserAvatarRepository {
       data: {
         url: data.path,
         publicId: data.filename,
+        userId,
       },
     });
 
@@ -30,13 +31,13 @@ class UserAvatarRepository {
     return avatar;
   }
 
-  async getAvatar(id: number) {
-    const user = await prisma.user.findUnique({ where: { id } });
-    return user;
+  async getAvatar(userId: number) {
+    const avatar = await prisma.avatarUser.findUnique({ where: { userId } });
+    return avatar;
   }
 
-  async deleteAvatar(id: number) {
-    const user = await prisma.user.delete({ where: { id } });
+  async deleteAvatar(userId: number) {
+    await prisma.avatarUser.delete({ where: { userId } });
     return;
   }
 }

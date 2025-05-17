@@ -6,11 +6,11 @@ class UserAvatarService {
   }
 
   async getAvatar(id: number) {
-    return userAvatarRepository.getAvatar(id);
+    return await userAvatarRepository.getAvatar(id);
   }
 
-  async deleteAvatar(id: number) {
-    return userAvatarRepository.deleteAvatar(id);
+  async deleteAvatar(userId: number) {
+    return await userAvatarRepository.deleteAvatar(userId);
   }
 }
 

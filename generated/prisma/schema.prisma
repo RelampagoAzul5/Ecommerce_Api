@@ -48,7 +48,7 @@ model User {
   bornDate   DateTime
 
   avatarId Int?        @unique
-  avatar   AvatarUser? @relation("UserAvatar", fields: [avatarId], references: [id], onDelete: SetNull)
+  avatar   AvatarUser?
 
   tokenLogin        LoginToken?        @relation("LoginToken")
   confirmationToken ConfirmationToken? @relation("ConfirmationToken")
@@ -87,7 +87,8 @@ model AvatarUser {
   url      String @db.VarChar(500)
   publicId String @db.VarChar(255)
 
-  userAvatar User? @relation("UserAvatar")
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Addresses {

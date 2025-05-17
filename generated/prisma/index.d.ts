@@ -7018,56 +7018,66 @@ export namespace Prisma {
 
   export type AvatarUserAvgAggregateOutputType = {
     id: number | null
+    userId: number | null
   }
 
   export type AvatarUserSumAggregateOutputType = {
     id: number | null
+    userId: number | null
   }
 
   export type AvatarUserMinAggregateOutputType = {
     id: number | null
     url: string | null
     publicId: string | null
+    userId: number | null
   }
 
   export type AvatarUserMaxAggregateOutputType = {
     id: number | null
     url: string | null
     publicId: string | null
+    userId: number | null
   }
 
   export type AvatarUserCountAggregateOutputType = {
     id: number
     url: number
     publicId: number
+    userId: number
     _all: number
   }
 
 
   export type AvatarUserAvgAggregateInputType = {
     id?: true
+    userId?: true
   }
 
   export type AvatarUserSumAggregateInputType = {
     id?: true
+    userId?: true
   }
 
   export type AvatarUserMinAggregateInputType = {
     id?: true
     url?: true
     publicId?: true
+    userId?: true
   }
 
   export type AvatarUserMaxAggregateInputType = {
     id?: true
     url?: true
     publicId?: true
+    userId?: true
   }
 
   export type AvatarUserCountAggregateInputType = {
     id?: true
     url?: true
     publicId?: true
+    userId?: true
     _all?: true
   }
 
@@ -7161,6 +7171,7 @@ export namespace Prisma {
     id: number
     url: string
     publicId: string
+    userId: number
     _count: AvatarUserCountAggregateOutputType | null
     _avg: AvatarUserAvgAggregateOutputType | null
     _sum: AvatarUserSumAggregateOutputType | null
@@ -7186,7 +7197,8 @@ export namespace Prisma {
     id?: boolean
     url?: boolean
     publicId?: boolean
-    userAvatar?: boolean | AvatarUser$userAvatarArgs<ExtArgs>
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["avatarUser"]>
 
 
@@ -7195,22 +7207,24 @@ export namespace Prisma {
     id?: boolean
     url?: boolean
     publicId?: boolean
+    userId?: boolean
   }
 
-  export type AvatarUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "publicId", ExtArgs["result"]["avatarUser"]>
+  export type AvatarUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "publicId" | "userId", ExtArgs["result"]["avatarUser"]>
   export type AvatarUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    userAvatar?: boolean | AvatarUser$userAvatarArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $AvatarUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AvatarUser"
     objects: {
-      userAvatar: Prisma.$UserPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       url: string
       publicId: string
+      userId: number
     }, ExtArgs["result"]["avatarUser"]>
     composites: {}
   }
@@ -7551,7 +7565,7 @@ export namespace Prisma {
    */
   export interface Prisma__AvatarUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    userAvatar<T extends AvatarUser$userAvatarArgs<ExtArgs> = {}>(args?: Subset<T, AvatarUser$userAvatarArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7584,6 +7598,7 @@ export namespace Prisma {
     readonly id: FieldRef<"AvatarUser", 'Int'>
     readonly url: FieldRef<"AvatarUser", 'String'>
     readonly publicId: FieldRef<"AvatarUser", 'String'>
+    readonly userId: FieldRef<"AvatarUser", 'Int'>
   }
     
 
@@ -7924,25 +7939,6 @@ export namespace Prisma {
      * Limit how many AvatarUsers to delete.
      */
     limit?: number
-  }
-
-  /**
-   * AvatarUser.userAvatar
-   */
-  export type AvatarUser$userAvatarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
   }
 
   /**
@@ -41468,7 +41464,8 @@ export namespace Prisma {
   export const AvatarUserScalarFieldEnum: {
     id: 'id',
     url: 'url',
-    publicId: 'publicId'
+    publicId: 'publicId',
+    userId: 'userId'
   };
 
   export type AvatarUserScalarFieldEnum = (typeof AvatarUserScalarFieldEnum)[keyof typeof AvatarUserScalarFieldEnum]
@@ -42320,31 +42317,35 @@ export namespace Prisma {
     id?: IntFilter<"AvatarUser"> | number
     url?: StringFilter<"AvatarUser"> | string
     publicId?: StringFilter<"AvatarUser"> | string
-    userAvatar?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    userId?: IntFilter<"AvatarUser"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type AvatarUserOrderByWithRelationInput = {
     id?: SortOrder
     url?: SortOrder
     publicId?: SortOrder
-    userAvatar?: UserOrderByWithRelationInput
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
     _relevance?: AvatarUserOrderByRelevanceInput
   }
 
   export type AvatarUserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    userId?: number
     AND?: AvatarUserWhereInput | AvatarUserWhereInput[]
     OR?: AvatarUserWhereInput[]
     NOT?: AvatarUserWhereInput | AvatarUserWhereInput[]
     url?: StringFilter<"AvatarUser"> | string
     publicId?: StringFilter<"AvatarUser"> | string
-    userAvatar?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id">
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
 
   export type AvatarUserOrderByWithAggregationInput = {
     id?: SortOrder
     url?: SortOrder
     publicId?: SortOrder
+    userId?: SortOrder
     _count?: AvatarUserCountOrderByAggregateInput
     _avg?: AvatarUserAvgOrderByAggregateInput
     _max?: AvatarUserMaxOrderByAggregateInput
@@ -42359,6 +42360,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"AvatarUser"> | number
     url?: StringWithAggregatesFilter<"AvatarUser"> | string
     publicId?: StringWithAggregatesFilter<"AvatarUser"> | string
+    userId?: IntWithAggregatesFilter<"AvatarUser"> | number
   }
 
   export type AddressesWhereInput = {
@@ -44513,7 +44515,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -44546,6 +44549,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -44572,7 +44576,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -44605,6 +44610,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -44645,6 +44651,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -44664,33 +44671,34 @@ export namespace Prisma {
   export type AvatarUserCreateInput = {
     url: string
     publicId: string
-    userAvatar?: UserCreateNestedOneWithoutAvatarInput
+    user: UserCreateNestedOneWithoutAvatarInput
   }
 
   export type AvatarUserUncheckedCreateInput = {
     id?: number
     url: string
     publicId: string
-    userAvatar?: UserUncheckedCreateNestedOneWithoutAvatarInput
+    userId: number
   }
 
   export type AvatarUserUpdateInput = {
     url?: StringFieldUpdateOperationsInput | string
     publicId?: StringFieldUpdateOperationsInput | string
-    userAvatar?: UserUpdateOneWithoutAvatarNestedInput
+    user?: UserUpdateOneRequiredWithoutAvatarNestedInput
   }
 
   export type AvatarUserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
     publicId?: StringFieldUpdateOperationsInput | string
-    userAvatar?: UserUncheckedUpdateOneWithoutAvatarNestedInput
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type AvatarUserCreateManyInput = {
     id?: number
     url: string
     publicId: string
+    userId: number
   }
 
   export type AvatarUserUpdateManyMutationInput = {
@@ -44702,6 +44710,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
     publicId?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type AddressesCreateInput = {
@@ -47004,11 +47013,6 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
   export type AvatarUserOrderByRelevanceInput = {
     fields: AvatarUserOrderByRelevanceFieldEnum | AvatarUserOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -47019,26 +47023,31 @@ export namespace Prisma {
     id?: SortOrder
     url?: SortOrder
     publicId?: SortOrder
+    userId?: SortOrder
   }
 
   export type AvatarUserAvgOrderByAggregateInput = {
     id?: SortOrder
+    userId?: SortOrder
   }
 
   export type AvatarUserMaxOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
     publicId?: SortOrder
+    userId?: SortOrder
   }
 
   export type AvatarUserMinOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
     publicId?: SortOrder
+    userId?: SortOrder
   }
 
   export type AvatarUserSumOrderByAggregateInput = {
     id?: SortOrder
+    userId?: SortOrder
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -47054,6 +47063,11 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type AddressesOrderByRelevanceInput = {
@@ -48765,9 +48779,9 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type AvatarUserCreateNestedOneWithoutUserAvatarInput = {
-    create?: XOR<AvatarUserCreateWithoutUserAvatarInput, AvatarUserUncheckedCreateWithoutUserAvatarInput>
-    connectOrCreate?: AvatarUserCreateOrConnectWithoutUserAvatarInput
+  export type AvatarUserCreateNestedOneWithoutUserInput = {
+    create?: XOR<AvatarUserCreateWithoutUserInput, AvatarUserUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AvatarUserCreateOrConnectWithoutUserInput
     connect?: AvatarUserWhereUniqueInput
   }
 
@@ -48891,6 +48905,12 @@ export namespace Prisma {
     connect?: AbandonedCartWhereUniqueInput | AbandonedCartWhereUniqueInput[]
   }
 
+  export type AvatarUserUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<AvatarUserCreateWithoutUserInput, AvatarUserUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AvatarUserCreateOrConnectWithoutUserInput
+    connect?: AvatarUserWhereUniqueInput
+  }
+
   export type LoginTokenUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<LoginTokenCreateWithoutUserInput, LoginTokenUncheckedCreateWithoutUserInput>
     connectOrCreate?: LoginTokenCreateOrConnectWithoutUserInput
@@ -49007,14 +49027,22 @@ export namespace Prisma {
     set?: string
   }
 
-  export type AvatarUserUpdateOneWithoutUserAvatarNestedInput = {
-    create?: XOR<AvatarUserCreateWithoutUserAvatarInput, AvatarUserUncheckedCreateWithoutUserAvatarInput>
-    connectOrCreate?: AvatarUserCreateOrConnectWithoutUserAvatarInput
-    upsert?: AvatarUserUpsertWithoutUserAvatarInput
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type AvatarUserUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AvatarUserCreateWithoutUserInput, AvatarUserUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AvatarUserCreateOrConnectWithoutUserInput
+    upsert?: AvatarUserUpsertWithoutUserInput
     disconnect?: AvatarUserWhereInput | boolean
     delete?: AvatarUserWhereInput | boolean
     connect?: AvatarUserWhereUniqueInput
-    update?: XOR<XOR<AvatarUserUpdateToOneWithWhereWithoutUserAvatarInput, AvatarUserUpdateWithoutUserAvatarInput>, AvatarUserUncheckedUpdateWithoutUserAvatarInput>
+    update?: XOR<XOR<AvatarUserUpdateToOneWithWhereWithoutUserInput, AvatarUserUpdateWithoutUserInput>, AvatarUserUncheckedUpdateWithoutUserInput>
   }
 
   export type LoginTokenUpdateOneWithoutUserNestedInput = {
@@ -49243,12 +49271,14 @@ export namespace Prisma {
     deleteMany?: AbandonedCartScalarWhereInput | AbandonedCartScalarWhereInput[]
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
+  export type AvatarUserUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AvatarUserCreateWithoutUserInput, AvatarUserUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AvatarUserCreateOrConnectWithoutUserInput
+    upsert?: AvatarUserUpsertWithoutUserInput
+    disconnect?: AvatarUserWhereInput | boolean
+    delete?: AvatarUserWhereInput | boolean
+    connect?: AvatarUserWhereUniqueInput
+    update?: XOR<XOR<AvatarUserUpdateToOneWithWhereWithoutUserInput, AvatarUserUpdateWithoutUserInput>, AvatarUserUncheckedUpdateWithoutUserInput>
   }
 
   export type LoginTokenUncheckedUpdateOneWithoutUserNestedInput = {
@@ -49465,28 +49495,10 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type UserUncheckedCreateNestedOneWithoutAvatarInput = {
-    create?: XOR<UserCreateWithoutAvatarInput, UserUncheckedCreateWithoutAvatarInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAvatarInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneWithoutAvatarNestedInput = {
+  export type UserUpdateOneRequiredWithoutAvatarNestedInput = {
     create?: XOR<UserCreateWithoutAvatarInput, UserUncheckedCreateWithoutAvatarInput>
     connectOrCreate?: UserCreateOrConnectWithoutAvatarInput
     upsert?: UserUpsertWithoutAvatarInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAvatarInput, UserUpdateWithoutAvatarInput>, UserUncheckedUpdateWithoutAvatarInput>
-  }
-
-  export type UserUncheckedUpdateOneWithoutAvatarNestedInput = {
-    create?: XOR<UserCreateWithoutAvatarInput, UserUncheckedCreateWithoutAvatarInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAvatarInput
-    upsert?: UserUpsertWithoutAvatarInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAvatarInput, UserUpdateWithoutAvatarInput>, UserUncheckedUpdateWithoutAvatarInput>
   }
@@ -51924,7 +51936,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -51956,6 +51969,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -51997,7 +52011,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -52029,6 +52044,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -52046,20 +52062,20 @@ export namespace Prisma {
     AbandonedCart?: AbandonedCartUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type AvatarUserCreateWithoutUserAvatarInput = {
+  export type AvatarUserCreateWithoutUserInput = {
     url: string
     publicId: string
   }
 
-  export type AvatarUserUncheckedCreateWithoutUserAvatarInput = {
+  export type AvatarUserUncheckedCreateWithoutUserInput = {
     id?: number
     url: string
     publicId: string
   }
 
-  export type AvatarUserCreateOrConnectWithoutUserAvatarInput = {
+  export type AvatarUserCreateOrConnectWithoutUserInput = {
     where: AvatarUserWhereUniqueInput
-    create: XOR<AvatarUserCreateWithoutUserAvatarInput, AvatarUserUncheckedCreateWithoutUserAvatarInput>
+    create: XOR<AvatarUserCreateWithoutUserInput, AvatarUserUncheckedCreateWithoutUserInput>
   }
 
   export type LoginTokenCreateWithoutUserInput = {
@@ -52553,23 +52569,23 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type AvatarUserUpsertWithoutUserAvatarInput = {
-    update: XOR<AvatarUserUpdateWithoutUserAvatarInput, AvatarUserUncheckedUpdateWithoutUserAvatarInput>
-    create: XOR<AvatarUserCreateWithoutUserAvatarInput, AvatarUserUncheckedCreateWithoutUserAvatarInput>
+  export type AvatarUserUpsertWithoutUserInput = {
+    update: XOR<AvatarUserUpdateWithoutUserInput, AvatarUserUncheckedUpdateWithoutUserInput>
+    create: XOR<AvatarUserCreateWithoutUserInput, AvatarUserUncheckedCreateWithoutUserInput>
     where?: AvatarUserWhereInput
   }
 
-  export type AvatarUserUpdateToOneWithWhereWithoutUserAvatarInput = {
+  export type AvatarUserUpdateToOneWithWhereWithoutUserInput = {
     where?: AvatarUserWhereInput
-    data: XOR<AvatarUserUpdateWithoutUserAvatarInput, AvatarUserUncheckedUpdateWithoutUserAvatarInput>
+    data: XOR<AvatarUserUpdateWithoutUserInput, AvatarUserUncheckedUpdateWithoutUserInput>
   }
 
-  export type AvatarUserUpdateWithoutUserAvatarInput = {
+  export type AvatarUserUpdateWithoutUserInput = {
     url?: StringFieldUpdateOperationsInput | string
     publicId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type AvatarUserUncheckedUpdateWithoutUserAvatarInput = {
+  export type AvatarUserUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
     publicId?: StringFieldUpdateOperationsInput | string
@@ -53084,6 +53100,7 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
+    avatarId?: number | null
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -53113,6 +53130,7 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
+    avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
@@ -53157,6 +53175,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -53186,6 +53205,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
@@ -53214,7 +53234,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -53246,6 +53267,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -53276,7 +53298,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -53307,6 +53330,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -53398,7 +53422,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -53430,6 +53455,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -53466,7 +53492,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -53497,6 +53524,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -53539,7 +53567,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -53571,6 +53600,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -53682,7 +53712,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -53714,6 +53745,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -53821,7 +53853,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -53853,6 +53886,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -54168,7 +54202,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -54200,6 +54235,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -54511,7 +54547,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -54543,6 +54580,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -54643,7 +54681,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -54675,6 +54714,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -55442,7 +55482,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -55474,6 +55515,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -55551,7 +55593,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -55583,6 +55626,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -55888,7 +55932,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -55920,6 +55965,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -56018,7 +56064,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -56050,6 +56097,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -56193,7 +56241,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -56224,6 +56273,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     principalAddressId?: number | null
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -56289,7 +56339,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -56320,6 +56371,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -56658,7 +56710,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -56690,6 +56743,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -56899,7 +56953,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -56931,6 +56986,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -57576,7 +57632,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -57608,6 +57665,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -57726,7 +57784,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -57758,6 +57817,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -57859,7 +57919,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -57891,6 +57952,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -57959,7 +58021,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -57991,6 +58054,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -58108,7 +58172,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -58140,6 +58205,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -58220,7 +58286,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -58252,6 +58319,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -58417,7 +58485,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -58449,6 +58518,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -58490,7 +58560,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -58522,6 +58593,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -58547,7 +58619,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -58579,6 +58652,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -58620,7 +58694,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -58652,6 +58727,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -58677,7 +58753,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -58709,6 +58786,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -58750,7 +58828,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -58782,6 +58861,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -58807,7 +58887,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -58839,6 +58920,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -58880,7 +58962,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -58912,6 +58995,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
@@ -58937,7 +59021,8 @@ export namespace Prisma {
     email: string
     password: string
     bornDate: Date | string
-    avatar?: AvatarUserCreateNestedOneWithoutUserAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarUserCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
@@ -58969,6 +59054,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
+    avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
     tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
@@ -59033,7 +59119,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    avatar?: AvatarUserUpdateOneWithoutUserAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarUserUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
@@ -59065,6 +59152,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
+    avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
     tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
