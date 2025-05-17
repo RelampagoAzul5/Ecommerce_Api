@@ -7,6 +7,7 @@ import { UserUpdateDTO } from '@/interfaces/user.interface';
 class UserController {
   async createUser(req: Request, res: Response) {
     req.body.bornDate = new Date(req.body.bornDate);
+    const file = req.file as Express.Multer.File;
 
     const errors = userValidation.userCreateValidation(req.body);
 
@@ -15,7 +16,7 @@ class UserController {
       return;
     }
     try {
-      const user = await userService.createUser(req.body);
+      const user = await userService.createUser(req.body, file);
       res.status(201).json(user);
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {

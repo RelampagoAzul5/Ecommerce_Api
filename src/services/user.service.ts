@@ -1,9 +1,15 @@
 import userRepository from '../repositories/user.repository';
 import { CreateUserDTO, UserUpdateDTO } from '../interfaces/user.interface';
+import userAvatarRepository from '../repositories/userAvatar.repository';
 
 class UserService {
-  async createUser(data: CreateUserDTO) {
-    return await userRepository.createUser(data);
+  async createUser(data: CreateUserDTO, file: Express.Multer.File) {
+    const user = await userRepository.createUser(data);
+    if (file) {
+      const avatar = await userAvatarRepository.uploadAvatar(file, user.id);
+      user.avatarId = avatar.id;
+    }
+    return user;
   }
 
   async getUser(id: number) {
