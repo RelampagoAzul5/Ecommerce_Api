@@ -3,6 +3,7 @@ import userService from '../services/user.service';
 import userValidation from '../utils/userValidation';
 import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
 import { UserUpdateDTO } from '@/interfaces/user.interface';
+import { JwtPayload } from 'jsonwebtoken';
 
 class UserController {
   async createUser(req: Request, res: Response) {
@@ -50,44 +51,49 @@ class UserController {
   }
 
   async deleteUser(req: Request, res: Response) {
-    try {
-      await userService.deleteUser(Number(req.params.id));
-      res.json({
-        message: `Usuário foi deletado com sucesso!`,
-      });
+    const userIdFromToken = (req.user as JwtPayload).userId;
+    const idFromParams = Number(req.params.id);
+
+    if (userIdFromToken !== idFromParams) {
+      res
+        .status(403)
+        .json({ error: 'Você só pode excluir sua própria conta.' });
       return;
+    }
+
+    try {
+      await userService.deleteUser(idFromParams);
+      res.json({ message: `Usuário foi deletado com sucesso!` });
     } catch (err) {
       if (
         err instanceof PrismaClientKnownRequestError &&
         err.code === 'P2025'
       ) {
         res.status(404).json({ error: 'Usuário não encontrado' });
-        return;
+      } else {
+        res.status(500).json({ error: 'Não foi possível deletar usuário' });
       }
-      res.status(500).json({ error: 'Não foi possível deletar usuário' });
     }
   }
 
   async updateUser(req: Request, res: Response) {
     const updatedUser: UserUpdateDTO = req.body;
-    const errors = userValidation.userUpdateValidation(updatedUser);
-    const id = Number(req.params.id);
+    const idFromParams = Number(req.params.id);
+    const userIdFromToken = (req.user as JwtPayload).userId;
 
-    if (errors.length > 0) {
-      res.status(400).json({ errors });
-      return;
+    if (userIdFromToken !== idFromParams) {
+      return res
+        .status(403)
+        .json({ error: 'Você só pode editar sua própria conta.' });
     }
 
-    if (isNaN(id)) {
-      res.status(400).json({ error: 'ID inválido' });
-      return;
+    const errors = userValidation.userUpdateValidation(updatedUser);
+    if (errors.length > 0) {
+      return res.status(400).json({ errors });
     }
 
     try {
-      const user = await userService.updateUser(
-        updatedUser,
-        Number(req.params.id),
-      );
+      const user = await userService.updateUser(updatedUser, idFromParams);
       res.status(200).json(user);
     } catch (err) {
       if (
@@ -95,9 +101,9 @@ class UserController {
         err.code === 'P2025'
       ) {
         res.status(404).json({ error: 'Usuário não encontrado' });
-        return;
+      } else {
+        res.status(500).json({ error: 'Não foi possível atualizar usuário' });
       }
-      res.status(500).json({ error: 'Não foi possível atualizar usuário' });
     }
   }
 }
