@@ -82,14 +82,14 @@ class UserController {
     const userIdFromToken = (req.user as JwtPayload).userId;
 
     if (userIdFromToken !== idFromParams) {
-      return res
-        .status(403)
-        .json({ error: 'Você só pode editar sua própria conta.' });
+      res.status(403).json({ error: 'Você só pode editar sua própria conta.' });
+      return;
     }
 
     const errors = userValidation.userUpdateValidation(updatedUser);
     if (errors.length > 0) {
-      return res.status(400).json({ errors });
+      res.status(400).json({ errors });
+      return;
     }
 
     try {
