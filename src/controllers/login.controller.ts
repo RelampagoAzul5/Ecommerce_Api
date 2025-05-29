@@ -8,14 +8,12 @@ const JWT_SECRET = process.env.JWT_SECRET || 'ColoqueSeuTokenNoEnviroment';
 class LoginController {
   async getLogin(req: Request, res: Response) {
     const { email, password } = req.body;
-    console.log(email);
     try {
       const user = await loginService.getUser(email);
       if (!user) {
         res.status(404).json({ error: 'Usuário não encontrado' });
         return;
       }
-      console.log(password, user.password);
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch) {
         res.status(401).json({ error: 'Senha incorreta' });
