@@ -1,10 +1,18 @@
+import { JwtPayload } from 'jsonwebtoken';
 import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
 import userAvatarService from '../services/userAvatar.service';
 import { Request, Response } from 'express';
 
 class UserAvatarController {
   async uploadAvatar(req: Request, res: Response) {
-    const userId = Number(req.params.userId);
+    const userIdFromParams = Number(req.params.userId);
+    const userIdFromToken = (req.user as JwtPayload).userId;
+    if (userIdFromToken !== userIdFromParams) {
+      res
+        .status(403)
+        .json({ error: 'Você só consegue mudar a própria foto de perfil' });
+      return;
+    }
     const file = req.file as Express.Multer.File;
 
     if (!file || !file.path) {
@@ -13,7 +21,10 @@ class UserAvatarController {
     }
 
     try {
-      const avatar = await userAvatarService.uploadAvatar(file, userId);
+      const avatar = await userAvatarService.uploadAvatar(
+        file,
+        userIdFromParams,
+      );
       res.status(201).json({ avatarUrl: avatar.url });
       return;
     } catch (error) {
@@ -41,14 +52,23 @@ class UserAvatarController {
   }
 
   async deleteAvatar(req: Request, res: Response) {
-    const userId = Number(req.params.userId);
-    if (isNaN(userId)) {
+    const userIdFromParams = Number(req.params.userId);
+    const userIdFromToken = (req.user as JwtPayload).userId;
+
+    if (isNaN(userIdFromParams)) {
       res.status(400).json({ error: 'Id de usuário inválido' });
       return;
     }
 
+    if (userIdFromToken !== userIdFromParams) {
+      res
+        .status(403)
+        .json({ error: 'Você só consegue deletar a própria foto de perfil' });
+      return;
+    }
+
     try {
-      await userAvatarService.deleteAvatar(userId);
+      await userAvatarService.deleteAvatar(userIdFromParams);
       res.json({
         message: `Avatar foi deletado com sucesso!`,
       });
