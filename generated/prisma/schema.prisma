@@ -50,7 +50,7 @@ model User {
   avatarId Int?        @unique
   avatar   AvatarUser?
 
-  tokenLogin        LoginToken?        @relation("LoginToken")
+  tokenLogin        LoginToken[]       @relation("LoginToken")
   confirmationToken ConfirmationToken? @relation("ConfirmationToken")
 
   admin Admin?
@@ -138,7 +138,7 @@ model Stores {
   cnpj       String?  @unique @db.VarChar(18)
 
   avatarId Int?         @unique
-  avatar   AvatarStore? @relation("StoreAvatar", fields: [avatarId], references: [id], onDelete: SetNull)
+  avatar   AvatarStore?
 
   product Products[] @relation("StoreProduct")
 
@@ -160,7 +160,8 @@ model AvatarStore {
   url      String @db.VarChar(500)
   publicId String @db.VarChar(255)
 
-  storeAvatar Stores? @relation("StoreAvatar")
+  storeId Int    @unique
+  store   Stores @relation(fields: [storeId], references: [id], onDelete: Cascade)
 }
 
 model StoreAvaliations {
@@ -479,7 +480,7 @@ model MessageImages {
 model LoginToken {
   id Int @id @default(autoincrement())
 
-  userId Int  @unique
+  userId Int
   user   User @relation("LoginToken", fields: [userId], references: [id], onDelete: Cascade)
 
   token String @db.VarChar(255)

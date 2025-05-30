@@ -2,6 +2,10 @@ import { CreateUserDTO, UserUpdateDTO } from '@/interfaces/user.interface';
 import isEmail from 'validator/lib/isEmail';
 
 class UserValidation {
+  private _validateName(name: string) {
+    return name.length === 0 ? false : true;
+  }
+
   private _validatePassword(password: string) {
     return password.length < 6 || password.length > 16 ? false : true;
   }
@@ -52,6 +56,8 @@ class UserValidation {
 
   userCreateValidation(data: CreateUserDTO) {
     const errors = [];
+    if (!this._validateName(data.name)) errors.push('Nome Inválido');
+
     if (!this._validateCPF(data.cpf)) errors.push('Cpf Inválido');
 
     if (!this._validateEmail(data.email)) errors.push('Email Inválido');
@@ -71,6 +77,9 @@ class UserValidation {
       errors.push('Dados de entrada ausentes');
       return errors;
     }
+    if (data.name && !this._validateName(data.name))
+      errors.push('Nome Inválido');
+
     if (data.email && !this._validateEmail(data.email))
       errors.push('Email Inválido');
 

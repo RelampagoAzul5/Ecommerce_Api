@@ -161,7 +161,7 @@ model AvatarStore {
   url String @db.VarChar(500)
   publicId String @db.VarChar(255)
 
-  storeId   Int    @unique @map("userId")
+  storeId   Int    @unique
   store     Stores   @relation(fields: [storeId], references: [id], onDelete: Cascade)
 
   }

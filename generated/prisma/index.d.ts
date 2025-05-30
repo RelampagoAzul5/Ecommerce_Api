@@ -3815,6 +3815,7 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
+    tokenLogin: number
     addresses: number
     productAvaliations: number
     storeAvaliations: number
@@ -3830,6 +3831,7 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tokenLogin?: boolean | UserCountOutputTypeCountTokenLoginArgs
     addresses?: boolean | UserCountOutputTypeCountAddressesArgs
     productAvaliations?: boolean | UserCountOutputTypeCountProductAvaliationsArgs
     storeAvaliations?: boolean | UserCountOutputTypeCountStoreAvaliationsArgs
@@ -3853,6 +3855,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTokenLoginArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LoginTokenWhereInput
   }
 
   /**
@@ -5811,7 +5820,7 @@ export namespace Prisma {
     name: "User"
     objects: {
       avatar: Prisma.$AvatarUserPayload<ExtArgs> | null
-      tokenLogin: Prisma.$LoginTokenPayload<ExtArgs> | null
+      tokenLogin: Prisma.$LoginTokenPayload<ExtArgs>[]
       confirmationToken: Prisma.$ConfirmationTokenPayload<ExtArgs> | null
       admin: Prisma.$AdminPayload<ExtArgs> | null
       principalAddress: Prisma.$AddressesPayload<ExtArgs> | null
@@ -6183,7 +6192,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     avatar<T extends User$avatarArgs<ExtArgs> = {}>(args?: Subset<T, User$avatarArgs<ExtArgs>>): Prisma__AvatarUserClient<$Result.GetResult<Prisma.$AvatarUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    tokenLogin<T extends User$tokenLoginArgs<ExtArgs> = {}>(args?: Subset<T, User$tokenLoginArgs<ExtArgs>>): Prisma__LoginTokenClient<$Result.GetResult<Prisma.$LoginTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    tokenLogin<T extends User$tokenLoginArgs<ExtArgs> = {}>(args?: Subset<T, User$tokenLoginArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LoginTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     confirmationToken<T extends User$confirmationTokenArgs<ExtArgs> = {}>(args?: Subset<T, User$confirmationTokenArgs<ExtArgs>>): Prisma__ConfirmationTokenClient<$Result.GetResult<Prisma.$ConfirmationTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     admin<T extends User$adminArgs<ExtArgs> = {}>(args?: Subset<T, User$adminArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     principalAddress<T extends User$principalAddressArgs<ExtArgs> = {}>(args?: Subset<T, User$principalAddressArgs<ExtArgs>>): Prisma__AddressesClient<$Result.GetResult<Prisma.$AddressesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -6619,6 +6628,11 @@ export namespace Prisma {
      */
     include?: LoginTokenInclude<ExtArgs> | null
     where?: LoginTokenWhereInput
+    orderBy?: LoginTokenOrderByWithRelationInput | LoginTokenOrderByWithRelationInput[]
+    cursor?: LoginTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LoginTokenScalarFieldEnum | LoginTokenScalarFieldEnum[]
   }
 
   /**
@@ -11315,56 +11329,66 @@ export namespace Prisma {
 
   export type AvatarStoreAvgAggregateOutputType = {
     id: number | null
+    storeId: number | null
   }
 
   export type AvatarStoreSumAggregateOutputType = {
     id: number | null
+    storeId: number | null
   }
 
   export type AvatarStoreMinAggregateOutputType = {
     id: number | null
     url: string | null
     publicId: string | null
+    storeId: number | null
   }
 
   export type AvatarStoreMaxAggregateOutputType = {
     id: number | null
     url: string | null
     publicId: string | null
+    storeId: number | null
   }
 
   export type AvatarStoreCountAggregateOutputType = {
     id: number
     url: number
     publicId: number
+    storeId: number
     _all: number
   }
 
 
   export type AvatarStoreAvgAggregateInputType = {
     id?: true
+    storeId?: true
   }
 
   export type AvatarStoreSumAggregateInputType = {
     id?: true
+    storeId?: true
   }
 
   export type AvatarStoreMinAggregateInputType = {
     id?: true
     url?: true
     publicId?: true
+    storeId?: true
   }
 
   export type AvatarStoreMaxAggregateInputType = {
     id?: true
     url?: true
     publicId?: true
+    storeId?: true
   }
 
   export type AvatarStoreCountAggregateInputType = {
     id?: true
     url?: true
     publicId?: true
+    storeId?: true
     _all?: true
   }
 
@@ -11458,6 +11482,7 @@ export namespace Prisma {
     id: number
     url: string
     publicId: string
+    storeId: number
     _count: AvatarStoreCountAggregateOutputType | null
     _avg: AvatarStoreAvgAggregateOutputType | null
     _sum: AvatarStoreSumAggregateOutputType | null
@@ -11483,7 +11508,8 @@ export namespace Prisma {
     id?: boolean
     url?: boolean
     publicId?: boolean
-    storeAvatar?: boolean | AvatarStore$storeAvatarArgs<ExtArgs>
+    storeId?: boolean
+    store?: boolean | StoresDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["avatarStore"]>
 
 
@@ -11492,22 +11518,24 @@ export namespace Prisma {
     id?: boolean
     url?: boolean
     publicId?: boolean
+    storeId?: boolean
   }
 
-  export type AvatarStoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "publicId", ExtArgs["result"]["avatarStore"]>
+  export type AvatarStoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "publicId" | "storeId", ExtArgs["result"]["avatarStore"]>
   export type AvatarStoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    storeAvatar?: boolean | AvatarStore$storeAvatarArgs<ExtArgs>
+    store?: boolean | StoresDefaultArgs<ExtArgs>
   }
 
   export type $AvatarStorePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AvatarStore"
     objects: {
-      storeAvatar: Prisma.$StoresPayload<ExtArgs> | null
+      store: Prisma.$StoresPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       url: string
       publicId: string
+      storeId: number
     }, ExtArgs["result"]["avatarStore"]>
     composites: {}
   }
@@ -11848,7 +11876,7 @@ export namespace Prisma {
    */
   export interface Prisma__AvatarStoreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    storeAvatar<T extends AvatarStore$storeAvatarArgs<ExtArgs> = {}>(args?: Subset<T, AvatarStore$storeAvatarArgs<ExtArgs>>): Prisma__StoresClient<$Result.GetResult<Prisma.$StoresPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    store<T extends StoresDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoresDefaultArgs<ExtArgs>>): Prisma__StoresClient<$Result.GetResult<Prisma.$StoresPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11881,6 +11909,7 @@ export namespace Prisma {
     readonly id: FieldRef<"AvatarStore", 'Int'>
     readonly url: FieldRef<"AvatarStore", 'String'>
     readonly publicId: FieldRef<"AvatarStore", 'String'>
+    readonly storeId: FieldRef<"AvatarStore", 'Int'>
   }
     
 
@@ -12221,25 +12250,6 @@ export namespace Prisma {
      * Limit how many AvatarStores to delete.
      */
     limit?: number
-  }
-
-  /**
-   * AvatarStore.storeAvatar
-   */
-  export type AvatarStore$storeAvatarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Stores
-     */
-    select?: StoresSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Stores
-     */
-    omit?: StoresOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StoresInclude<ExtArgs> | null
-    where?: StoresWhereInput
   }
 
   /**
@@ -41516,7 +41526,8 @@ export namespace Prisma {
   export const AvatarStoreScalarFieldEnum: {
     id: 'id',
     url: 'url',
-    publicId: 'publicId'
+    publicId: 'publicId',
+    storeId: 'storeId'
   };
 
   export type AvatarStoreScalarFieldEnum = (typeof AvatarStoreScalarFieldEnum)[keyof typeof AvatarStoreScalarFieldEnum]
@@ -42184,7 +42195,7 @@ export namespace Prisma {
     principalAddressId?: IntNullableFilter<"User"> | number | null
     cartId?: IntFilter<"User"> | number
     avatar?: XOR<AvatarUserNullableScalarRelationFilter, AvatarUserWhereInput> | null
-    tokenLogin?: XOR<LoginTokenNullableScalarRelationFilter, LoginTokenWhereInput> | null
+    tokenLogin?: LoginTokenListRelationFilter
     confirmationToken?: XOR<ConfirmationTokenNullableScalarRelationFilter, ConfirmationTokenWhereInput> | null
     admin?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
     principalAddress?: XOR<AddressesNullableScalarRelationFilter, AddressesWhereInput> | null
@@ -42217,7 +42228,7 @@ export namespace Prisma {
     principalAddressId?: SortOrderInput | SortOrder
     cartId?: SortOrder
     avatar?: AvatarUserOrderByWithRelationInput
-    tokenLogin?: LoginTokenOrderByWithRelationInput
+    tokenLogin?: LoginTokenOrderByRelationAggregateInput
     confirmationToken?: ConfirmationTokenOrderByWithRelationInput
     admin?: AdminOrderByWithRelationInput
     principalAddress?: AddressesOrderByWithRelationInput
@@ -42254,7 +42265,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     bornDate?: DateTimeFilter<"User"> | Date | string
     avatar?: XOR<AvatarUserNullableScalarRelationFilter, AvatarUserWhereInput> | null
-    tokenLogin?: XOR<LoginTokenNullableScalarRelationFilter, LoginTokenWhereInput> | null
+    tokenLogin?: LoginTokenListRelationFilter
     confirmationToken?: XOR<ConfirmationTokenNullableScalarRelationFilter, ConfirmationTokenWhereInput> | null
     admin?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
     principalAddress?: XOR<AddressesNullableScalarRelationFilter, AddressesWhereInput> | null
@@ -42627,31 +42638,35 @@ export namespace Prisma {
     id?: IntFilter<"AvatarStore"> | number
     url?: StringFilter<"AvatarStore"> | string
     publicId?: StringFilter<"AvatarStore"> | string
-    storeAvatar?: XOR<StoresNullableScalarRelationFilter, StoresWhereInput> | null
+    storeId?: IntFilter<"AvatarStore"> | number
+    store?: XOR<StoresScalarRelationFilter, StoresWhereInput>
   }
 
   export type AvatarStoreOrderByWithRelationInput = {
     id?: SortOrder
     url?: SortOrder
     publicId?: SortOrder
-    storeAvatar?: StoresOrderByWithRelationInput
+    storeId?: SortOrder
+    store?: StoresOrderByWithRelationInput
     _relevance?: AvatarStoreOrderByRelevanceInput
   }
 
   export type AvatarStoreWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    storeId?: number
     AND?: AvatarStoreWhereInput | AvatarStoreWhereInput[]
     OR?: AvatarStoreWhereInput[]
     NOT?: AvatarStoreWhereInput | AvatarStoreWhereInput[]
     url?: StringFilter<"AvatarStore"> | string
     publicId?: StringFilter<"AvatarStore"> | string
-    storeAvatar?: XOR<StoresNullableScalarRelationFilter, StoresWhereInput> | null
-  }, "id">
+    store?: XOR<StoresScalarRelationFilter, StoresWhereInput>
+  }, "id" | "storeId">
 
   export type AvatarStoreOrderByWithAggregationInput = {
     id?: SortOrder
     url?: SortOrder
     publicId?: SortOrder
+    storeId?: SortOrder
     _count?: AvatarStoreCountOrderByAggregateInput
     _avg?: AvatarStoreAvgOrderByAggregateInput
     _max?: AvatarStoreMaxOrderByAggregateInput
@@ -42666,6 +42681,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"AvatarStore"> | number
     url?: StringWithAggregatesFilter<"AvatarStore"> | string
     publicId?: StringWithAggregatesFilter<"AvatarStore"> | string
+    storeId?: IntWithAggregatesFilter<"AvatarStore"> | number
   }
 
   export type StoreAvaliationsWhereInput = {
@@ -44155,13 +44171,13 @@ export namespace Prisma {
 
   export type LoginTokenWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    userId?: number
     AND?: LoginTokenWhereInput | LoginTokenWhereInput[]
     OR?: LoginTokenWhereInput[]
     NOT?: LoginTokenWhereInput | LoginTokenWhereInput[]
+    userId?: IntFilter<"LoginToken"> | number
     token?: StringFilter<"LoginToken"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "userId">
+  }, "id">
 
   export type LoginTokenOrderByWithAggregationInput = {
     id?: SortOrder
@@ -44517,7 +44533,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -44550,7 +44566,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -44578,7 +44594,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -44611,7 +44627,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -44877,8 +44893,9 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
+    avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
-    avatar?: AvatarStoreCreateNestedOneWithoutStoreAvatarInput
+    avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsCreateNestedManyWithoutStoreInput
     coupons?: CouponsCreateNestedManyWithoutStoreInput
@@ -44897,6 +44914,7 @@ export namespace Prisma {
     name: string
     cnpj?: string | null
     avatarId?: number | null
+    avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
     coupons?: CouponsUncheckedCreateNestedManyWithoutStoreInput
@@ -44912,8 +44930,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
-    avatar?: AvatarStoreUpdateOneWithoutStoreAvatarNestedInput
+    avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUpdateManyWithoutStoreNestedInput
@@ -44932,6 +44951,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUncheckedUpdateManyWithoutStoreNestedInput
@@ -44957,6 +44977,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StoresUncheckedUpdateManyInput = {
@@ -44972,33 +44993,34 @@ export namespace Prisma {
   export type AvatarStoreCreateInput = {
     url: string
     publicId: string
-    storeAvatar?: StoresCreateNestedOneWithoutAvatarInput
+    store: StoresCreateNestedOneWithoutAvatarInput
   }
 
   export type AvatarStoreUncheckedCreateInput = {
     id?: number
     url: string
     publicId: string
-    storeAvatar?: StoresUncheckedCreateNestedOneWithoutAvatarInput
+    storeId: number
   }
 
   export type AvatarStoreUpdateInput = {
     url?: StringFieldUpdateOperationsInput | string
     publicId?: StringFieldUpdateOperationsInput | string
-    storeAvatar?: StoresUpdateOneWithoutAvatarNestedInput
+    store?: StoresUpdateOneRequiredWithoutAvatarNestedInput
   }
 
   export type AvatarStoreUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
     publicId?: StringFieldUpdateOperationsInput | string
-    storeAvatar?: StoresUncheckedUpdateOneWithoutAvatarNestedInput
+    storeId?: IntFieldUpdateOperationsInput | number
   }
 
   export type AvatarStoreCreateManyInput = {
     id?: number
     url: string
     publicId: string
+    storeId: number
   }
 
   export type AvatarStoreUpdateManyMutationInput = {
@@ -45010,6 +45032,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
     publicId?: StringFieldUpdateOperationsInput | string
+    storeId?: IntFieldUpdateOperationsInput | number
   }
 
   export type StoreAvaliationsCreateInput = {
@@ -46758,9 +46781,10 @@ export namespace Prisma {
     isNot?: AvatarUserWhereInput | null
   }
 
-  export type LoginTokenNullableScalarRelationFilter = {
-    is?: LoginTokenWhereInput | null
-    isNot?: LoginTokenWhereInput | null
+  export type LoginTokenListRelationFilter = {
+    every?: LoginTokenWhereInput
+    some?: LoginTokenWhereInput
+    none?: LoginTokenWhereInput
   }
 
   export type ConfirmationTokenNullableScalarRelationFilter = {
@@ -46857,6 +46881,10 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type LoginTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type AddressesOrderByRelationAggregateInput = {
@@ -47290,6 +47318,11 @@ export namespace Prisma {
     avatarId?: SortOrder
   }
 
+  export type StoresScalarRelationFilter = {
+    is?: StoresWhereInput
+    isNot?: StoresWhereInput
+  }
+
   export type AvatarStoreOrderByRelevanceInput = {
     fields: AvatarStoreOrderByRelevanceFieldEnum | AvatarStoreOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -47300,31 +47333,31 @@ export namespace Prisma {
     id?: SortOrder
     url?: SortOrder
     publicId?: SortOrder
+    storeId?: SortOrder
   }
 
   export type AvatarStoreAvgOrderByAggregateInput = {
     id?: SortOrder
+    storeId?: SortOrder
   }
 
   export type AvatarStoreMaxOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
     publicId?: SortOrder
+    storeId?: SortOrder
   }
 
   export type AvatarStoreMinOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
     publicId?: SortOrder
+    storeId?: SortOrder
   }
 
   export type AvatarStoreSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type StoresScalarRelationFilter = {
-    is?: StoresWhereInput
-    isNot?: StoresWhereInput
+    storeId?: SortOrder
   }
 
   export type StoreAvaliationImagesListRelationFilter = {
@@ -48785,10 +48818,11 @@ export namespace Prisma {
     connect?: AvatarUserWhereUniqueInput
   }
 
-  export type LoginTokenCreateNestedOneWithoutUserInput = {
-    create?: XOR<LoginTokenCreateWithoutUserInput, LoginTokenUncheckedCreateWithoutUserInput>
-    connectOrCreate?: LoginTokenCreateOrConnectWithoutUserInput
-    connect?: LoginTokenWhereUniqueInput
+  export type LoginTokenCreateNestedManyWithoutUserInput = {
+    create?: XOR<LoginTokenCreateWithoutUserInput, LoginTokenUncheckedCreateWithoutUserInput> | LoginTokenCreateWithoutUserInput[] | LoginTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LoginTokenCreateOrConnectWithoutUserInput | LoginTokenCreateOrConnectWithoutUserInput[]
+    createMany?: LoginTokenCreateManyUserInputEnvelope
+    connect?: LoginTokenWhereUniqueInput | LoginTokenWhereUniqueInput[]
   }
 
   export type ConfirmationTokenCreateNestedOneWithoutUserInput = {
@@ -48911,10 +48945,11 @@ export namespace Prisma {
     connect?: AvatarUserWhereUniqueInput
   }
 
-  export type LoginTokenUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<LoginTokenCreateWithoutUserInput, LoginTokenUncheckedCreateWithoutUserInput>
-    connectOrCreate?: LoginTokenCreateOrConnectWithoutUserInput
-    connect?: LoginTokenWhereUniqueInput
+  export type LoginTokenUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<LoginTokenCreateWithoutUserInput, LoginTokenUncheckedCreateWithoutUserInput> | LoginTokenCreateWithoutUserInput[] | LoginTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LoginTokenCreateOrConnectWithoutUserInput | LoginTokenCreateOrConnectWithoutUserInput[]
+    createMany?: LoginTokenCreateManyUserInputEnvelope
+    connect?: LoginTokenWhereUniqueInput | LoginTokenWhereUniqueInput[]
   }
 
   export type ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput = {
@@ -49045,14 +49080,18 @@ export namespace Prisma {
     update?: XOR<XOR<AvatarUserUpdateToOneWithWhereWithoutUserInput, AvatarUserUpdateWithoutUserInput>, AvatarUserUncheckedUpdateWithoutUserInput>
   }
 
-  export type LoginTokenUpdateOneWithoutUserNestedInput = {
-    create?: XOR<LoginTokenCreateWithoutUserInput, LoginTokenUncheckedCreateWithoutUserInput>
-    connectOrCreate?: LoginTokenCreateOrConnectWithoutUserInput
-    upsert?: LoginTokenUpsertWithoutUserInput
-    disconnect?: LoginTokenWhereInput | boolean
-    delete?: LoginTokenWhereInput | boolean
-    connect?: LoginTokenWhereUniqueInput
-    update?: XOR<XOR<LoginTokenUpdateToOneWithWhereWithoutUserInput, LoginTokenUpdateWithoutUserInput>, LoginTokenUncheckedUpdateWithoutUserInput>
+  export type LoginTokenUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LoginTokenCreateWithoutUserInput, LoginTokenUncheckedCreateWithoutUserInput> | LoginTokenCreateWithoutUserInput[] | LoginTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LoginTokenCreateOrConnectWithoutUserInput | LoginTokenCreateOrConnectWithoutUserInput[]
+    upsert?: LoginTokenUpsertWithWhereUniqueWithoutUserInput | LoginTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LoginTokenCreateManyUserInputEnvelope
+    set?: LoginTokenWhereUniqueInput | LoginTokenWhereUniqueInput[]
+    disconnect?: LoginTokenWhereUniqueInput | LoginTokenWhereUniqueInput[]
+    delete?: LoginTokenWhereUniqueInput | LoginTokenWhereUniqueInput[]
+    connect?: LoginTokenWhereUniqueInput | LoginTokenWhereUniqueInput[]
+    update?: LoginTokenUpdateWithWhereUniqueWithoutUserInput | LoginTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LoginTokenUpdateManyWithWhereWithoutUserInput | LoginTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LoginTokenScalarWhereInput | LoginTokenScalarWhereInput[]
   }
 
   export type ConfirmationTokenUpdateOneWithoutUserNestedInput = {
@@ -49281,14 +49320,18 @@ export namespace Prisma {
     update?: XOR<XOR<AvatarUserUpdateToOneWithWhereWithoutUserInput, AvatarUserUpdateWithoutUserInput>, AvatarUserUncheckedUpdateWithoutUserInput>
   }
 
-  export type LoginTokenUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<LoginTokenCreateWithoutUserInput, LoginTokenUncheckedCreateWithoutUserInput>
-    connectOrCreate?: LoginTokenCreateOrConnectWithoutUserInput
-    upsert?: LoginTokenUpsertWithoutUserInput
-    disconnect?: LoginTokenWhereInput | boolean
-    delete?: LoginTokenWhereInput | boolean
-    connect?: LoginTokenWhereUniqueInput
-    update?: XOR<XOR<LoginTokenUpdateToOneWithWhereWithoutUserInput, LoginTokenUpdateWithoutUserInput>, LoginTokenUncheckedUpdateWithoutUserInput>
+  export type LoginTokenUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LoginTokenCreateWithoutUserInput, LoginTokenUncheckedCreateWithoutUserInput> | LoginTokenCreateWithoutUserInput[] | LoginTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LoginTokenCreateOrConnectWithoutUserInput | LoginTokenCreateOrConnectWithoutUserInput[]
+    upsert?: LoginTokenUpsertWithWhereUniqueWithoutUserInput | LoginTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LoginTokenCreateManyUserInputEnvelope
+    set?: LoginTokenWhereUniqueInput | LoginTokenWhereUniqueInput[]
+    disconnect?: LoginTokenWhereUniqueInput | LoginTokenWhereUniqueInput[]
+    delete?: LoginTokenWhereUniqueInput | LoginTokenWhereUniqueInput[]
+    connect?: LoginTokenWhereUniqueInput | LoginTokenWhereUniqueInput[]
+    update?: LoginTokenUpdateWithWhereUniqueWithoutUserInput | LoginTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LoginTokenUpdateManyWithWhereWithoutUserInput | LoginTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LoginTokenScalarWhereInput | LoginTokenScalarWhereInput[]
   }
 
   export type ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput = {
@@ -49645,9 +49688,9 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type AvatarStoreCreateNestedOneWithoutStoreAvatarInput = {
-    create?: XOR<AvatarStoreCreateWithoutStoreAvatarInput, AvatarStoreUncheckedCreateWithoutStoreAvatarInput>
-    connectOrCreate?: AvatarStoreCreateOrConnectWithoutStoreAvatarInput
+  export type AvatarStoreCreateNestedOneWithoutStoreInput = {
+    create?: XOR<AvatarStoreCreateWithoutStoreInput, AvatarStoreUncheckedCreateWithoutStoreInput>
+    connectOrCreate?: AvatarStoreCreateOrConnectWithoutStoreInput
     connect?: AvatarStoreWhereUniqueInput
   }
 
@@ -49705,6 +49748,12 @@ export namespace Prisma {
     connectOrCreate?: PromotionCreateOrConnectWithoutStoreInput | PromotionCreateOrConnectWithoutStoreInput[]
     createMany?: PromotionCreateManyStoreInputEnvelope
     connect?: PromotionWhereUniqueInput | PromotionWhereUniqueInput[]
+  }
+
+  export type AvatarStoreUncheckedCreateNestedOneWithoutStoreInput = {
+    create?: XOR<AvatarStoreCreateWithoutStoreInput, AvatarStoreUncheckedCreateWithoutStoreInput>
+    connectOrCreate?: AvatarStoreCreateOrConnectWithoutStoreInput
+    connect?: AvatarStoreWhereUniqueInput
   }
 
   export type ProductsUncheckedCreateNestedManyWithoutStoreInput = {
@@ -49771,14 +49820,14 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStoreInput, UserUpdateWithoutStoreInput>, UserUncheckedUpdateWithoutStoreInput>
   }
 
-  export type AvatarStoreUpdateOneWithoutStoreAvatarNestedInput = {
-    create?: XOR<AvatarStoreCreateWithoutStoreAvatarInput, AvatarStoreUncheckedCreateWithoutStoreAvatarInput>
-    connectOrCreate?: AvatarStoreCreateOrConnectWithoutStoreAvatarInput
-    upsert?: AvatarStoreUpsertWithoutStoreAvatarInput
+  export type AvatarStoreUpdateOneWithoutStoreNestedInput = {
+    create?: XOR<AvatarStoreCreateWithoutStoreInput, AvatarStoreUncheckedCreateWithoutStoreInput>
+    connectOrCreate?: AvatarStoreCreateOrConnectWithoutStoreInput
+    upsert?: AvatarStoreUpsertWithoutStoreInput
     disconnect?: AvatarStoreWhereInput | boolean
     delete?: AvatarStoreWhereInput | boolean
     connect?: AvatarStoreWhereUniqueInput
-    update?: XOR<XOR<AvatarStoreUpdateToOneWithWhereWithoutStoreAvatarInput, AvatarStoreUpdateWithoutStoreAvatarInput>, AvatarStoreUncheckedUpdateWithoutStoreAvatarInput>
+    update?: XOR<XOR<AvatarStoreUpdateToOneWithWhereWithoutStoreInput, AvatarStoreUpdateWithoutStoreInput>, AvatarStoreUncheckedUpdateWithoutStoreInput>
   }
 
   export type ProductsUpdateManyWithoutStoreNestedInput = {
@@ -49891,6 +49940,16 @@ export namespace Prisma {
     update?: PromotionUpdateWithWhereUniqueWithoutStoreInput | PromotionUpdateWithWhereUniqueWithoutStoreInput[]
     updateMany?: PromotionUpdateManyWithWhereWithoutStoreInput | PromotionUpdateManyWithWhereWithoutStoreInput[]
     deleteMany?: PromotionScalarWhereInput | PromotionScalarWhereInput[]
+  }
+
+  export type AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput = {
+    create?: XOR<AvatarStoreCreateWithoutStoreInput, AvatarStoreUncheckedCreateWithoutStoreInput>
+    connectOrCreate?: AvatarStoreCreateOrConnectWithoutStoreInput
+    upsert?: AvatarStoreUpsertWithoutStoreInput
+    disconnect?: AvatarStoreWhereInput | boolean
+    delete?: AvatarStoreWhereInput | boolean
+    connect?: AvatarStoreWhereUniqueInput
+    update?: XOR<XOR<AvatarStoreUpdateToOneWithWhereWithoutStoreInput, AvatarStoreUpdateWithoutStoreInput>, AvatarStoreUncheckedUpdateWithoutStoreInput>
   }
 
   export type ProductsUncheckedUpdateManyWithoutStoreNestedInput = {
@@ -50011,28 +50070,10 @@ export namespace Prisma {
     connect?: StoresWhereUniqueInput
   }
 
-  export type StoresUncheckedCreateNestedOneWithoutAvatarInput = {
-    create?: XOR<StoresCreateWithoutAvatarInput, StoresUncheckedCreateWithoutAvatarInput>
-    connectOrCreate?: StoresCreateOrConnectWithoutAvatarInput
-    connect?: StoresWhereUniqueInput
-  }
-
-  export type StoresUpdateOneWithoutAvatarNestedInput = {
+  export type StoresUpdateOneRequiredWithoutAvatarNestedInput = {
     create?: XOR<StoresCreateWithoutAvatarInput, StoresUncheckedCreateWithoutAvatarInput>
     connectOrCreate?: StoresCreateOrConnectWithoutAvatarInput
     upsert?: StoresUpsertWithoutAvatarInput
-    disconnect?: StoresWhereInput | boolean
-    delete?: StoresWhereInput | boolean
-    connect?: StoresWhereUniqueInput
-    update?: XOR<XOR<StoresUpdateToOneWithWhereWithoutAvatarInput, StoresUpdateWithoutAvatarInput>, StoresUncheckedUpdateWithoutAvatarInput>
-  }
-
-  export type StoresUncheckedUpdateOneWithoutAvatarNestedInput = {
-    create?: XOR<StoresCreateWithoutAvatarInput, StoresUncheckedCreateWithoutAvatarInput>
-    connectOrCreate?: StoresCreateOrConnectWithoutAvatarInput
-    upsert?: StoresUpsertWithoutAvatarInput
-    disconnect?: StoresWhereInput | boolean
-    delete?: StoresWhereInput | boolean
     connect?: StoresWhereUniqueInput
     update?: XOR<XOR<StoresUpdateToOneWithWhereWithoutAvatarInput, StoresUpdateWithoutAvatarInput>, StoresUncheckedUpdateWithoutAvatarInput>
   }
@@ -51938,7 +51979,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
     addresses?: AddressesCreateNestedManyWithoutUserInput
@@ -51970,7 +52011,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
     store?: StoresUncheckedCreateNestedOneWithoutUserInput
@@ -52013,7 +52054,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
     addresses?: AddressesUpdateManyWithoutUserNestedInput
@@ -52045,7 +52086,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
     store?: StoresUncheckedUpdateOneWithoutUserNestedInput
@@ -52090,6 +52131,11 @@ export namespace Prisma {
   export type LoginTokenCreateOrConnectWithoutUserInput = {
     where: LoginTokenWhereUniqueInput
     create: XOR<LoginTokenCreateWithoutUserInput, LoginTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type LoginTokenCreateManyUserInputEnvelope = {
+    data: LoginTokenCreateManyUserInput | LoginTokenCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type ConfirmationTokenCreateWithoutUserInput = {
@@ -52201,7 +52247,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
-    avatar?: AvatarStoreCreateNestedOneWithoutStoreAvatarInput
+    avatarId?: number | null
+    avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsCreateNestedManyWithoutStoreInput
     coupons?: CouponsCreateNestedManyWithoutStoreInput
@@ -52219,6 +52266,7 @@ export namespace Prisma {
     name: string
     cnpj?: string | null
     avatarId?: number | null
+    avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
     coupons?: CouponsUncheckedCreateNestedManyWithoutStoreInput
@@ -52591,24 +52639,29 @@ export namespace Prisma {
     publicId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type LoginTokenUpsertWithoutUserInput = {
+  export type LoginTokenUpsertWithWhereUniqueWithoutUserInput = {
+    where: LoginTokenWhereUniqueInput
     update: XOR<LoginTokenUpdateWithoutUserInput, LoginTokenUncheckedUpdateWithoutUserInput>
     create: XOR<LoginTokenCreateWithoutUserInput, LoginTokenUncheckedCreateWithoutUserInput>
-    where?: LoginTokenWhereInput
   }
 
-  export type LoginTokenUpdateToOneWithWhereWithoutUserInput = {
-    where?: LoginTokenWhereInput
+  export type LoginTokenUpdateWithWhereUniqueWithoutUserInput = {
+    where: LoginTokenWhereUniqueInput
     data: XOR<LoginTokenUpdateWithoutUserInput, LoginTokenUncheckedUpdateWithoutUserInput>
   }
 
-  export type LoginTokenUpdateWithoutUserInput = {
-    token?: StringFieldUpdateOperationsInput | string
+  export type LoginTokenUpdateManyWithWhereWithoutUserInput = {
+    where: LoginTokenScalarWhereInput
+    data: XOR<LoginTokenUpdateManyMutationInput, LoginTokenUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type LoginTokenUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    token?: StringFieldUpdateOperationsInput | string
+  export type LoginTokenScalarWhereInput = {
+    AND?: LoginTokenScalarWhereInput | LoginTokenScalarWhereInput[]
+    OR?: LoginTokenScalarWhereInput[]
+    NOT?: LoginTokenScalarWhereInput | LoginTokenScalarWhereInput[]
+    id?: IntFilter<"LoginToken"> | number
+    userId?: IntFilter<"LoginToken"> | number
+    token?: StringFilter<"LoginToken"> | string
   }
 
   export type ConfirmationTokenUpsertWithoutUserInput = {
@@ -52742,7 +52795,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    avatar?: AvatarStoreUpdateOneWithoutStoreAvatarNestedInput
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUpdateManyWithoutStoreNestedInput
@@ -52760,6 +52814,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUncheckedUpdateManyWithoutStoreNestedInput
@@ -53101,7 +53156,7 @@ export namespace Prisma {
     password: string
     bornDate: Date | string
     avatarId?: number | null
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -53133,7 +53188,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     cartId: number
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -53176,7 +53231,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -53208,7 +53263,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -53236,7 +53291,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -53268,7 +53323,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     store?: StoresUncheckedCreateNestedOneWithoutUserInput
@@ -53300,7 +53355,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     addresses?: AddressesCreateNestedManyWithoutUserInput
@@ -53331,7 +53386,7 @@ export namespace Prisma {
     avatarId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -53424,7 +53479,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -53456,7 +53511,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     store?: StoresUncheckedUpdateOneWithoutUserNestedInput
@@ -53494,7 +53549,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     addresses?: AddressesUpdateManyWithoutUserNestedInput
@@ -53525,7 +53580,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -53569,7 +53624,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -53601,7 +53656,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -53714,7 +53769,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -53746,7 +53801,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -53855,7 +53910,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -53887,7 +53942,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -53909,20 +53964,20 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutStoreInput, UserUncheckedCreateWithoutStoreInput>
   }
 
-  export type AvatarStoreCreateWithoutStoreAvatarInput = {
+  export type AvatarStoreCreateWithoutStoreInput = {
     url: string
     publicId: string
   }
 
-  export type AvatarStoreUncheckedCreateWithoutStoreAvatarInput = {
+  export type AvatarStoreUncheckedCreateWithoutStoreInput = {
     id?: number
     url: string
     publicId: string
   }
 
-  export type AvatarStoreCreateOrConnectWithoutStoreAvatarInput = {
+  export type AvatarStoreCreateOrConnectWithoutStoreInput = {
     where: AvatarStoreWhereUniqueInput
-    create: XOR<AvatarStoreCreateWithoutStoreAvatarInput, AvatarStoreUncheckedCreateWithoutStoreAvatarInput>
+    create: XOR<AvatarStoreCreateWithoutStoreInput, AvatarStoreUncheckedCreateWithoutStoreInput>
   }
 
   export type ProductsCreateWithoutStoreInput = {
@@ -54204,7 +54259,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -54236,7 +54291,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -54253,23 +54308,23 @@ export namespace Prisma {
     AbandonedCart?: AbandonedCartUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type AvatarStoreUpsertWithoutStoreAvatarInput = {
-    update: XOR<AvatarStoreUpdateWithoutStoreAvatarInput, AvatarStoreUncheckedUpdateWithoutStoreAvatarInput>
-    create: XOR<AvatarStoreCreateWithoutStoreAvatarInput, AvatarStoreUncheckedCreateWithoutStoreAvatarInput>
+  export type AvatarStoreUpsertWithoutStoreInput = {
+    update: XOR<AvatarStoreUpdateWithoutStoreInput, AvatarStoreUncheckedUpdateWithoutStoreInput>
+    create: XOR<AvatarStoreCreateWithoutStoreInput, AvatarStoreUncheckedCreateWithoutStoreInput>
     where?: AvatarStoreWhereInput
   }
 
-  export type AvatarStoreUpdateToOneWithWhereWithoutStoreAvatarInput = {
+  export type AvatarStoreUpdateToOneWithWhereWithoutStoreInput = {
     where?: AvatarStoreWhereInput
-    data: XOR<AvatarStoreUpdateWithoutStoreAvatarInput, AvatarStoreUncheckedUpdateWithoutStoreAvatarInput>
+    data: XOR<AvatarStoreUpdateWithoutStoreInput, AvatarStoreUncheckedUpdateWithoutStoreInput>
   }
 
-  export type AvatarStoreUpdateWithoutStoreAvatarInput = {
+  export type AvatarStoreUpdateWithoutStoreInput = {
     url?: StringFieldUpdateOperationsInput | string
     publicId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type AvatarStoreUncheckedUpdateWithoutStoreAvatarInput = {
+  export type AvatarStoreUncheckedUpdateWithoutStoreInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
     publicId?: StringFieldUpdateOperationsInput | string
@@ -54462,6 +54517,7 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
+    avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsCreateNestedManyWithoutStoreInput
@@ -54480,6 +54536,7 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
+    avatarId?: number | null
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
     coupons?: CouponsUncheckedCreateNestedManyWithoutStoreInput
@@ -54511,6 +54568,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUpdateManyWithoutStoreNestedInput
@@ -54529,6 +54587,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUncheckedUpdateManyWithoutStoreNestedInput
@@ -54549,7 +54608,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -54581,7 +54640,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -54608,8 +54667,9 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
+    avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
-    avatar?: AvatarStoreCreateNestedOneWithoutStoreAvatarInput
+    avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
     coupons?: CouponsCreateNestedManyWithoutStoreInput
     chat?: ChatCreateNestedManyWithoutStoreInput
@@ -54627,6 +54687,7 @@ export namespace Prisma {
     name: string
     cnpj?: string | null
     avatarId?: number | null
+    avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
     coupons?: CouponsUncheckedCreateNestedManyWithoutStoreInput
     chat?: ChatUncheckedCreateNestedManyWithoutStoreInput
@@ -54683,7 +54744,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -54715,7 +54776,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -54748,8 +54809,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
-    avatar?: AvatarStoreUpdateOneWithoutStoreAvatarNestedInput
+    avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUpdateManyWithoutStoreNestedInput
     chat?: ChatUpdateManyWithoutStoreNestedInput
@@ -54767,6 +54829,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUncheckedUpdateManyWithoutStoreNestedInput
     chat?: ChatUncheckedUpdateManyWithoutStoreNestedInput
@@ -54857,8 +54920,9 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
+    avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
-    avatar?: AvatarStoreCreateNestedOneWithoutStoreAvatarInput
+    avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsCreateNestedManyWithoutStoreInput
     chat?: ChatCreateNestedManyWithoutStoreInput
@@ -54876,6 +54940,7 @@ export namespace Prisma {
     name: string
     cnpj?: string | null
     avatarId?: number | null
+    avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
     chat?: ChatUncheckedCreateNestedManyWithoutStoreInput
@@ -54929,8 +54994,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
-    avatar?: AvatarStoreUpdateOneWithoutStoreAvatarNestedInput
+    avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUpdateManyWithoutStoreNestedInput
     chat?: ChatUpdateManyWithoutStoreNestedInput
@@ -54948,6 +55014,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
     chat?: ChatUncheckedUpdateManyWithoutStoreNestedInput
@@ -54978,8 +55045,9 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
+    avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
-    avatar?: AvatarStoreCreateNestedOneWithoutStoreAvatarInput
+    avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
     avaliations?: StoreAvaliationsCreateNestedManyWithoutStoreInput
     coupons?: CouponsCreateNestedManyWithoutStoreInput
     chat?: ChatCreateNestedManyWithoutStoreInput
@@ -54997,6 +55065,7 @@ export namespace Prisma {
     name: string
     cnpj?: string | null
     avatarId?: number | null
+    avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
     coupons?: CouponsUncheckedCreateNestedManyWithoutStoreInput
     chat?: ChatUncheckedCreateNestedManyWithoutStoreInput
@@ -55203,8 +55272,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
-    avatar?: AvatarStoreUpdateOneWithoutStoreAvatarNestedInput
+    avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUpdateManyWithoutStoreNestedInput
     chat?: ChatUpdateManyWithoutStoreNestedInput
@@ -55222,6 +55292,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUncheckedUpdateManyWithoutStoreNestedInput
     chat?: ChatUncheckedUpdateManyWithoutStoreNestedInput
@@ -55484,7 +55555,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -55516,7 +55587,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -55595,7 +55666,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -55627,7 +55698,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -55743,8 +55814,9 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
+    avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
-    avatar?: AvatarStoreCreateNestedOneWithoutStoreAvatarInput
+    avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsCreateNestedManyWithoutStoreInput
     coupons?: CouponsCreateNestedManyWithoutStoreInput
@@ -55762,6 +55834,7 @@ export namespace Prisma {
     name: string
     cnpj?: string | null
     avatarId?: number | null
+    avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
     coupons?: CouponsUncheckedCreateNestedManyWithoutStoreInput
@@ -55828,8 +55901,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
-    avatar?: AvatarStoreUpdateOneWithoutStoreAvatarNestedInput
+    avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUpdateManyWithoutStoreNestedInput
@@ -55847,6 +55921,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUncheckedUpdateManyWithoutStoreNestedInput
@@ -55934,7 +56009,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -55966,7 +56041,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -56066,7 +56141,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -56098,7 +56173,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -56243,7 +56318,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -56274,7 +56349,7 @@ export namespace Prisma {
     avatarId?: number | null
     principalAddressId?: number | null
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -56341,7 +56416,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -56372,7 +56447,7 @@ export namespace Prisma {
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -56712,7 +56787,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -56744,7 +56819,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -56955,7 +57030,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -56987,7 +57062,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -57361,8 +57436,9 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
+    avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
-    avatar?: AvatarStoreCreateNestedOneWithoutStoreAvatarInput
+    avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsCreateNestedManyWithoutStoreInput
     coupons?: CouponsCreateNestedManyWithoutStoreInput
@@ -57380,6 +57456,7 @@ export namespace Prisma {
     name: string
     cnpj?: string | null
     avatarId?: number | null
+    avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
     coupons?: CouponsUncheckedCreateNestedManyWithoutStoreInput
@@ -57502,8 +57579,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
-    avatar?: AvatarStoreUpdateOneWithoutStoreAvatarNestedInput
+    avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUpdateManyWithoutStoreNestedInput
@@ -57521,6 +57599,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUncheckedUpdateManyWithoutStoreNestedInput
@@ -57634,7 +57713,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -57666,7 +57745,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -57693,8 +57772,9 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
+    avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
-    avatar?: AvatarStoreCreateNestedOneWithoutStoreAvatarInput
+    avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsCreateNestedManyWithoutStoreInput
     coupons?: CouponsCreateNestedManyWithoutStoreInput
@@ -57712,6 +57792,7 @@ export namespace Prisma {
     name: string
     cnpj?: string | null
     avatarId?: number | null
+    avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
     coupons?: CouponsUncheckedCreateNestedManyWithoutStoreInput
@@ -57786,7 +57867,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -57818,7 +57899,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -57851,8 +57932,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
-    avatar?: AvatarStoreUpdateOneWithoutStoreAvatarNestedInput
+    avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUpdateManyWithoutStoreNestedInput
@@ -57870,6 +57952,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUncheckedUpdateManyWithoutStoreNestedInput
@@ -57921,7 +58004,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -57953,7 +58036,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -57980,8 +58063,9 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
+    avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
-    avatar?: AvatarStoreCreateNestedOneWithoutStoreAvatarInput
+    avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsCreateNestedManyWithoutStoreInput
     coupons?: CouponsCreateNestedManyWithoutStoreInput
@@ -57999,6 +58083,7 @@ export namespace Prisma {
     name: string
     cnpj?: string | null
     avatarId?: number | null
+    avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
     coupons?: CouponsUncheckedCreateNestedManyWithoutStoreInput
@@ -58023,7 +58108,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -58055,7 +58140,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -58082,8 +58167,9 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     cnpj?: string | null
+    avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
-    avatar?: AvatarStoreCreateNestedOneWithoutStoreAvatarInput
+    avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsCreateNestedManyWithoutStoreInput
     coupons?: CouponsCreateNestedManyWithoutStoreInput
@@ -58101,6 +58187,7 @@ export namespace Prisma {
     name: string
     cnpj?: string | null
     avatarId?: number | null
+    avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
     coupons?: CouponsUncheckedCreateNestedManyWithoutStoreInput
@@ -58174,7 +58261,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -58206,7 +58293,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -58239,8 +58326,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
-    avatar?: AvatarStoreUpdateOneWithoutStoreAvatarNestedInput
+    avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUpdateManyWithoutStoreNestedInput
@@ -58258,6 +58346,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUncheckedUpdateManyWithoutStoreNestedInput
@@ -58288,7 +58377,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -58320,7 +58409,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -58353,8 +58442,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
-    avatar?: AvatarStoreUpdateOneWithoutStoreAvatarNestedInput
+    avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUpdateManyWithoutStoreNestedInput
@@ -58372,6 +58462,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
+    avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
     coupons?: CouponsUncheckedUpdateManyWithoutStoreNestedInput
@@ -58621,7 +58712,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
     addresses?: AddressesCreateNestedManyWithoutUserInput
@@ -58653,7 +58744,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
     store?: StoresUncheckedCreateNestedOneWithoutUserInput
@@ -58696,7 +58787,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
     addresses?: AddressesUpdateManyWithoutUserNestedInput
@@ -58728,7 +58819,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
     store?: StoresUncheckedUpdateOneWithoutUserNestedInput
@@ -58755,7 +58846,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -58787,7 +58878,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -58830,7 +58921,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -58862,7 +58953,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -58889,7 +58980,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -58921,7 +59012,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -58964,7 +59055,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -58996,7 +59087,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -59023,7 +59114,7 @@ export namespace Prisma {
     bornDate: Date | string
     avatarId?: number | null
     avatar?: AvatarUserCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenCreateNestedOneWithoutUserInput
     admin?: AdminCreateNestedOneWithoutUserInput
     principalAddress?: AddressesCreateNestedOneWithoutPrincipalOfInput
@@ -59055,7 +59146,7 @@ export namespace Prisma {
     principalAddressId?: number | null
     cartId: number
     avatar?: AvatarUserUncheckedCreateNestedOneWithoutUserInput
-    tokenLogin?: LoginTokenUncheckedCreateNestedOneWithoutUserInput
+    tokenLogin?: LoginTokenUncheckedCreateNestedManyWithoutUserInput
     confirmationToken?: ConfirmationTokenUncheckedCreateNestedOneWithoutUserInput
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     addresses?: AddressesUncheckedCreateNestedManyWithoutUserInput
@@ -59121,7 +59212,7 @@ export namespace Prisma {
     bornDate?: DateTimeFieldUpdateOperationsInput | Date | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarUserUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUpdateOneWithoutUserNestedInput
     admin?: AdminUpdateOneWithoutUserNestedInput
     principalAddress?: AddressesUpdateOneWithoutPrincipalOfNestedInput
@@ -59153,7 +59244,7 @@ export namespace Prisma {
     principalAddressId?: NullableIntFieldUpdateOperationsInput | number | null
     cartId?: IntFieldUpdateOperationsInput | number
     avatar?: AvatarUserUncheckedUpdateOneWithoutUserNestedInput
-    tokenLogin?: LoginTokenUncheckedUpdateOneWithoutUserNestedInput
+    tokenLogin?: LoginTokenUncheckedUpdateManyWithoutUserNestedInput
     confirmationToken?: ConfirmationTokenUncheckedUpdateOneWithoutUserNestedInput
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     addresses?: AddressesUncheckedUpdateManyWithoutUserNestedInput
@@ -59280,6 +59371,11 @@ export namespace Prisma {
     shipping?: ShippingUncheckedUpdateOneWithoutOrderNestedInput
   }
 
+  export type LoginTokenCreateManyUserInput = {
+    id?: number
+    token: string
+  }
+
   export type AddressesCreateManyUserInput = {
     id?: number
     cep: string
@@ -59393,6 +59489,20 @@ export namespace Prisma {
   export type AbandonedCartCreateManyUserInput = {
     id?: number
     abandonedAt?: Date | string
+  }
+
+  export type LoginTokenUpdateWithoutUserInput = {
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LoginTokenUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LoginTokenUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    token?: StringFieldUpdateOperationsInput | string
   }
 
   export type AddressesUpdateWithoutUserInput = {

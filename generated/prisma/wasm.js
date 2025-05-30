@@ -182,7 +182,8 @@ exports.Prisma.StoresScalarFieldEnum = {
 exports.Prisma.AvatarStoreScalarFieldEnum = {
   id: 'id',
   url: 'url',
-  publicId: 'publicId'
+  publicId: 'publicId',
+  storeId: 'storeId'
 };
 
 exports.Prisma.StoreAvaliationsScalarFieldEnum = {

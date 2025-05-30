@@ -28,6 +28,7 @@ class UserController {
           return;
         }
       }
+      console.log(error);
       res.status(500).json({ error: 'Erro ao criar usuário' });
     }
   }
