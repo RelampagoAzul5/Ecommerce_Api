@@ -50,7 +50,7 @@ model User {
   avatarId Int?    @unique
   avatar   AvatarUser?
 
-  tokenLogin        LoginToken?        @relation("LoginToken")
+  tokenLogin        LoginToken[]        @relation("LoginToken")
   confirmationToken ConfirmationToken? @relation("ConfirmationToken")
 
   admin Admin?
@@ -482,7 +482,7 @@ model MessageImages {
 model LoginToken {
   id Int @id @default(autoincrement())
 
-  userId Int  @unique
+  userId Int
   user   User @relation("LoginToken", fields: [userId], references: [id], onDelete: Cascade)
 
   token String @db.VarChar(255)
