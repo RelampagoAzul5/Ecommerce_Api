@@ -8,7 +8,16 @@ router.post(
   authMiddleware,
   addressController.createAddress,
 );
-router.get('/:userId/addresses/', authMiddleware, addressController.getAddress);
+router.get(
+  '/:userId/addresses/',
+  authMiddleware,
+  addressController.getAddresses,
+);
+router.get(
+  '/:userId/address/:addressId',
+  authMiddleware,
+  addressController.getAddress,
+);
 router.put(
   '/:userId/addresses/:addressId/update',
   authMiddleware,

@@ -16,8 +16,14 @@ class AddressRepository {
     return address;
   }
 
-  async getAddress(userId: number) {
+  async getAddresses(userId: number) {
     const addresses = await prisma.addresses.findMany({ where: { userId } });
+    return addresses;
+  }
+  async getAddress(userId: number, addressId: number) {
+    const addresses = await prisma.addresses.findUnique({
+      where: { userId, id: addressId },
+    });
     return addresses;
   }
 

@@ -39,7 +39,7 @@ class AddressControler {
     }
   }
 
-  async getAddress(req: Request, res: Response) {
+  async getAddresses(req: Request, res: Response) {
     const userIdFromParams = Number(req.params.userId);
     const userIdFromToken = (req.user as JwtPayload).userId;
 
@@ -54,7 +54,7 @@ class AddressControler {
       return;
     }
     try {
-      const addresses = await addressService.getAddress(userIdFromParams);
+      const addresses = await addressService.getAddresses(userIdFromParams);
       if (addresses.length === 0) {
         res.status(404).json({ error: 'Endereços não encontrados' });
         return;
@@ -62,6 +62,36 @@ class AddressControler {
       res.json(addresses);
     } catch (err) {
       res.status(500).json({ error: 'Ocorreu um erro ao buscar os endereços' });
+    }
+  }
+
+  async getAddress(req: Request, res: Response) {
+    const userIdFromParams = Number(req.params.userId);
+    const userIdFromToken = (req.user as JwtPayload).userId;
+    const addressId = Number(req.params.addressId);
+
+    if (isNaN(userIdFromParams)) {
+      res.status(400).json({ error: 'Id de usuário inválido' });
+      return;
+    }
+    if (userIdFromToken !== userIdFromParams) {
+      res
+        .status(403)
+        .json({ error: 'Você só pode ver seus próprios endereços!' });
+      return;
+    }
+    try {
+      const address = await addressService.getAddress(
+        userIdFromParams,
+        addressId,
+      );
+      if (!address) {
+        res.status(404).json({ error: 'Endereço não encontrado' });
+        return;
+      }
+      res.json(address);
+    } catch (err) {
+      res.status(500).json({ error: 'Ocorreu um erro ao buscar o endereço' });
     }
   }
 

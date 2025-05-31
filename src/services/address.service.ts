@@ -19,8 +19,12 @@ class AddressService {
     return address;
   }
 
-  async getAddress(id: number) {
-    return await addressRepository.getAddress(id);
+  async getAddresses(id: number) {
+    return await addressRepository.getAddresses(id);
+  }
+
+  async getAddress(userId: number, addressId: number) {
+    return await addressRepository.getAddress(userId, addressId);
   }
 
   async deleteAddress(addresId: number, userId: number) {
