@@ -6,6 +6,9 @@ class LoginService {
   async createToken(userId: number, token: string) {
     return await loginRepository.createToken(userId, token);
   }
+  async deleteToken(token: string) {
+    return await loginRepository.deleteToken(token);
+  }
 }
 
 export default new LoginService();

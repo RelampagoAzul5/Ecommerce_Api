@@ -12,6 +12,9 @@ class LoginRepository {
     });
     return userToken;
   }
+  async deleteToken(token: string) {
+    return await prisma.loginToken.deleteMany({ where: { token } });
+  }
 }
 
 export default new LoginRepository();

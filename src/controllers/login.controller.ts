@@ -33,6 +33,25 @@ class LoginController {
       return;
     }
   }
+  async logout(req: Request, res: Response) {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      res.status(401).json({ error: 'Token não encontrado' });
+      return;
+    }
+
+    const token = authHeader.split(' ')[1];
+
+    try {
+      await loginService.deleteToken(token);
+      res.status(200).json({ message: 'Logout realizado com sucesso' });
+      return;
+    } catch (err) {
+      res.status(500).json({ error: 'Erro ao realizar logout' });
+      return;
+    }
+  }
 }
 
 export default new LoginController();
