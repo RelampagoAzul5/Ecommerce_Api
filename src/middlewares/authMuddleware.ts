@@ -38,9 +38,9 @@ export const authMiddleware = async (
     req.user = decoded;
     next();
   } catch (err) {
+    validateLoginToken.deleteInvalidToken(token);
     res.status(401).json({
-      error:
-        'Ocorreu um erro ao atenticar usuário! Por favor faça login novamente',
+      error: 'Tempo de sessão expirado! Por favor faça login novamente.',
     });
   }
 };
