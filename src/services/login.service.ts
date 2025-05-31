@@ -9,6 +9,9 @@ class LoginService {
   async deleteToken(token: string) {
     return await loginRepository.deleteToken(token);
   }
+  async getToken(token: string) {
+    return await loginRepository.getToken(token);
+  }
 }
 
 export default new LoginService();

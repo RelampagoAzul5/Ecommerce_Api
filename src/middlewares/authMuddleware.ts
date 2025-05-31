@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { JwtPayload } from 'jsonwebtoken';
+import validateLoginToken from '../utils/validateLoginToken';
 
 declare global {
   namespace Express {
@@ -11,7 +12,7 @@ declare global {
 }
 const JWT_SECRET = process.env.JWT_SECRET || 'ColoqueSeuTokenNoEnviroment';
 
-export const authMiddleware = (
+export const authMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction,
@@ -24,6 +25,14 @@ export const authMiddleware = (
     return;
   }
   const token = authHeader.split(' ')[1];
+
+  const tokenExists = await validateLoginToken.tokenValidation(token);
+  if (!tokenExists) {
+    res.status(401).json({
+      error: 'Sessão inválida. Faça login novamente.',
+    });
+    return;
+  }
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     req.user = decoded;
