@@ -14,3 +14,12 @@ export interface UserUpdateDTO {
   avatarId?: number;
   bornDate?: Date;
 }
+
+export interface GetUserDTO {
+  name: string;
+  cpf: string;
+  bornDate: Date;
+  avatarId: number | null;
+  principalAddressId: number | null;
+  cartId: number;
+}

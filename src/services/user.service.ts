@@ -1,27 +1,73 @@
 import userRepository from '../repositories/user.repository';
-import { CreateUserDTO, UserUpdateDTO } from '../interfaces/user.interface';
+import {
+  CreateUserDTO,
+  GetUserDTO,
+  UserUpdateDTO,
+} from '../interfaces/user.interface';
 import userAvatarRepository from '../repositories/userAvatar.repository';
 
 class UserService {
-  async createUser(data: CreateUserDTO, file: Express.Multer.File) {
+  async createUser(
+    data: CreateUserDTO,
+    file: Express.Multer.File,
+  ): Promise<GetUserDTO | undefined> {
     const user = await userRepository.createUser(data);
+    if (!user) return;
+
+    const { name, cpf, bornDate, avatarId, principalAddressId, cartId } = user;
+
     if (file) {
       const avatar = await userAvatarRepository.uploadAvatar(file, user.id);
       user.avatarId = avatar.id;
     }
-    return user;
+
+    return {
+      name,
+      cpf,
+      bornDate,
+      avatarId,
+      principalAddressId,
+      cartId,
+    };
   }
 
-  async getUser(id: number) {
-    return userRepository.getUser(id);
+  async getUser(id: number): Promise<GetUserDTO | undefined> {
+    const user = await userRepository.getUser(id);
+    if (!user) return;
+
+    const { name, cpf, bornDate, avatarId, principalAddressId, cartId } = user;
+
+    return {
+      name,
+      cpf,
+      bornDate,
+      avatarId,
+      principalAddressId,
+      cartId,
+    };
   }
 
   async deleteUser(id: number) {
     return userRepository.deleteUser(id);
   }
 
-  async updateUser(data: UserUpdateDTO, id: number) {
-    return userRepository.updateUser(data, id);
+  async updateUser(
+    data: UserUpdateDTO,
+    id: number,
+  ): Promise<GetUserDTO | undefined> {
+    const user = await userRepository.updateUser(data, id);
+    if (!user) return;
+
+    const { name, cpf, bornDate, avatarId, principalAddressId, cartId } = user;
+
+    return {
+      name,
+      cpf,
+      bornDate,
+      avatarId,
+      principalAddressId,
+      cartId,
+    };
   }
 }
 
