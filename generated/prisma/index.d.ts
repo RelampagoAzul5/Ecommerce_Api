@@ -10103,7 +10103,8 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     name: string | null
-    cnpj: string | null
+    credentialType: string | null
+    crendential: string | null
     avatarId: number | null
   }
 
@@ -10113,7 +10114,8 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     name: string | null
-    cnpj: string | null
+    credentialType: string | null
+    crendential: string | null
     avatarId: number | null
   }
 
@@ -10123,7 +10125,8 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     name: number
-    cnpj: number
+    credentialType: number
+    crendential: number
     avatarId: number
     _all: number
   }
@@ -10147,7 +10150,8 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     name?: true
-    cnpj?: true
+    credentialType?: true
+    crendential?: true
     avatarId?: true
   }
 
@@ -10157,7 +10161,8 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     name?: true
-    cnpj?: true
+    credentialType?: true
+    crendential?: true
     avatarId?: true
   }
 
@@ -10167,7 +10172,8 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     name?: true
-    cnpj?: true
+    credentialType?: true
+    crendential?: true
     avatarId?: true
     _all?: true
   }
@@ -10264,7 +10270,8 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     name: string
-    cnpj: string | null
+    credentialType: string
+    crendential: string
     avatarId: number | null
     _count: StoresCountAggregateOutputType | null
     _avg: StoresAvgAggregateOutputType | null
@@ -10293,7 +10300,8 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     name?: boolean
-    cnpj?: boolean
+    credentialType?: boolean
+    crendential?: boolean
     avatarId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     avatar?: boolean | Stores$avatarArgs<ExtArgs>
@@ -10316,11 +10324,12 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     name?: boolean
-    cnpj?: boolean
+    credentialType?: boolean
+    crendential?: boolean
     avatarId?: boolean
   }
 
-  export type StoresOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "created_at" | "updated_at" | "name" | "cnpj" | "avatarId", ExtArgs["result"]["stores"]>
+  export type StoresOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "created_at" | "updated_at" | "name" | "credentialType" | "crendential" | "avatarId", ExtArgs["result"]["stores"]>
   export type StoresInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     avatar?: boolean | Stores$avatarArgs<ExtArgs>
@@ -10355,7 +10364,8 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       name: string
-      cnpj: string | null
+      credentialType: string
+      crendential: string
       avatarId: number | null
     }, ExtArgs["result"]["stores"]>
     composites: {}
@@ -10741,7 +10751,8 @@ export namespace Prisma {
     readonly created_at: FieldRef<"Stores", 'DateTime'>
     readonly updated_at: FieldRef<"Stores", 'DateTime'>
     readonly name: FieldRef<"Stores", 'String'>
-    readonly cnpj: FieldRef<"Stores", 'String'>
+    readonly credentialType: FieldRef<"Stores", 'String'>
+    readonly crendential: FieldRef<"Stores", 'String'>
     readonly avatarId: FieldRef<"Stores", 'Int'>
   }
     
@@ -41516,7 +41527,8 @@ export namespace Prisma {
     created_at: 'created_at',
     updated_at: 'updated_at',
     name: 'name',
-    cnpj: 'cnpj',
+    credentialType: 'credentialType',
+    crendential: 'crendential',
     avatarId: 'avatarId'
   };
 
@@ -41910,7 +41922,8 @@ export namespace Prisma {
 
   export const StoresOrderByRelevanceFieldEnum: {
     name: 'name',
-    cnpj: 'cnpj'
+    credentialType: 'credentialType',
+    crendential: 'crendential'
   };
 
   export type StoresOrderByRelevanceFieldEnum = (typeof StoresOrderByRelevanceFieldEnum)[keyof typeof StoresOrderByRelevanceFieldEnum]
@@ -42545,7 +42558,8 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Stores"> | Date | string
     updated_at?: DateTimeFilter<"Stores"> | Date | string
     name?: StringFilter<"Stores"> | string
-    cnpj?: StringNullableFilter<"Stores"> | string | null
+    credentialType?: StringFilter<"Stores"> | string
+    crendential?: StringFilter<"Stores"> | string
     avatarId?: IntNullableFilter<"Stores"> | number | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     avatar?: XOR<AvatarStoreNullableScalarRelationFilter, AvatarStoreWhereInput> | null
@@ -42565,7 +42579,8 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     name?: SortOrder
-    cnpj?: SortOrderInput | SortOrder
+    credentialType?: SortOrder
+    crendential?: SortOrder
     avatarId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     avatar?: AvatarStoreOrderByWithRelationInput
@@ -42583,7 +42598,7 @@ export namespace Prisma {
   export type StoresWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     userId?: number
-    cnpj?: string
+    crendential?: string
     avatarId?: number
     AND?: StoresWhereInput | StoresWhereInput[]
     OR?: StoresWhereInput[]
@@ -42591,6 +42606,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Stores"> | Date | string
     updated_at?: DateTimeFilter<"Stores"> | Date | string
     name?: StringFilter<"Stores"> | string
+    credentialType?: StringFilter<"Stores"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     avatar?: XOR<AvatarStoreNullableScalarRelationFilter, AvatarStoreWhereInput> | null
     product?: ProductsListRelationFilter
@@ -42601,7 +42617,7 @@ export namespace Prisma {
     receivedMessages?: ChatMessagesListRelationFilter
     orderItems?: OrderItemsListRelationFilter
     promotions?: PromotionListRelationFilter
-  }, "id" | "userId" | "cnpj" | "avatarId">
+  }, "id" | "userId" | "crendential" | "avatarId">
 
   export type StoresOrderByWithAggregationInput = {
     id?: SortOrder
@@ -42609,7 +42625,8 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     name?: SortOrder
-    cnpj?: SortOrderInput | SortOrder
+    credentialType?: SortOrder
+    crendential?: SortOrder
     avatarId?: SortOrderInput | SortOrder
     _count?: StoresCountOrderByAggregateInput
     _avg?: StoresAvgOrderByAggregateInput
@@ -42627,7 +42644,8 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"Stores"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Stores"> | Date | string
     name?: StringWithAggregatesFilter<"Stores"> | string
-    cnpj?: StringNullableWithAggregatesFilter<"Stores"> | string | null
+    credentialType?: StringWithAggregatesFilter<"Stores"> | string
+    crendential?: StringWithAggregatesFilter<"Stores"> | string
     avatarId?: IntNullableWithAggregatesFilter<"Stores"> | number | null
   }
 
@@ -44892,7 +44910,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
     avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
@@ -44912,7 +44931,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
@@ -44929,7 +44949,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
     avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
@@ -44949,7 +44970,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
@@ -44968,7 +44990,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
   }
 
@@ -44976,7 +44999,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -44986,7 +45010,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -47282,7 +47307,8 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     name?: SortOrder
-    cnpj?: SortOrder
+    credentialType?: SortOrder
+    crendential?: SortOrder
     avatarId?: SortOrder
   }
 
@@ -47298,7 +47324,8 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     name?: SortOrder
-    cnpj?: SortOrder
+    credentialType?: SortOrder
+    crendential?: SortOrder
     avatarId?: SortOrder
   }
 
@@ -47308,7 +47335,8 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     name?: SortOrder
-    cnpj?: SortOrder
+    credentialType?: SortOrder
+    crendential?: SortOrder
     avatarId?: SortOrder
   }
 
@@ -52246,7 +52274,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
@@ -52264,7 +52293,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
@@ -52794,7 +52824,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
@@ -52812,7 +52843,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
@@ -54516,7 +54548,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
     product?: ProductsCreateNestedManyWithoutStoreInput
@@ -54535,7 +54568,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
@@ -54567,7 +54601,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
     product?: ProductsUpdateManyWithoutStoreNestedInput
@@ -54586,7 +54621,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
@@ -54666,7 +54702,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
     avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
@@ -54685,7 +54722,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
@@ -54808,7 +54846,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
     avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
@@ -54827,7 +54866,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
@@ -54919,7 +54959,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
     avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
@@ -54938,7 +54979,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
@@ -54993,7 +55035,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
     avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
@@ -55012,7 +55055,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
@@ -55044,7 +55088,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
     avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
@@ -55063,7 +55108,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     avaliations?: StoreAvaliationsUncheckedCreateNestedManyWithoutStoreInput
@@ -55271,7 +55317,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
     avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
@@ -55290,7 +55337,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     avaliations?: StoreAvaliationsUncheckedUpdateManyWithoutStoreNestedInput
@@ -55813,7 +55861,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
     avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
@@ -55832,7 +55881,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
@@ -55900,7 +55950,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
     avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
@@ -55919,7 +55970,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
@@ -57435,7 +57487,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
     avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
@@ -57454,7 +57507,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
@@ -57578,7 +57632,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
     avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
@@ -57597,7 +57652,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
@@ -57771,7 +57827,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
     avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
@@ -57790,7 +57847,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
@@ -57931,7 +57989,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
     avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
@@ -57950,7 +58009,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
@@ -58062,7 +58122,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
     avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
@@ -58081,7 +58142,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
@@ -58166,7 +58228,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     user: UserCreateNestedOneWithoutStoreInput
     avatar?: AvatarStoreCreateNestedOneWithoutStoreInput
@@ -58185,7 +58248,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     name: string
-    cnpj?: string | null
+    credentialType: string
+    crendential: string
     avatarId?: number | null
     avatar?: AvatarStoreUncheckedCreateNestedOneWithoutStoreInput
     product?: ProductsUncheckedCreateNestedManyWithoutStoreInput
@@ -58325,7 +58389,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
     avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
@@ -58344,7 +58409,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput
@@ -58441,7 +58507,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutStoreNestedInput
     avatar?: AvatarStoreUpdateOneWithoutStoreNestedInput
@@ -58460,7 +58527,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    credentialType?: StringFieldUpdateOperationsInput | string
+    crendential?: StringFieldUpdateOperationsInput | string
     avatarId?: NullableIntFieldUpdateOperationsInput | number | null
     avatar?: AvatarStoreUncheckedUpdateOneWithoutStoreNestedInput
     product?: ProductsUncheckedUpdateManyWithoutStoreNestedInput

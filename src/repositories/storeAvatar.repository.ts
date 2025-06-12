@@ -1,7 +1,7 @@
 import cloudinary from '../lib/cloudinary';
 import { prisma } from '../lib/prisma';
 
-class Store {
+class StoreAvatarRepository {
   async uploadAvatar(data: Express.Multer.File, storeId: number) {
     const store = await prisma.stores.findUnique({
       where: { id: storeId },
@@ -10,7 +10,7 @@ class Store {
 
     if (store?.avatar) {
       await cloudinary.uploader.destroy(store.avatar.publicId);
-      await prisma.avatarUser.delete({
+      await prisma.avatarStore.delete({
         where: { id: store.avatar.id },
       });
     }
@@ -31,15 +31,17 @@ class Store {
     return avatar;
   }
 
-  async getAvatar(userId: number) {
-    const avatar = await prisma.avatarUser.findUnique({ where: { userId } });
+  async getAvatar(storeId: number) {
+    const avatar = await prisma.avatarStore.findUnique({
+      where: { id: storeId },
+    });
     return avatar;
   }
 
-  async deleteAvatar(userId: number) {
-    await prisma.avatarUser.delete({ where: { userId } });
+  async deleteAvatar(storeId: number) {
+    await prisma.avatarStore.delete({ where: { id: storeId } });
     return;
   }
 }
 
-export default new Store();
+export default new StoreAvatarRepository();

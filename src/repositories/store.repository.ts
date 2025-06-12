@@ -6,7 +6,8 @@ class StoreRepository {
     return await prisma.stores.create({
       data: {
         name: data.name,
-        cnpj: data.cnpj,
+        credentialType: data.credentialType,
+        crendential: data.credential,
         userId,
       },
     });

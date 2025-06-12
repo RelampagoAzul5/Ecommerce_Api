@@ -1,6 +1,7 @@
 export interface CreateStoreDTO {
   name: string;
-  cnpj?: string;
+  credentialType: string;
+  credential: string;
   userId: number;
 }
 

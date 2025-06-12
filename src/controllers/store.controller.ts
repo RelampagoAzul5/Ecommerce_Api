@@ -3,7 +3,8 @@ import storeService from '../services/store.service';
 import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
 import { StoreUpdateDTO } from '@/interfaces/store.interface';
 import { JwtPayload } from 'jsonwebtoken';
-import storeValidation from '@/utils/storeValidation';
+import storeValidation from '../utils/storeValidation';
+import userService from '../services/user.service';
 
 class StoreController {
   async createStore(req: Request, res: Response) {
@@ -28,6 +29,10 @@ class StoreController {
       return;
     }
     try {
+      if (req.body.credentialType === 'CPF') {
+        const user = await userService.getUser(userIdFromToken);
+        req.body.credential = user?.cpf;
+      }
       const store = await storeService.createStore(
         req.body,
         file,
@@ -38,7 +43,7 @@ class StoreController {
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
           res.status(409).json({
-            error: `CNPJ já cadastrado!`,
+            error: `Loja já cadastrada!`,
           });
           return;
         }

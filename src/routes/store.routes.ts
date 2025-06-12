@@ -1,5 +1,5 @@
 import { upload } from '../middlewares/uploadMiddleware';
-import userController from '../controllers/user.controller';
+import storeController from '../controllers/store.controller';
 import { Router } from 'express';
 import { authMiddleware } from '../middlewares/authMuddleware';
 
@@ -8,9 +8,9 @@ router.post(
   '/register/:userId',
   authMiddleware,
   upload.single('StoreAvatar'),
-  userController.createUser,
+  storeController.createStore,
 );
-router.get('/:id', userController.getUser);
-router.delete('/delete/:id', authMiddleware, userController.deleteUser);
-router.put('/update/:id', authMiddleware, userController.updateUser);
+router.get('/:id', storeController.getStore);
+router.delete('/delete/:id', authMiddleware, storeController.deleteStore);
+router.put('/update/:id', authMiddleware, storeController.updateStore);
 export default router;

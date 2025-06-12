@@ -175,7 +175,8 @@ exports.Prisma.StoresScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   name: 'name',
-  cnpj: 'cnpj',
+  credentialType: 'credentialType',
+  crendential: 'crendential',
   avatarId: 'avatarId'
 };
 
@@ -461,7 +462,8 @@ exports.Prisma.AddressesOrderByRelevanceFieldEnum = {
 
 exports.Prisma.StoresOrderByRelevanceFieldEnum = {
   name: 'name',
-  cnpj: 'cnpj'
+  credentialType: 'credentialType',
+  crendential: 'crendential'
 };
 
 exports.Prisma.AvatarStoreOrderByRelevanceFieldEnum = {
