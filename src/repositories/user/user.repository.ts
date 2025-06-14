@@ -1,5 +1,5 @@
-import { prisma } from '../lib/prisma';
-import { CreateUserDTO, UserUpdateDTO } from '../interfaces/user.interface';
+import { prisma } from '../../lib/prisma';
+import { CreateUserDTO, UserUpdateDTO } from '../../interfaces/user.interface';
 import bcrypt from 'bcrypt';
 
 class UserRepository {

@@ -1,9 +1,9 @@
 import {
   AddressUpdateDTO,
   CreateAddressDTO,
-} from '@/interfaces/address.interface';
-import addressRepository from '../repositories/address.repository';
-import userRepository from '../repositories/user.repository';
+} from '../../interfaces/address.interface';
+import addressRepository from '../../repositories/user/address.repository';
+import userRepository from '../../repositories/user/user.repository';
 
 class AddressService {
   async createAddress(data: CreateAddressDTO, userId: number) {

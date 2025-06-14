@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import addressService from '../services/address.service';
-import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
-import { AddressUpdateDTO } from '../interfaces/address.interface';
-import addressValitation from '../utils/addressValidation';
+import addressService from '../../services/user/address.service';
+import { PrismaClientKnownRequestError } from '../../../generated/prisma/runtime/library';
+import { AddressUpdateDTO } from '../../interfaces/address.interface';
+import addressValitation from '../../utils/addressValidation';
 import { JwtPayload } from 'jsonwebtoken';
 
 class AddressControler {

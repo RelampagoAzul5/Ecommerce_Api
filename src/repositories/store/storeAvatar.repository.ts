@@ -1,5 +1,5 @@
-import cloudinary from '../lib/cloudinary';
-import { prisma } from '../lib/prisma';
+import cloudinary from '../../lib/cloudinary';
+import { prisma } from '../../lib/prisma';
 
 class StoreAvatarRepository {
   async uploadAvatar(data: Express.Multer.File, storeId: number) {

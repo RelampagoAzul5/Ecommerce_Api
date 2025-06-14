@@ -1,4 +1,4 @@
-import loginService from '../services/login.service';
+import loginService from '../../services/user/login.service';
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';

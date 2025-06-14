@@ -1,7 +1,7 @@
-import userAvatarController from '../controllers/userAvatar.controller';
-import { upload } from '../middlewares/uploadMiddleware';
+import userAvatarController from '../..//controllers/user/userAvatar.controller';
+import { upload } from '../../middlewares/uploadMiddleware';
 import { Router } from 'express';
-import { authMiddleware } from '../middlewares/authMuddleware';
+import { authMiddleware } from '../../middlewares/authMuddleware';
 
 const router = Router();
 router.post(

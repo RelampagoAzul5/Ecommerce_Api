@@ -1,4 +1,4 @@
-import loginService from '../services/login.service';
+import loginService from '../services/user/login.service';
 
 class ValidateToken {
   async tokenValidation(token: string) {

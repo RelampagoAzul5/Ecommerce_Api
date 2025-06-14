@@ -1,5 +1,8 @@
-import { prisma } from '../lib/prisma';
-import { CreateStoreDTO, StoreUpdateDTO } from '../interfaces/store.interface';
+import { prisma } from '../../lib/prisma';
+import {
+  CreateStoreDTO,
+  StoreUpdateDTO,
+} from '../../interfaces/store.interface';
 
 class StoreRepository {
   async createStore(data: CreateStoreDTO, userId: number) {

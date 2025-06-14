@@ -1,7 +1,7 @@
-import { upload } from '../middlewares/uploadMiddleware';
-import userController from '../controllers/user.controller';
+import { upload } from '../../middlewares/uploadMiddleware';
+import userController from '../../controllers/user/user.controller';
 import { Router } from 'express';
-import { authMiddleware } from '../middlewares/authMuddleware';
+import { authMiddleware } from '../../middlewares/authMuddleware';
 
 const router = Router();
 router.post('/register', upload.single('avatar'), userController.createUser);

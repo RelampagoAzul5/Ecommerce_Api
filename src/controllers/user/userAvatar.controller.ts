@@ -1,6 +1,6 @@
 import { JwtPayload } from 'jsonwebtoken';
-import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
-import userAvatarService from '../services/userAvatar.service';
+import { PrismaClientKnownRequestError } from '../../../generated/prisma/runtime/library';
+import userAvatarService from '../../services/user/userAvatar.service';
 import { Request, Response } from 'express';
 
 class UserAvatarController {
@@ -8,9 +8,9 @@ class UserAvatarController {
     const userIdFromParams = Number(req.params.userId);
     const userIdFromToken = (req.user as JwtPayload).userId;
     if (userIdFromToken !== userIdFromParams) {
-      res.status(403).json({
-        error: 'Você só consegue mudar a foto de perfil da própria loja!',
-      });
+      res
+        .status(403)
+        .json({ error: 'Você só consegue mudar a própria foto de perfil' });
       return;
     }
     const file = req.file as Express.Multer.File;

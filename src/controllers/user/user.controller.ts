@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import userService from '../services/user.service';
-import userValidation from '../utils/userValidation';
-import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
-import { UserUpdateDTO } from '@/interfaces/user.interface';
+import userService from '../../services/user/user.service';
+import userValidation from '../../utils/userValidation';
+import { PrismaClientKnownRequestError } from '../../../generated/prisma/runtime/library';
+import { UserUpdateDTO } from '../../interfaces/user.interface';
 import { JwtPayload } from 'jsonwebtoken';
 
 class UserController {

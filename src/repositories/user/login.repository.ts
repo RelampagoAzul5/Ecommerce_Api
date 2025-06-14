@@ -1,4 +1,4 @@
-import { prisma } from '../lib/prisma';
+import { prisma } from '../../lib/prisma';
 
 class LoginRepository {
   async getUser(email: string) {

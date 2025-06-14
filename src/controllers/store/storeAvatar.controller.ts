@@ -1,16 +1,16 @@
 import { JwtPayload } from 'jsonwebtoken';
-import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
-import userAvatarService from '../services/userAvatar.service';
+import { PrismaClientKnownRequestError } from '../../../generated/prisma/runtime/library';
+import storeAvatarService from '../../services/store/storeAvatar.service';
 import { Request, Response } from 'express';
 
-class UserAvatarController {
+class StoreAvatarController {
   async uploadAvatar(req: Request, res: Response) {
     const userIdFromParams = Number(req.params.userId);
     const userIdFromToken = (req.user as JwtPayload).userId;
     if (userIdFromToken !== userIdFromParams) {
-      res
-        .status(403)
-        .json({ error: 'Você só consegue mudar a própria foto de perfil' });
+      res.status(403).json({
+        error: 'Você só consegue mudar a foto de perfil da própria loja!',
+      });
       return;
     }
     const file = req.file as Express.Multer.File;
@@ -21,7 +21,7 @@ class UserAvatarController {
     }
 
     try {
-      const avatar = await userAvatarService.uploadAvatar(
+      const avatar = await storeAvatarService.uploadAvatar(
         file,
         userIdFromParams,
       );
@@ -42,7 +42,7 @@ class UserAvatarController {
     }
 
     try {
-      const avatar = await userAvatarService.getAvatar(id);
+      const avatar = await storeAvatarService.getAvatar(id);
       if (!avatar) {
         res.status(404).json({ error: 'Avatar não encontrado' });
         return;
@@ -68,7 +68,7 @@ class UserAvatarController {
     }
 
     try {
-      await userAvatarService.deleteAvatar(userIdFromParams);
+      await storeAvatarService.deleteAvatar(userIdFromParams);
       res.json({
         message: `Avatar foi deletado com sucesso!`,
       });
@@ -86,4 +86,4 @@ class UserAvatarController {
   }
 }
 
-export default new UserAvatarController();
+export default new StoreAvatarController();

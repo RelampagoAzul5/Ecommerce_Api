@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import storeService from '../services/store.service';
-import { PrismaClientKnownRequestError } from '../../generated/prisma/runtime/library';
-import { StoreUpdateDTO } from '@/interfaces/store.interface';
+import storeService from '../../services/store/store.service';
+import { PrismaClientKnownRequestError } from '../../../generated/prisma/runtime/library';
+import { StoreUpdateDTO } from '../../interfaces/store.interface';
 import { JwtPayload } from 'jsonwebtoken';
-import storeValidation from '../utils/storeValidation';
-import userService from '../services/user.service';
+import storeValidation from '../../utils/storeValidation';
+import userService from '../../services/user/user.service';
 
 class StoreController {
   async createStore(req: Request, res: Response) {

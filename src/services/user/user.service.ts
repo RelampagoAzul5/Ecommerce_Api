@@ -1,10 +1,10 @@
-import userRepository from '../repositories/user.repository';
+import userRepository from '../../repositories/user/user.repository';
 import {
   CreateUserDTO,
   GetUserDTO,
   UserUpdateDTO,
-} from '../interfaces/user.interface';
-import userAvatarRepository from '../repositories/userAvatar.repository';
+} from '../../interfaces/user.interface';
+import userAvatarRepository from '../../repositories/user/userAvatar.repository';
 
 class UserService {
   async createUser(

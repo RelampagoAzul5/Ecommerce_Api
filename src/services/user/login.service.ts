@@ -1,4 +1,4 @@
-import loginRepository from '../repositories/login.repository';
+import loginRepository from '../../repositories/user/login.repository';
 class LoginService {
   async getUser(email: string) {
     return await loginRepository.getUser(email);

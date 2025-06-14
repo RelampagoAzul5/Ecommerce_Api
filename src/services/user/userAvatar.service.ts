@@ -1,4 +1,4 @@
-import userAvatarRepository from '../repositories/userAvatar.repository';
+import userAvatarRepository from '../../repositories/user/userAvatar.repository';
 
 class UserAvatarService {
   async uploadAvatar(data: Express.Multer.File, userId: number) {

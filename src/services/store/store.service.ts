@@ -1,10 +1,10 @@
-import storeRepository from '../repositories/store.repository';
+import storeRepository from '../../repositories/store/store.repository';
 import {
   CreateStoreDTO,
   GetStoreDTO,
   StoreUpdateDTO,
-} from '../interfaces/store.interface';
-import storeAvatarRepository from '../repositories/storeAvatar.repository';
+} from '../../interfaces/store.interface';
+import storeAvatarRepository from '../../repositories/store/storeAvatar.repository';
 
 class storeService {
   async createStore(

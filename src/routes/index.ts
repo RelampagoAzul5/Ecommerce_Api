@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import userRoutes from './user.routes';
-import addressRoutes from './address.routes';
-import userAvatarRoutes from './userAvatar.routes';
-import loginRoutes from './userlogin.routes';
-import storeRoutes from './store.routes';
-import storeAvatarRoutes from './storeAvatar.routes';
+import userRoutes from './user/user.routes';
+import addressRoutes from './user/address.routes';
+import userAvatarRoutes from './user/userAvatar.routes';
+import loginRoutes from './user/userlogin.routes';
+import storeRoutes from './store/store.routes';
+import storeAvatarRoutes from './store/storeAvatar.routes';
 
 const router = Router();
 router.use('/user', userRoutes);

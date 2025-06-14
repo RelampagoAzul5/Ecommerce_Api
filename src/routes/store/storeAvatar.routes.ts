@@ -1,7 +1,7 @@
-import storeAvatarController from '../controllers/storeAvatar.controller';
-import { upload } from '../middlewares/uploadMiddleware';
+import storeAvatarController from '../../controllers/store/storeAvatar.controller';
+import { upload } from '../../middlewares/uploadMiddleware';
 import { Router } from 'express';
-import { authMiddleware } from '../middlewares/authMuddleware';
+import { authMiddleware } from '../../middlewares/authMuddleware';
 
 const router = Router();
 router.post(
