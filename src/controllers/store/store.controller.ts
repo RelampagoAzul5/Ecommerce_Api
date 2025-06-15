@@ -9,19 +9,8 @@ import userService from '../../services/user/user.service';
 class StoreController {
   async createStore(req: Request, res: Response) {
     const file = req.file as Express.Multer.File;
-    const userIdFromParams = Number(req.params.userId);
     const userIdFromToken = (req.user as JwtPayload).userId;
 
-    if (isNaN(userIdFromParams)) {
-      res.status(400).json({ error: 'Id de usuário inválido' });
-      return;
-    }
-    if (userIdFromToken !== userIdFromParams) {
-      res
-        .status(403)
-        .json({ error: 'Você só pode criar uma loja na sua própria conta!' });
-      return;
-    }
     const errors = storeValidation.storeCreateValidation(req.body);
 
     if (errors.length > 0) {
@@ -36,7 +25,7 @@ class StoreController {
       const store = await storeService.createStore(
         req.body,
         file,
-        userIdFromParams,
+        userIdFromToken,
       );
       res.status(201).json(store);
     } catch (error) {
@@ -72,15 +61,9 @@ class StoreController {
 
   async deleteStore(req: Request, res: Response) {
     const userIdFromToken = (req.user as JwtPayload).userId;
-    const idFromParams = Number(req.params.id);
-
-    if (userIdFromToken !== idFromParams) {
-      res.status(403).json({ error: 'Você só pode excluir sua própria loja.' });
-      return;
-    }
 
     try {
-      await storeService.deleteStore(idFromParams);
+      await storeService.deleteStore(userIdFromToken);
       res.json({ message: `Loja foi deletada com sucesso!` });
     } catch (err) {
       if (
@@ -96,13 +79,7 @@ class StoreController {
 
   async updateStore(req: Request, res: Response) {
     const updatedStore: StoreUpdateDTO = req.body;
-    const idFromParams = Number(req.params.id);
     const userIdFromToken = (req.user as JwtPayload).userId;
-
-    if (userIdFromToken !== idFromParams) {
-      res.status(403).json({ error: 'Você só pode editar sua própria loja.' });
-      return;
-    }
 
     const errors = storeValidation.storeUpdateValidation(updatedStore);
     if (errors.length > 0) {
@@ -111,7 +88,10 @@ class StoreController {
     }
 
     try {
-      const store = await storeService.updateStore(updatedStore, idFromParams);
+      const store = await storeService.updateStore(
+        updatedStore,
+        userIdFromToken,
+      );
       res.status(200).json(store);
     } catch (err) {
       if (

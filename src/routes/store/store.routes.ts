@@ -5,12 +5,12 @@ import { authMiddleware } from '../../middlewares/authMuddleware';
 
 const router = Router();
 router.post(
-  '/register/:userId',
+  '/register',
   authMiddleware,
   upload.single('StoreAvatar'),
   storeController.createStore,
 );
 router.get('/:id', storeController.getStore);
-router.delete('/delete/:id', authMiddleware, storeController.deleteStore);
-router.put('/update/:id', authMiddleware, storeController.updateStore);
+router.delete('/delete', authMiddleware, storeController.deleteStore);
+router.put('/update', authMiddleware, storeController.updateStore);
 export default router;

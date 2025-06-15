@@ -15,7 +15,7 @@ class storeService {
     const store = await storeRepository.createStore(data, userId);
     if (!store) return;
 
-    const { name, avatarId } = store;
+    const { name, avatarId, credentialType, crendential } = store;
 
     if (file) {
       const avatar = await storeAvatarRepository.uploadAvatar(file, store.id);
@@ -23,8 +23,11 @@ class storeService {
     }
 
     return {
+      userId,
       name,
       avatarId,
+      credential: crendential,
+      credentialType,
     };
   }
 
@@ -32,30 +35,36 @@ class storeService {
     const store = await storeRepository.getStore(id);
     if (!store) return;
 
-    const { name, avatarId } = store;
+    const { userId, name, avatarId, credentialType, crendential } = store;
 
     return {
+      userId,
       name,
       avatarId,
+      credential: crendential,
+      credentialType,
     };
   }
 
-  async deleteStore(id: number) {
-    return storeRepository.deleteStore(id);
+  async deleteStore(userId: number) {
+    return storeRepository.deleteStore(userId);
   }
 
   async updateStore(
     data: StoreUpdateDTO,
-    id: number,
+    userId: number,
   ): Promise<GetStoreDTO | undefined> {
-    const store = await storeRepository.updateStore(data, id);
+    const store = await storeRepository.updateStore(data, userId);
     if (!store) return;
 
-    const { name, avatarId } = store;
+    const { name, avatarId, credentialType, crendential } = store;
 
     return {
+      userId,
       name,
       avatarId,
+      credential: crendential,
+      credentialType,
     };
   }
 }

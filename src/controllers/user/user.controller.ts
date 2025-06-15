@@ -53,17 +53,9 @@ class UserController {
 
   async deleteUser(req: Request, res: Response) {
     const userIdFromToken = (req.user as JwtPayload).userId;
-    const idFromParams = Number(req.params.id);
-
-    if (userIdFromToken !== idFromParams) {
-      res
-        .status(403)
-        .json({ error: 'Você só pode excluir sua própria conta.' });
-      return;
-    }
 
     try {
-      await userService.deleteUser(idFromParams);
+      await userService.deleteUser(userIdFromToken);
       res.json({ message: `Usuário foi deletado com sucesso!` });
     } catch (err) {
       if (
@@ -79,13 +71,7 @@ class UserController {
 
   async updateUser(req: Request, res: Response) {
     const updatedUser: UserUpdateDTO = req.body;
-    const idFromParams = Number(req.params.id);
     const userIdFromToken = (req.user as JwtPayload).userId;
-
-    if (userIdFromToken !== idFromParams) {
-      res.status(403).json({ error: 'Você só pode editar sua própria conta.' });
-      return;
-    }
 
     const errors = userValidation.userUpdateValidation(updatedUser);
     if (errors.length > 0) {
@@ -94,7 +80,7 @@ class UserController {
     }
 
     try {
-      const user = await userService.updateUser(updatedUser, idFromParams);
+      const user = await userService.updateUser(updatedUser, userIdFromToken);
       res.status(200).json(user);
     } catch (err) {
       if (

@@ -21,13 +21,13 @@ class StoreRepository {
     return store;
   }
 
-  async deleteStore(id: number) {
-    return await prisma.stores.delete({ where: { id } });
+  async deleteStore(userId: number) {
+    return await prisma.stores.delete({ where: { userId } });
   }
 
-  async updateStore(data: StoreUpdateDTO, id: number) {
+  async updateStore(data: StoreUpdateDTO, userId: number) {
     return await prisma.stores.update({
-      where: { id },
+      where: { userId },
       data: {
         ...data,
       },

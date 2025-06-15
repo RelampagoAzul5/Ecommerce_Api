@@ -11,7 +11,7 @@ export interface UserUpdateDTO {
   email?: string;
   password?: string;
   principalAddressId?: number;
-  avatarId?: number;
+  avatarId?: number | null;
   bornDate?: Date;
 }
 

@@ -5,14 +5,8 @@ import { Request, Response } from 'express';
 
 class UserAvatarController {
   async uploadAvatar(req: Request, res: Response) {
-    const userIdFromParams = Number(req.params.userId);
     const userIdFromToken = (req.user as JwtPayload).userId;
-    if (userIdFromToken !== userIdFromParams) {
-      res
-        .status(403)
-        .json({ error: 'Você só consegue mudar a própria foto de perfil' });
-      return;
-    }
+
     const file = req.file as Express.Multer.File;
 
     if (!file || !file.path) {
@@ -23,7 +17,7 @@ class UserAvatarController {
     try {
       const avatar = await userAvatarService.uploadAvatar(
         file,
-        userIdFromParams,
+        userIdFromToken,
       );
       res.status(201).json({ avatarUrl: avatar.url });
       return;
@@ -52,23 +46,10 @@ class UserAvatarController {
   }
 
   async deleteAvatar(req: Request, res: Response) {
-    const userIdFromParams = Number(req.params.userId);
     const userIdFromToken = (req.user as JwtPayload).userId;
 
-    if (isNaN(userIdFromParams)) {
-      res.status(400).json({ error: 'Id de usuário inválido' });
-      return;
-    }
-
-    if (userIdFromToken !== userIdFromParams) {
-      res
-        .status(403)
-        .json({ error: 'Você só consegue deletar a própria foto de perfil' });
-      return;
-    }
-
     try {
-      await userAvatarService.deleteAvatar(userIdFromParams);
+      await userAvatarService.deleteAvatar(userIdFromToken);
       res.json({
         message: `Avatar foi deletado com sucesso!`,
       });

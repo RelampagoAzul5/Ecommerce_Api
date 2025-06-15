@@ -8,20 +8,7 @@ import { JwtPayload } from 'jsonwebtoken';
 class AddressControler {
   async createAddress(req: Request, res: Response) {
     const errors = addressValitation.addressCreateValitation(req.body);
-    const userIdFromParams = Number(req.params.userId);
     const userIdFromToken = (req.user as JwtPayload).userId;
-
-    if (isNaN(userIdFromParams)) {
-      res.status(400).json({ error: 'Id de usuário inválido' });
-      return;
-    }
-
-    if (userIdFromToken !== userIdFromParams) {
-      res
-        .status(403)
-        .json({ error: 'Você só pode criar endereços na sua conta!' });
-      return;
-    }
 
     if (errors.length > 0) {
       res.status(400).json({ errors });
@@ -31,7 +18,7 @@ class AddressControler {
     try {
       const address = await addressService.createAddress(
         req.body,
-        userIdFromParams,
+        userIdFromToken,
       );
       res.status(201).json(address);
     } catch (error) {
@@ -40,21 +27,10 @@ class AddressControler {
   }
 
   async getAddresses(req: Request, res: Response) {
-    const userIdFromParams = Number(req.params.userId);
     const userIdFromToken = (req.user as JwtPayload).userId;
 
-    if (isNaN(userIdFromParams)) {
-      res.status(400).json({ error: 'Id de usuário inválido' });
-      return;
-    }
-    if (userIdFromToken !== userIdFromParams) {
-      res
-        .status(403)
-        .json({ error: 'Você só pode ver seus próprios endereços!' });
-      return;
-    }
     try {
-      const addresses = await addressService.getAddresses(userIdFromParams);
+      const addresses = await addressService.getAddresses(userIdFromToken);
       if (addresses.length === 0) {
         res.status(404).json({ error: 'Endereços não encontrados' });
         return;
@@ -66,23 +42,12 @@ class AddressControler {
   }
 
   async getAddress(req: Request, res: Response) {
-    const userIdFromParams = Number(req.params.userId);
     const userIdFromToken = (req.user as JwtPayload).userId;
     const addressId = Number(req.params.addressId);
 
-    if (isNaN(userIdFromParams)) {
-      res.status(400).json({ error: 'Id de usuário inválido' });
-      return;
-    }
-    if (userIdFromToken !== userIdFromParams) {
-      res
-        .status(403)
-        .json({ error: 'Você só pode ver seus próprios endereços!' });
-      return;
-    }
     try {
       const address = await addressService.getAddress(
-        userIdFromParams,
+        userIdFromToken,
         addressId,
       );
       if (!address) {
@@ -96,28 +61,16 @@ class AddressControler {
   }
 
   async deleteAddress(req: Request, res: Response) {
-    const userIdFromParams = Number(req.params.userId);
     const addressId = Number(req.params.addressId);
     const userIdFromToken = (req.user as JwtPayload).userId;
 
-    if (isNaN(userIdFromParams)) {
-      res.status(400).json({ error: 'Id de usuário inválido' });
-      return;
-    }
     if (isNaN(addressId)) {
       res.status(400).json({ error: 'Id de endereço inválido' });
       return;
     }
 
-    if (userIdFromToken !== userIdFromParams) {
-      res
-        .status(403)
-        .json({ error: 'Você só pode excluir seus próprios endereços.' });
-      return;
-    }
-
     try {
-      await addressService.deleteAddress(addressId, userIdFromParams);
+      await addressService.deleteAddress(addressId, userIdFromToken);
       res.json({
         message: `Endereço foi deletado com sucesso!`,
       });
@@ -138,25 +91,12 @@ class AddressControler {
     const updatedAddressData: AddressUpdateDTO = req.body;
     const addressId = Number(req.params.addressId);
     const userIdFromToken = (req.user as JwtPayload).userId;
-    const userIdFromParams = Number(req.params.userId);
 
     const errors =
       addressValitation.addressUpdateValitation(updatedAddressData);
 
     if (isNaN(addressId)) {
       res.status(400).json({ error: 'ID inválido' });
-      return;
-    }
-
-    if (isNaN(userIdFromParams)) {
-      res.status(400).json({ error: 'ID inválido' });
-      return;
-    }
-
-    if (userIdFromToken !== userIdFromParams) {
-      res
-        .status(403)
-        .json({ error: 'Você só pode editar seus próprios endereços.' });
       return;
     }
 
@@ -169,7 +109,7 @@ class AddressControler {
       const address = await addressService.updateAddress(
         updatedAddressData,
         addressId,
-        userIdFromParams,
+        userIdFromToken,
       );
       res.status(200).json(address);
     } catch (err) {

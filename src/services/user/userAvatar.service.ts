@@ -1,3 +1,4 @@
+import userRepository from '../../repositories/user/user.repository';
 import userAvatarRepository from '../../repositories/user/userAvatar.repository';
 
 class UserAvatarService {
@@ -10,6 +11,7 @@ class UserAvatarService {
   }
 
   async deleteAvatar(userId: number) {
+    await userRepository.updateUser({ avatarId: null }, userId);
     return await userAvatarRepository.deleteAvatar(userId);
   }
 }
