@@ -7,6 +7,7 @@ export interface CreateUserDTO {
 }
 
 export interface UserUpdateDTO {
+  cpf?: string;
   name?: string;
   email?: string;
   password?: string;

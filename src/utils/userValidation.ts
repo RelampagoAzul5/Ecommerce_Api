@@ -77,6 +77,9 @@ class UserValidation {
       errors.push('Dados de entrada ausentes');
       return errors;
     }
+    if (data.cpf) {
+      errors.push('O cpf não pode ser alterado!');
+    }
     if (data.name && !this._validateName(data.name))
       errors.push('Nome Inválido');
 
