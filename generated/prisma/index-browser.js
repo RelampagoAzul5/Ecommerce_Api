@@ -220,7 +220,9 @@ exports.Prisma.ProductsScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   name: 'name',
-  price: 'price'
+  price: 'price',
+  description: 'description',
+  purchasedTimes: 'purchasedTimes'
 };
 
 exports.Prisma.ProductImagesScalarFieldEnum = {
@@ -485,7 +487,8 @@ exports.Prisma.CouponsOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.ProductsOrderByRelevanceFieldEnum = {
-  name: 'name'
+  name: 'name',
+  description: 'description'
 };
 
 exports.Prisma.ProductImagesOrderByRelevanceFieldEnum = {

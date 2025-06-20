@@ -46,6 +46,12 @@ class storeService {
     };
   }
 
+  async getUserStore(userIdFromToken: number) {
+    const store = await storeRepository.getUserStore(userIdFromToken);
+    if (!store) return;
+    return store;
+  }
+
   async deleteStore(userId: number) {
     return storeRepository.deleteStore(userId);
   }

@@ -31,7 +31,7 @@ class AddressControler {
 
     try {
       const addresses = await addressService.getAddresses(userIdFromToken);
-      if (addresses.length === 0) {
+      if (!addresses) {
         res.status(404).json({ error: 'Endereços não encontrados' });
         return;
       }

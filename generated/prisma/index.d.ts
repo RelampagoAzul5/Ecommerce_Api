@@ -15331,12 +15331,14 @@ export namespace Prisma {
     id: number | null
     storeId: number | null
     price: Decimal | null
+    purchasedTimes: number | null
   }
 
   export type ProductsSumAggregateOutputType = {
     id: number | null
     storeId: number | null
     price: Decimal | null
+    purchasedTimes: number | null
   }
 
   export type ProductsMinAggregateOutputType = {
@@ -15346,6 +15348,8 @@ export namespace Prisma {
     updated_at: Date | null
     name: string | null
     price: Decimal | null
+    description: string | null
+    purchasedTimes: number | null
   }
 
   export type ProductsMaxAggregateOutputType = {
@@ -15355,6 +15359,8 @@ export namespace Prisma {
     updated_at: Date | null
     name: string | null
     price: Decimal | null
+    description: string | null
+    purchasedTimes: number | null
   }
 
   export type ProductsCountAggregateOutputType = {
@@ -15364,6 +15370,8 @@ export namespace Prisma {
     updated_at: number
     name: number
     price: number
+    description: number
+    purchasedTimes: number
     _all: number
   }
 
@@ -15372,12 +15380,14 @@ export namespace Prisma {
     id?: true
     storeId?: true
     price?: true
+    purchasedTimes?: true
   }
 
   export type ProductsSumAggregateInputType = {
     id?: true
     storeId?: true
     price?: true
+    purchasedTimes?: true
   }
 
   export type ProductsMinAggregateInputType = {
@@ -15387,6 +15397,8 @@ export namespace Prisma {
     updated_at?: true
     name?: true
     price?: true
+    description?: true
+    purchasedTimes?: true
   }
 
   export type ProductsMaxAggregateInputType = {
@@ -15396,6 +15408,8 @@ export namespace Prisma {
     updated_at?: true
     name?: true
     price?: true
+    description?: true
+    purchasedTimes?: true
   }
 
   export type ProductsCountAggregateInputType = {
@@ -15405,6 +15419,8 @@ export namespace Prisma {
     updated_at?: true
     name?: true
     price?: true
+    description?: true
+    purchasedTimes?: true
     _all?: true
   }
 
@@ -15501,6 +15517,8 @@ export namespace Prisma {
     updated_at: Date
     name: string
     price: Decimal
+    description: string
+    purchasedTimes: number
     _count: ProductsCountAggregateOutputType | null
     _avg: ProductsAvgAggregateOutputType | null
     _sum: ProductsSumAggregateOutputType | null
@@ -15529,6 +15547,8 @@ export namespace Prisma {
     updated_at?: boolean
     name?: boolean
     price?: boolean
+    description?: boolean
+    purchasedTimes?: boolean
     store?: boolean | StoresDefaultArgs<ExtArgs>
     inventory?: boolean | Products$inventoryArgs<ExtArgs>
     images?: boolean | Products$imagesArgs<ExtArgs>
@@ -15550,9 +15570,11 @@ export namespace Prisma {
     updated_at?: boolean
     name?: boolean
     price?: boolean
+    description?: boolean
+    purchasedTimes?: boolean
   }
 
-  export type ProductsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storeId" | "created_at" | "updated_at" | "name" | "price", ExtArgs["result"]["products"]>
+  export type ProductsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "storeId" | "created_at" | "updated_at" | "name" | "price" | "description" | "purchasedTimes", ExtArgs["result"]["products"]>
   export type ProductsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     store?: boolean | StoresDefaultArgs<ExtArgs>
     inventory?: boolean | Products$inventoryArgs<ExtArgs>
@@ -15586,6 +15608,8 @@ export namespace Prisma {
       updated_at: Date
       name: string
       price: Prisma.Decimal
+      description: string
+      purchasedTimes: number
     }, ExtArgs["result"]["products"]>
     composites: {}
   }
@@ -15970,6 +15994,8 @@ export namespace Prisma {
     readonly updated_at: FieldRef<"Products", 'DateTime'>
     readonly name: FieldRef<"Products", 'String'>
     readonly price: FieldRef<"Products", 'Decimal'>
+    readonly description: FieldRef<"Products", 'String'>
+    readonly purchasedTimes: FieldRef<"Products", 'Int'>
   }
     
 
@@ -41587,7 +41613,9 @@ export namespace Prisma {
     created_at: 'created_at',
     updated_at: 'updated_at',
     name: 'name',
-    price: 'price'
+    price: 'price',
+    description: 'description',
+    purchasedTimes: 'purchasedTimes'
   };
 
   export type ProductsScalarFieldEnum = (typeof ProductsScalarFieldEnum)[keyof typeof ProductsScalarFieldEnum]
@@ -41960,7 +41988,8 @@ export namespace Prisma {
 
 
   export const ProductsOrderByRelevanceFieldEnum: {
-    name: 'name'
+    name: 'name',
+    description: 'description'
   };
 
   export type ProductsOrderByRelevanceFieldEnum = (typeof ProductsOrderByRelevanceFieldEnum)[keyof typeof ProductsOrderByRelevanceFieldEnum]
@@ -42910,6 +42939,8 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Products"> | Date | string
     name?: StringFilter<"Products"> | string
     price?: DecimalFilter<"Products"> | Decimal | DecimalJsLike | number | string
+    description?: StringFilter<"Products"> | string
+    purchasedTimes?: IntFilter<"Products"> | number
     store?: XOR<StoresScalarRelationFilter, StoresWhereInput>
     inventory?: XOR<InventoryNullableScalarRelationFilter, InventoryWhereInput> | null
     images?: ProductImagesListRelationFilter
@@ -42928,6 +42959,8 @@ export namespace Prisma {
     updated_at?: SortOrder
     name?: SortOrder
     price?: SortOrder
+    description?: SortOrder
+    purchasedTimes?: SortOrder
     store?: StoresOrderByWithRelationInput
     inventory?: InventoryOrderByWithRelationInput
     images?: ProductImagesOrderByRelationAggregateInput
@@ -42950,6 +42983,8 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Products"> | Date | string
     name?: StringFilter<"Products"> | string
     price?: DecimalFilter<"Products"> | Decimal | DecimalJsLike | number | string
+    description?: StringFilter<"Products"> | string
+    purchasedTimes?: IntFilter<"Products"> | number
     store?: XOR<StoresScalarRelationFilter, StoresWhereInput>
     inventory?: XOR<InventoryNullableScalarRelationFilter, InventoryWhereInput> | null
     images?: ProductImagesListRelationFilter
@@ -42968,6 +43003,8 @@ export namespace Prisma {
     updated_at?: SortOrder
     name?: SortOrder
     price?: SortOrder
+    description?: SortOrder
+    purchasedTimes?: SortOrder
     _count?: ProductsCountOrderByAggregateInput
     _avg?: ProductsAvgOrderByAggregateInput
     _max?: ProductsMaxOrderByAggregateInput
@@ -42985,6 +43022,8 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"Products"> | Date | string
     name?: StringWithAggregatesFilter<"Products"> | string
     price?: DecimalWithAggregatesFilter<"Products"> | Decimal | DecimalJsLike | number | string
+    description?: StringWithAggregatesFilter<"Products"> | string
+    purchasedTimes?: IntWithAggregatesFilter<"Products"> | number
   }
 
   export type ProductImagesWhereInput = {
@@ -45249,6 +45288,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     store: StoresCreateNestedOneWithoutProductInput
     inventory?: InventoryCreateNestedOneWithoutProductInput
     images?: ProductImagesCreateNestedManyWithoutProductInput
@@ -45267,6 +45308,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     inventory?: InventoryUncheckedCreateNestedOneWithoutProductInput
     images?: ProductImagesUncheckedCreateNestedManyWithoutProductInput
     category?: CategoryUncheckedCreateNestedManyWithoutProductInput
@@ -45282,6 +45325,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     store?: StoresUpdateOneRequiredWithoutProductNestedInput
     inventory?: InventoryUpdateOneWithoutProductNestedInput
     images?: ProductImagesUpdateManyWithoutProductNestedInput
@@ -45300,6 +45345,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     inventory?: InventoryUncheckedUpdateOneWithoutProductNestedInput
     images?: ProductImagesUncheckedUpdateManyWithoutProductNestedInput
     category?: CategoryUncheckedUpdateManyWithoutProductNestedInput
@@ -45317,6 +45364,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
   }
 
   export type ProductsUpdateManyMutationInput = {
@@ -45324,6 +45373,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
   }
 
   export type ProductsUncheckedUpdateManyInput = {
@@ -45333,6 +45384,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
   }
 
   export type ProductImagesCreateInput = {
@@ -47615,12 +47668,15 @@ export namespace Prisma {
     updated_at?: SortOrder
     name?: SortOrder
     price?: SortOrder
+    description?: SortOrder
+    purchasedTimes?: SortOrder
   }
 
   export type ProductsAvgOrderByAggregateInput = {
     id?: SortOrder
     storeId?: SortOrder
     price?: SortOrder
+    purchasedTimes?: SortOrder
   }
 
   export type ProductsMaxOrderByAggregateInput = {
@@ -47630,6 +47686,8 @@ export namespace Prisma {
     updated_at?: SortOrder
     name?: SortOrder
     price?: SortOrder
+    description?: SortOrder
+    purchasedTimes?: SortOrder
   }
 
   export type ProductsMinOrderByAggregateInput = {
@@ -47639,12 +47697,15 @@ export namespace Prisma {
     updated_at?: SortOrder
     name?: SortOrder
     price?: SortOrder
+    description?: SortOrder
+    purchasedTimes?: SortOrder
   }
 
   export type ProductsSumOrderByAggregateInput = {
     id?: SortOrder
     storeId?: SortOrder
     price?: SortOrder
+    purchasedTimes?: SortOrder
   }
 
   export type ProductsNullableScalarRelationFilter = {
@@ -54017,6 +54078,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     inventory?: InventoryCreateNestedOneWithoutProductInput
     images?: ProductImagesCreateNestedManyWithoutProductInput
     category?: CategoryCreateNestedManyWithoutProductInput
@@ -54033,6 +54096,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     inventory?: InventoryUncheckedCreateNestedOneWithoutProductInput
     images?: ProductImagesUncheckedCreateNestedManyWithoutProductInput
     category?: CategoryUncheckedCreateNestedManyWithoutProductInput
@@ -54388,6 +54453,8 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Products"> | Date | string
     name?: StringFilter<"Products"> | string
     price?: DecimalFilter<"Products"> | Decimal | DecimalJsLike | number | string
+    description?: StringFilter<"Products"> | string
+    purchasedTimes?: IntFilter<"Products"> | number
   }
 
   export type StoreAvaliationsUpsertWithWhereUniqueWithoutStoreInput = {
@@ -55520,6 +55587,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     store: StoresCreateNestedOneWithoutProductInput
     inventory?: InventoryCreateNestedOneWithoutProductInput
     category?: CategoryCreateNestedManyWithoutProductInput
@@ -55537,6 +55606,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     inventory?: InventoryUncheckedCreateNestedOneWithoutProductInput
     category?: CategoryUncheckedCreateNestedManyWithoutProductInput
     avaliations?: ProductAvaliationsUncheckedCreateNestedManyWithoutProductInput
@@ -55567,6 +55638,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     store?: StoresUpdateOneRequiredWithoutProductNestedInput
     inventory?: InventoryUpdateOneWithoutProductNestedInput
     category?: CategoryUpdateManyWithoutProductNestedInput
@@ -55584,6 +55657,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     inventory?: InventoryUncheckedUpdateOneWithoutProductNestedInput
     category?: CategoryUncheckedUpdateManyWithoutProductNestedInput
     avaliations?: ProductAvaliationsUncheckedUpdateManyWithoutProductNestedInput
@@ -55662,6 +55737,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     store: StoresCreateNestedOneWithoutProductInput
     inventory?: InventoryCreateNestedOneWithoutProductInput
     images?: ProductImagesCreateNestedManyWithoutProductInput
@@ -55679,6 +55756,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     inventory?: InventoryUncheckedCreateNestedOneWithoutProductInput
     images?: ProductImagesUncheckedCreateNestedManyWithoutProductInput
     category?: CategoryUncheckedCreateNestedManyWithoutProductInput
@@ -55784,6 +55863,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     store: StoresCreateNestedOneWithoutProductInput
     images?: ProductImagesCreateNestedManyWithoutProductInput
     category?: CategoryCreateNestedManyWithoutProductInput
@@ -55801,6 +55882,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     images?: ProductImagesUncheckedCreateNestedManyWithoutProductInput
     category?: CategoryUncheckedCreateNestedManyWithoutProductInput
     avaliations?: ProductAvaliationsUncheckedCreateNestedManyWithoutProductInput
@@ -55831,6 +55914,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     store?: StoresUpdateOneRequiredWithoutProductNestedInput
     images?: ProductImagesUpdateManyWithoutProductNestedInput
     category?: CategoryUpdateManyWithoutProductNestedInput
@@ -55848,6 +55933,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     images?: ProductImagesUncheckedUpdateManyWithoutProductNestedInput
     category?: CategoryUncheckedUpdateManyWithoutProductNestedInput
     avaliations?: ProductAvaliationsUncheckedUpdateManyWithoutProductNestedInput
@@ -55904,6 +55991,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     store: StoresCreateNestedOneWithoutProductInput
     inventory?: InventoryCreateNestedOneWithoutProductInput
     images?: ProductImagesCreateNestedManyWithoutProductInput
@@ -55921,6 +56010,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     inventory?: InventoryUncheckedCreateNestedOneWithoutProductInput
     images?: ProductImagesUncheckedCreateNestedManyWithoutProductInput
     category?: CategoryUncheckedCreateNestedManyWithoutProductInput
@@ -56004,6 +56095,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     store: StoresCreateNestedOneWithoutProductInput
     inventory?: InventoryCreateNestedOneWithoutProductInput
     images?: ProductImagesCreateNestedManyWithoutProductInput
@@ -56021,6 +56114,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     inventory?: InventoryUncheckedCreateNestedOneWithoutProductInput
     images?: ProductImagesUncheckedCreateNestedManyWithoutProductInput
     avaliations?: ProductAvaliationsUncheckedCreateNestedManyWithoutProductInput
@@ -56120,6 +56215,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     store: StoresCreateNestedOneWithoutProductInput
     inventory?: InventoryCreateNestedOneWithoutProductInput
     images?: ProductImagesCreateNestedManyWithoutProductInput
@@ -56137,6 +56234,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     inventory?: InventoryUncheckedCreateNestedOneWithoutProductInput
     images?: ProductImagesUncheckedCreateNestedManyWithoutProductInput
     category?: CategoryUncheckedCreateNestedManyWithoutProductInput
@@ -56258,6 +56357,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     store?: StoresUpdateOneRequiredWithoutProductNestedInput
     inventory?: InventoryUpdateOneWithoutProductNestedInput
     images?: ProductImagesUpdateManyWithoutProductNestedInput
@@ -56275,6 +56376,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     inventory?: InventoryUncheckedUpdateOneWithoutProductNestedInput
     images?: ProductImagesUncheckedUpdateManyWithoutProductNestedInput
     category?: CategoryUncheckedUpdateManyWithoutProductNestedInput
@@ -56552,6 +56655,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     store: StoresCreateNestedOneWithoutProductInput
     inventory?: InventoryCreateNestedOneWithoutProductInput
     images?: ProductImagesCreateNestedManyWithoutProductInput
@@ -56569,6 +56674,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     inventory?: InventoryUncheckedCreateNestedOneWithoutProductInput
     images?: ProductImagesUncheckedCreateNestedManyWithoutProductInput
     category?: CategoryUncheckedCreateNestedManyWithoutProductInput
@@ -56635,6 +56742,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     store?: StoresUpdateOneRequiredWithoutProductNestedInput
     inventory?: InventoryUpdateOneWithoutProductNestedInput
     images?: ProductImagesUpdateManyWithoutProductNestedInput
@@ -56652,6 +56761,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     inventory?: InventoryUncheckedUpdateOneWithoutProductNestedInput
     images?: ProductImagesUncheckedUpdateManyWithoutProductNestedInput
     category?: CategoryUncheckedUpdateManyWithoutProductNestedInput
@@ -57452,6 +57563,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     store: StoresCreateNestedOneWithoutProductInput
     inventory?: InventoryCreateNestedOneWithoutProductInput
     images?: ProductImagesCreateNestedManyWithoutProductInput
@@ -57469,6 +57582,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
     inventory?: InventoryUncheckedCreateNestedOneWithoutProductInput
     images?: ProductImagesUncheckedCreateNestedManyWithoutProductInput
     category?: CategoryUncheckedCreateNestedManyWithoutProductInput
@@ -57591,6 +57706,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     store?: StoresUpdateOneRequiredWithoutProductNestedInput
     inventory?: InventoryUpdateOneWithoutProductNestedInput
     images?: ProductImagesUpdateManyWithoutProductNestedInput
@@ -57608,6 +57725,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     inventory?: InventoryUncheckedUpdateOneWithoutProductNestedInput
     images?: ProductImagesUncheckedUpdateManyWithoutProductNestedInput
     category?: CategoryUncheckedUpdateManyWithoutProductNestedInput
@@ -60005,6 +60124,8 @@ export namespace Prisma {
     updated_at?: Date | string
     name: string
     price: Decimal | DecimalJsLike | number | string
+    description: string
+    purchasedTimes: number
   }
 
   export type StoreAvaliationsCreateManyStoreInput = {
@@ -60085,6 +60206,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     inventory?: InventoryUpdateOneWithoutProductNestedInput
     images?: ProductImagesUpdateManyWithoutProductNestedInput
     category?: CategoryUpdateManyWithoutProductNestedInput
@@ -60101,6 +60224,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     inventory?: InventoryUncheckedUpdateOneWithoutProductNestedInput
     images?: ProductImagesUncheckedUpdateManyWithoutProductNestedInput
     category?: CategoryUncheckedUpdateManyWithoutProductNestedInput
@@ -60117,6 +60242,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
   }
 
   export type StoreAvaliationsUpdateWithoutStoreInput = {
@@ -60580,6 +60707,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     store?: StoresUpdateOneRequiredWithoutProductNestedInput
     inventory?: InventoryUpdateOneWithoutProductNestedInput
     images?: ProductImagesUpdateManyWithoutProductNestedInput
@@ -60597,6 +60726,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     inventory?: InventoryUncheckedUpdateOneWithoutProductNestedInput
     images?: ProductImagesUncheckedUpdateManyWithoutProductNestedInput
     category?: CategoryUncheckedUpdateManyWithoutProductNestedInput
@@ -60613,6 +60744,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
   }
 
   export type ProductsUpdateWithoutPromotionsInput = {
@@ -60620,6 +60753,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     store?: StoresUpdateOneRequiredWithoutProductNestedInput
     inventory?: InventoryUpdateOneWithoutProductNestedInput
     images?: ProductImagesUpdateManyWithoutProductNestedInput
@@ -60637,6 +60772,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     inventory?: InventoryUncheckedUpdateOneWithoutProductNestedInput
     images?: ProductImagesUncheckedUpdateManyWithoutProductNestedInput
     category?: CategoryUncheckedUpdateManyWithoutProductNestedInput
@@ -60653,6 +60790,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
   }
 
   export type ProductsUpdateWithoutCategoryInput = {
@@ -60660,6 +60799,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     store?: StoresUpdateOneRequiredWithoutProductNestedInput
     inventory?: InventoryUpdateOneWithoutProductNestedInput
     images?: ProductImagesUpdateManyWithoutProductNestedInput
@@ -60677,6 +60818,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
     inventory?: InventoryUncheckedUpdateOneWithoutProductNestedInput
     images?: ProductImagesUncheckedUpdateManyWithoutProductNestedInput
     avaliations?: ProductAvaliationsUncheckedUpdateManyWithoutProductNestedInput
@@ -60693,6 +60836,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    description?: StringFieldUpdateOperationsInput | string
+    purchasedTimes?: IntFieldUpdateOperationsInput | number
   }
 
   export type ProductAvaliationImagesCreateManyProductAvaliationInput = {

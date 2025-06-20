@@ -211,10 +211,12 @@ model Products {
   storeId Int
   store   Stores @relation("StoreProduct", fields: [storeId], references: [id], onDelete: Cascade)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  name       String   @db.VarChar(255)
-  price      Decimal  @db.Decimal(10, 2)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  name           String   @db.VarChar(255)
+  price          Decimal  @db.Decimal(10, 2)
+  description    String
+  purchasedTimes Int
 
   inventory Inventory?
 

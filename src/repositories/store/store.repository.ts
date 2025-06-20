@@ -21,6 +21,11 @@ class StoreRepository {
     return store;
   }
 
+  async getUserStore(userId: number) {
+    const store = await prisma.stores.findUnique({ where: { userId } });
+    return store;
+  }
+
   async deleteStore(userId: number) {
     return await prisma.stores.delete({ where: { userId } });
   }
