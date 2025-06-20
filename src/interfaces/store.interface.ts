@@ -6,7 +6,6 @@ export interface CreateStoreDTO {
 }
 
 export interface StoreUpdateDTO {
-  userId: number;
   name?: string;
   avatarId?: number;
   credentialType?: string;

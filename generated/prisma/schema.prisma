@@ -137,7 +137,7 @@ model Stores {
   name       String   @db.VarChar(255)
 
   credentialType String @db.VarChar(4)
-  crendential    String @unique @db.VarChar(18)
+  credential     String @unique @db.VarChar(18)
 
   avatarId Int?         @unique
   avatar   AvatarStore?

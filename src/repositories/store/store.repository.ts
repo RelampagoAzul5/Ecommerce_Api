@@ -10,7 +10,7 @@ class StoreRepository {
       data: {
         name: data.name,
         credentialType: data.credentialType,
-        crendential: data.credential,
+        credential: data.credential,
         userId,
       },
     });

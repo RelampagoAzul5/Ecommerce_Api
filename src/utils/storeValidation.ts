@@ -60,6 +60,12 @@ class StoreValidation {
       return errors;
     }
 
+    if (data.credentialType)
+      errors.push('Você não pode alterar a credencial da sua Loja!');
+
+    if (data.credential)
+      errors.push('Você não pode alterar a credencial da sua Loja!');
+
     if (data.name && !this._validateName(data.name))
       errors.push('Nome Inválido');
 
