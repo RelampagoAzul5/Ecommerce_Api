@@ -47,6 +47,24 @@ class ProductController {
     } catch (err) {}
   }
 
+  async getAllStoreProducts(req: Request, res: Response) {
+    const storeId = Number(req.params.id);
+
+    if (isNaN(storeId)) {
+      res.status(400).json({ error: 'ID inválido' });
+      return;
+    }
+
+    try {
+      const product = await productService.getProduct(storeId);
+      if (!product) {
+        res.status(404).json({ error: 'Produto não encontrado' });
+        return;
+      }
+      res.json(product);
+    } catch (err) {}
+  }
+
   async deleteProduct(req: Request, res: Response) {
     const userIdFromToken = (req.user as JwtPayload).userId;
     const productId = Number(req.params.productId);

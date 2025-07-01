@@ -17,12 +17,13 @@ class storeService {
     const product = await productRepository.createProduct(data, store.id);
     if (!product) return;
 
-    const { name, price, description, purchasedTimes } = product;
+    const { id, name, price, description, purchasedTimes } = product;
 
     if (file) {
       // const images = await storeAvatarRepository.uploadAvatar(file, product.id);
     }
     return {
+      id,
       name,
       price,
       description,
@@ -30,18 +31,40 @@ class storeService {
     };
   }
 
-  async getProduct(id: number): Promise<GetProductDTO | undefined> {
-    const product = await productRepository.getProduct(id);
+  async getProduct(productId: number): Promise<GetProductDTO | undefined> {
+    const product = await productRepository.getProduct(productId);
     if (!product) return;
 
-    const { name, price, description, purchasedTimes } = product;
+    const { id, name, price, description, purchasedTimes } = product;
 
     return {
+      id,
       name,
       price,
       description,
       purchasedTimes,
     };
+  }
+
+  async getAllStoreProducts(
+    storeId: number,
+  ): Promise<GetProductDTO[] | undefined> {
+    const products = await productRepository.getAllStoreProducts(storeId);
+    if (!products) return;
+    const productList = [];
+
+    for (let product of products) {
+      const { id, name, price, description, purchasedTimes } = product;
+      productList.push({
+        id,
+        name,
+        price,
+        description,
+        purchasedTimes,
+      });
+    }
+
+    return productList;
   }
 
   async deleteProduct(storeId: number, productId: number) {
@@ -50,15 +73,20 @@ class storeService {
 
   async updateProduct(
     data: UpdateProductDTO,
-    id: number,
+    productId: number,
     storeId: number,
   ): Promise<GetProductDTO | undefined> {
-    const product = await productRepository.updateProduct(data, id, storeId);
+    const product = await productRepository.updateProduct(
+      data,
+      productId,
+      storeId,
+    );
     if (!product) return;
 
-    const { name, price, description, purchasedTimes } = product;
+    const { id, name, price, description, purchasedTimes } = product;
 
     return {
+      id,
       name,
       price,
       description,

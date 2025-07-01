@@ -1,6 +1,7 @@
 import { Decimal } from 'generated/prisma/runtime/library';
 
 export interface CreateProductDTO {
+  id: number;
   storeId: number;
   name: string;
   price: Decimal;
@@ -16,6 +17,7 @@ export interface UpdateProductDTO {
 }
 
 export interface GetProductDTO {
+  id: number;
   name: string;
   price: Decimal;
   description: string;

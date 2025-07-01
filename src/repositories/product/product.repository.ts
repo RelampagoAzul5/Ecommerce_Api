@@ -22,6 +22,11 @@ class ProductRepository {
     return product;
   }
 
+  async getAllStoreProducts(storeId: number) {
+    const product = await prisma.products.findMany({ where: { storeId } });
+    return product;
+  }
+
   async deleteProduct(id: number, storeId: number) {
     return await prisma.products.delete({ where: { id, storeId } });
   }
